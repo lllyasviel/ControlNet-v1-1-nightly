@@ -33,10 +33,14 @@ class ZoeDetector:
             image_depth = rearrange(image_depth, 'h w c -> 1 c h w')
             depth = self.model.infer(image_depth)
 
-            depth = depth[0, 0]
-            depth -= torch.min(depth)
-            depth /= torch.max(depth)
-            depth = 1.0 - depth.cpu().numpy()
+            depth = depth[0, 0].cpu().numpy()
+
+            vmin = np.percentile(depth, 2)
+            vmax = np.percentile(depth, 85)
+
+            depth -= vmin
+            depth /= vmax - vmin
+            depth = 1.0 - depth
             depth_image = (depth * 255.0).clip(0, 255).astype(np.uint8)
 
             return depth_image
