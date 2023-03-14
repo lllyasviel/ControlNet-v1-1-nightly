@@ -68,6 +68,19 @@ def midas(img, res):
     return [result]
 
 
+model_zoe = None
+
+
+def zoe(img, res):
+    img = resize_image(HWC3(img), res)
+    global model_zoe
+    if model_zoe is None:
+        from annotator.zoe import ZoeDetector
+        model_zoe = ZoeDetector()
+    result = model_zoe(img)
+    return [result]
+
+
 model_openpose = None
 
 
@@ -154,6 +167,18 @@ with block:
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
     run_button.click(fn=midas, inputs=[input_image, resolution], outputs=[gallery])
+
+
+    with gr.Row():
+        gr.Markdown("## Zoe Depth")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=zoe, inputs=[input_image, resolution], outputs=[gallery])
 
     with gr.Row():
         gr.Markdown("## Openpose")
