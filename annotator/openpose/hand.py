@@ -36,8 +36,8 @@ class Hand(object):
 
         Hr, Wr, Cr = oriImgRaw.shape
 
-        oriImg = util.smart_resize(oriImgRaw, (256, 256))
-        oriImg = cv2.GaussianBlur(oriImg, (0, 0), 1.0)
+        oriImg = util.smart_resize(oriImgRaw, (184, 184))
+        oriImg = cv2.GaussianBlur(oriImg, (0, 0), 3.0)
 
         for m in range(len(multiplier)):
             scale = multiplier[m]
