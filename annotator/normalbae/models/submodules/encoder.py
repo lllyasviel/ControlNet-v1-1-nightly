@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -9,7 +10,8 @@ class Encoder(nn.Module):
 
         basemodel_name = 'tf_efficientnet_b5_ap'
         print('Loading base model ()...'.format(basemodel_name), end='')
-        basemodel = torch.hub.load('rwightman/gen-efficientnet-pytorch', basemodel_name, pretrained=False)
+        repo_path = os.path.join(os.path.dirname(__file__), 'efficientnet_repo')
+        basemodel = torch.hub.load(repo_path, basemodel_name, pretrained=False, source='local')
         print('Done.')
 
         # Remove last layer
