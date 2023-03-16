@@ -22,7 +22,7 @@ class Hand(object):
         self.model.load_state_dict(model_dict)
         self.model.eval()
 
-    def __call__(self, oriImg):
+    def __call__(self, oriImgRaw):
         scale_search = [0.5, 1.0, 1.5, 2.0]
         # scale_search = [0.5]
         boxsize = 368
@@ -34,10 +34,11 @@ class Hand(object):
         wsize = 128
         heatmap_avg = np.zeros((wsize, wsize, 22))
 
+        oriImg = cv2.GaussianBlur(oriImgRaw, (0, 0), 0.8)
+
         for m in range(len(multiplier)):
             scale = multiplier[m]
             imageToTest = util.smart_resize(oriImg, (scale, scale))
-            imageToTest = cv2.GaussianBlur(imageToTest, (0, 0), 0.8)
 
             imageToTest_padded, pad = util.padRightDownCorner(imageToTest, stride, padValue)
             im = np.transpose(np.float32(imageToTest_padded[:, :, :, np.newaxis]), (3, 2, 0, 1)) / 256 - 0.5
