@@ -52,7 +52,7 @@ class Hand(object):
 
             # extract outputs, resize, and remove padding
             heatmap = np.transpose(np.squeeze(output), (1, 2, 0))  # output 1 is heatmaps
-            heatmap = cv2.resize(heatmap, (0, 0), fx=stride, fy=stride, interpolation=cv2.INTER_CUBIC)
+            heatmap = util.smart_resize_k(heatmap, fx=stride, fy=stride)
             heatmap = heatmap[:imageToTest_padded.shape[0] - pad[2], :imageToTest_padded.shape[1] - pad[3], :]
             heatmap = util.smart_resize(heatmap, (wsize, wsize))
 
