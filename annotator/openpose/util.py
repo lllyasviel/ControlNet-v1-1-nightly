@@ -18,6 +18,20 @@ def smart_resize(x, s):
         return np.stack([smart_resize(x[:, :, i], s) for i in range(Co)], axis=2)
 
 
+def smart_resize_k(x, fx, fy):
+    if x.ndim == 2:
+        Ho, Wo = x.shape
+        Co = 1
+    else:
+        Ho, Wo, Co = x.shape
+    Ht, Wt = Ho * fy, Wo * fx
+    if Co == 3 or Co == 1:
+        k = float(Ht + Wt) / float(Ho + Wo)
+        return cv2.resize(x, (int(Wt), int(Ht)), interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_LANCZOS4)
+    else:
+        return np.stack([smart_resize_k(x[:, :, i], fx, fy) for i in range(Co)], axis=2)
+
+
 def padRightDownCorner(img, stride, padValue):
     h = img.shape[0]
     w = img.shape[1]
@@ -40,12 +54,14 @@ def padRightDownCorner(img, stride, padValue):
 
     return img_padded, pad
 
+
 # transfer caffe model to pytorch which will match the layer name
 def transfer(model, model_weights):
     transfered_model_weights = {}
     for weights_name in model.state_dict().keys():
         transfered_model_weights[weights_name] = model_weights['.'.join(weights_name.split('.')[1:])]
     return transfered_model_weights
+
 
 # draw the body keypoint and lims
 def draw_bodypose(canvas, candidate, subset):
@@ -102,6 +118,7 @@ def draw_handpose(canvas, all_hand_peaks, show_number=False):
             if show_number:
                 cv2.putText(canvas, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0, 0, 0), lineType=cv2.LINE_AA)
     return canvas
+
 
 # detect hand according to body pose keypoints
 # please refer to https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/src/openpose/hand/handDetector.cpp
@@ -168,6 +185,7 @@ def handDetect(candidate, subset, oriImg):
     x, y is the coordinate of top left 
     '''
     return detect_result
+
 
 # get max index of 2d array
 def npmax(array):
