@@ -30,7 +30,9 @@ class Hand(object):
         padValue = 128
         thre = 0.05
         multiplier = [x * boxsize for x in scale_search]
-        heatmap_avg = np.zeros((64, 64, 22))
+
+        wsize = 128
+        heatmap_avg = np.zeros((wsize, wsize, 22))
 
         for m in range(len(multiplier)):
             scale = multiplier[m]
@@ -52,7 +54,7 @@ class Hand(object):
             heatmap = np.transpose(np.squeeze(output), (1, 2, 0))  # output 1 is heatmaps
             heatmap = cv2.resize(heatmap, (0, 0), fx=stride, fy=stride, interpolation=cv2.INTER_CUBIC)
             heatmap = heatmap[:imageToTest_padded.shape[0] - pad[2], :imageToTest_padded.shape[1] - pad[3], :]
-            heatmap = util.smart_resize(heatmap, (64, 64))
+            heatmap = util.smart_resize(heatmap, (wsize, wsize))
 
             heatmap_avg += heatmap / len(multiplier)
 
@@ -71,8 +73,8 @@ class Hand(object):
             map_ori[label_img == 0] = 0
 
             y, x = util.npmax(map_ori)
-            y = int(float(y) * float(oriImg.shape[0]) / 64.0)
-            x = int(float(x) * float(oriImg.shape[1]) / 64.0)
+            y = int(float(y) * float(oriImg.shape[0]) / float(wsize))
+            x = int(float(x) * float(oriImg.shape[1]) / float(wsize))
             all_peaks.append([x, y])
         return np.array(all_peaks)
 
