@@ -61,7 +61,7 @@ class Hand(object):
             map_ori = heatmap_avg[:, :, part]
             one_heatmap = gaussian_filter(map_ori, sigma=3)
             binary = np.ascontiguousarray(one_heatmap > thre, dtype=np.uint8)
-            # 全部小于阈值
+
             if np.sum(binary) == 0:
                 all_peaks.append([0, 0])
                 continue
