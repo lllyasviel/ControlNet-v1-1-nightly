@@ -37,7 +37,7 @@ class Hand(object):
         for m in range(len(multiplier)):
             scale = multiplier[m]
             imageToTest = util.smart_resize(oriImg, (scale, scale))
-            imageToTest = cv2.GaussianBlur(imageToTest, (0, 0), 1.0)
+            imageToTest = cv2.GaussianBlur(imageToTest, (0, 0), 0.8)
 
             imageToTest_padded, pad = util.padRightDownCorner(imageToTest, stride, padValue)
             im = np.transpose(np.float32(imageToTest_padded[:, :, :, np.newaxis]), (3, 2, 0, 1)) / 256 - 0.5
