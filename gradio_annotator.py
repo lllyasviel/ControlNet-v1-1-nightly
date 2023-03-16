@@ -81,6 +81,19 @@ def zoe(img, res):
     return [result]
 
 
+model_normalbae = None
+
+
+def normalbae(img, res):
+    img = resize_image(HWC3(img), res)
+    global model_normalbae
+    if model_normalbae is None:
+        from annotator.normalbae import NormalBaeDetector
+        model_normalbae = NormalBaeDetector()
+    result = model_normalbae(img)
+    return [result]
+
+
 model_openpose = None
 
 
@@ -179,6 +192,17 @@ with block:
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
     run_button.click(fn=zoe, inputs=[input_image, resolution], outputs=[gallery])
+
+    with gr.Row():
+        gr.Markdown("## Normal Bae")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=normalbae, inputs=[input_image, resolution], outputs=[gallery])
 
     with gr.Row():
         gr.Markdown("## Openpose")
