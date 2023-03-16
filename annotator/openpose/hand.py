@@ -29,13 +29,14 @@ class Hand(object):
         stride = 8
         padValue = 128
         thre = 0.05
-        multiplier = [x * boxsize / oriImg.shape[0] for x in scale_search]
-        heatmap_avg = np.zeros((oriImg.shape[0], oriImg.shape[1], 22))
-        # paf_avg = np.zeros((oriImg.shape[0], oriImg.shape[1], 38))
+        multiplier = [x * boxsize for x in scale_search]
+        heatmap_avg = np.zeros((64, 64, 22))
 
         for m in range(len(multiplier)):
             scale = multiplier[m]
-            imageToTest = cv2.resize(oriImg, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
+            imageToTest = util.smart_resize(oriImg, (scale, scale))
+            imageToTest = cv2.GaussianBlur(imageToTest, (0, 0), 1.0)
+
             imageToTest_padded, pad = util.padRightDownCorner(imageToTest, stride, padValue)
             im = np.transpose(np.float32(imageToTest_padded[:, :, :, np.newaxis]), (3, 2, 0, 1)) / 256 - 0.5
             im = np.ascontiguousarray(im)
@@ -43,16 +44,15 @@ class Hand(object):
             data = torch.from_numpy(im).float()
             if torch.cuda.is_available():
                 data = data.cuda()
-            # data = data.permute([2, 0, 1]).unsqueeze(0).float()
+
             with torch.no_grad():
                 output = self.model(data).cpu().numpy()
-                # output = self.model(data).numpy()q
 
             # extract outputs, resize, and remove padding
             heatmap = np.transpose(np.squeeze(output), (1, 2, 0))  # output 1 is heatmaps
             heatmap = cv2.resize(heatmap, (0, 0), fx=stride, fy=stride, interpolation=cv2.INTER_CUBIC)
             heatmap = heatmap[:imageToTest_padded.shape[0] - pad[2], :imageToTest_padded.shape[1] - pad[3], :]
-            heatmap = cv2.resize(heatmap, (oriImg.shape[1], oriImg.shape[0]), interpolation=cv2.INTER_CUBIC)
+            heatmap = util.smart_resize(heatmap, (64, 64))
 
             heatmap_avg += heatmap / len(multiplier)
 
@@ -71,6 +71,8 @@ class Hand(object):
             map_ori[label_img == 0] = 0
 
             y, x = util.npmax(map_ori)
+            y = int(float(y) * float(oriImg.shape[0]) / 64.0)
+            x = int(float(x) * float(oriImg.shape[1]) / 64.0)
             all_peaks.append([x, y])
         return np.array(all_peaks)
 

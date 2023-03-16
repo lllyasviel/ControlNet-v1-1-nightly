@@ -4,6 +4,20 @@ import matplotlib
 import cv2
 
 
+def smart_resize(x, s):
+    Ht, Wt = s
+    if x.ndim == 2:
+        Ho, Wo = x.shape
+        Co = 1
+    else:
+        Ho, Wo, Co = x.shape
+    if Co == 3 or Co == 1:
+        k = float(Ht + Wt) / float(Ho + Wo)
+        return cv2.resize(x, (int(Wt), int(Ht)), interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_LANCZOS4)
+    else:
+        return np.stack([smart_resize(x[:, :, i], s) for i in range(Co)], axis=2)
+
+
 def padRightDownCorner(img, stride, padValue):
     h = img.shape[0]
     w = img.shape[1]
