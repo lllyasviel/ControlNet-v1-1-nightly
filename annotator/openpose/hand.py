@@ -34,7 +34,10 @@ class Hand(object):
         wsize = 128
         heatmap_avg = np.zeros((wsize, wsize, 22))
 
-        oriImg = cv2.GaussianBlur(oriImgRaw, (0, 0), 0.8)
+        Hr, Wr, Cr = oriImgRaw.shape
+
+        oriImg = util.smart_resize(oriImgRaw, (256, 256))
+        oriImg = cv2.GaussianBlur(oriImg, (0, 0), 2.0)
 
         for m in range(len(multiplier)):
             scale = multiplier[m]
@@ -74,8 +77,8 @@ class Hand(object):
             map_ori[label_img == 0] = 0
 
             y, x = util.npmax(map_ori)
-            y = int(float(y) * float(oriImg.shape[0]) / float(wsize))
-            x = int(float(x) * float(oriImg.shape[1]) / float(wsize))
+            y = int(float(y) * float(Hr) / float(wsize))
+            x = int(float(x) * float(Wr) / float(wsize))
             all_peaks.append([x, y])
         return np.array(all_peaks)
 
