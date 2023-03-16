@@ -120,6 +120,19 @@ def uniformer(img, res):
     return [result]
 
 
+model_lineart_anime = None
+
+
+def lineart_anime(img, res):
+    img = resize_image(HWC3(img), res)
+    global model_lineart_anime
+    if model_lineart_anime is None:
+        from annotator.lineart_anime import LineartAnimeDetector
+        model_lineart_anime = LineartAnimeDetector()
+    result = model_lineart_anime(img)
+    return [result]
+
+
 block = gr.Blocks().queue()
 with block:
     with gr.Row():
@@ -226,6 +239,17 @@ with block:
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
     run_button.click(fn=uniformer, inputs=[input_image, resolution], outputs=[gallery])
+
+    with gr.Row():
+        gr.Markdown("## Lineart Anime")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=lineart_anime, inputs=[input_image, resolution], outputs=[gallery])
 
 
 block.launch(server_name='0.0.0.0')
