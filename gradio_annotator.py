@@ -133,6 +133,19 @@ def lineart_anime(img, res):
     return [result]
 
 
+model_lineart = None
+
+
+def lineart(img, res, coarse=False):
+    img = resize_image(HWC3(img), res)
+    global model_lineart
+    if model_lineart is None:
+        from annotator.lineart import LineartDetector
+        model_lineart = LineartDetector()
+    result = model_lineart(img, coarse)
+    return [result]
+
+
 block = gr.Blocks().queue()
 with block:
     with gr.Row():
@@ -250,6 +263,18 @@ with block:
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
     run_button.click(fn=lineart_anime, inputs=[input_image, resolution], outputs=[gallery])
+
+    with gr.Row():
+        gr.Markdown("## Lineart")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            coarse = gr.Checkbox(label='Using coarse model', value=False)
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=lineart, inputs=[input_image, resolution, coarse], outputs=[gallery])
 
 
 block.launch(server_name='0.0.0.0')
