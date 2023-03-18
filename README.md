@@ -98,6 +98,6 @@ Below is our previous Uniformer. This model is out-of-date and will be replaced 
 
 ![p](github_misc/10.png)
 
-This is OneFormer. This method is SOTA. The ControlNet team made significant efforts to remove necessary dependencies so that anyone can use this model in nearly any environment without worrying about many difficult dependencies.
+This is OneFormer. This method is SOTA. The ControlNet team made significant efforts to remove unnecessary dependencies so that anyone can use this model in nearly any environment without worrying about many difficult dependencies.
 
 ![p](github_misc/11.png)
