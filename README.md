@@ -16,10 +16,12 @@ Also, no online TorchHub. Everything is offline.
 
 Just create a new conda environment and play with the demo
 
+    git clone https://github.com/lllyasviel/AnnotatorV3.git
+    cd AnnotatorV3    
+
     conda env create -f environment.yaml
     conda activate annotator-v3
-    git clone https://github.com/lllyasviel/AnnotatorV3.git
-    cd AnnotatorV3
+    
     python gradio_annotator.py
 
 The code will automatically download models. But if you want to download models manually, you can download all models [here](https://huggingface.co/lllyasviel/Annotators/tree/main), and put them in "AnnotatorV3\annotator\ckpts".
