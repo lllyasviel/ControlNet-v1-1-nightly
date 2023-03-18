@@ -10,6 +10,8 @@ The performance, quality, and inference "correctness" of all models are carefull
 
 No MMCV. No Detectron2. NO MSDeformAttn. No NATTEN. We say NO to any CUDA operations that need users to compile.
 
+Also, no online TorchHub. Everything is offline.
+
 # Just Try This
 
 Just create a new conda environment and play with the demo
