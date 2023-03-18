@@ -120,6 +120,13 @@ def draw_handpose(canvas, all_hand_peaks, show_number=False):
     return canvas
 
 
+def draw_facepose(canvas, lmks):
+    for lmk in lmks:
+        x, y = lmk
+        cv2.circle(canvas, (x, y), 4, (255, 255, 255), thickness=-1)
+    return canvas
+
+
 # detect hand according to body pose keypoints
 # please refer to https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/src/openpose/hand/handDetector.cpp
 def handDetect(candidate, subset, oriImg):

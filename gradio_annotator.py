@@ -97,13 +97,13 @@ def normalbae(img, res):
 model_openpose = None
 
 
-def openpose(img, res, has_hand):
+def openpose(img, res, hand_and_face):
     img = resize_image(HWC3(img), res)
     global model_openpose
     if model_openpose is None:
         from annotator.openpose import OpenposeDetector
         model_openpose = OpenposeDetector()
-    result, _ = model_openpose(img, has_hand)
+    result, _ = model_openpose(img, hand_and_face)
     return [result]
 
 
@@ -235,12 +235,12 @@ with block:
     with gr.Row():
         with gr.Column():
             input_image = gr.Image(source='upload', type="numpy")
-            hand = gr.Checkbox(label='detect hand', value=False)
+            hand_and_face = gr.Checkbox(label='Hand and Face', value=False)
             resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
             run_button = gr.Button(label="Run")
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
-    run_button.click(fn=openpose, inputs=[input_image, resolution, hand], outputs=[gallery])
+    run_button.click(fn=openpose, inputs=[input_image, resolution, hand_and_face], outputs=[gallery])
 
     with gr.Row():
         gr.Markdown("## Uniformer Segmentation")
