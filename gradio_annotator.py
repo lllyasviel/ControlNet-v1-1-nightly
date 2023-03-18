@@ -146,6 +146,32 @@ def lineart(img, res, coarse=False):
     return [result]
 
 
+model_oneformer_coco = None
+
+
+def oneformer_coco(img, res):
+    img = resize_image(HWC3(img), res)
+    global model_oneformer_coco
+    if model_oneformer_coco is None:
+        from annotator.oneformer import OneformerCOCODetector
+        model_oneformer_coco = OneformerCOCODetector()
+    result = model_oneformer_coco(img)
+    return [result]
+
+
+model_oneformer_ade20k = None
+
+
+def oneformer_ade20k(img, res):
+    img = resize_image(HWC3(img), res)
+    global model_oneformer_ade20k
+    if model_oneformer_ade20k is None:
+        from annotator.oneformer import OneformerADE20kDetector
+        model_oneformer_ade20k = OneformerADE20kDetector()
+    result = model_oneformer_ade20k(img)
+    return [result]
+
+
 block = gr.Blocks().queue()
 with block:
     with gr.Row():
@@ -275,6 +301,28 @@ with block:
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
     run_button.click(fn=lineart, inputs=[input_image, resolution, coarse], outputs=[gallery])
+
+    with gr.Row():
+        gr.Markdown("## Oneformer COCO Segmentation")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=oneformer_coco, inputs=[input_image, resolution], outputs=[gallery])
+
+    with gr.Row():
+        gr.Markdown("## Oneformer ADE20K Segmentation")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=oneformer_ade20k, inputs=[input_image, resolution], outputs=[gallery])
 
 
 block.launch(server_name='0.0.0.0')
