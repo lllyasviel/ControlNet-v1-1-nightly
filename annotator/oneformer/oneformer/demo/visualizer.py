@@ -376,7 +376,7 @@ class Visualizer:
         if is_img:
             self.img = np.asarray(img_rgb).clip(0, 255).astype(np.uint8)
         else:
-            self.img = np.zeros_like(img_rgb).clip(0, 255).astype(np.uint8)
+            self.img = np.zeros_like(img_rgb).clip(0, 255).astype(np.uint8) + 255
         if metadata is None:
             metadata = MetadataCatalog.get("__nonexist__")
         self.metadata = metadata
