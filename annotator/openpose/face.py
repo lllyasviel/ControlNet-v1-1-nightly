@@ -356,8 +356,7 @@ class Face(object):
         all_peaks = []
         for part in range(heatmaps.shape[0]):
             map_ori = heatmaps[part].copy()
-            one_heatmap = gaussian_filter(map_ori, sigma=0.8)
-            binary = np.ascontiguousarray(one_heatmap > 0.05, dtype=np.uint8)
+            binary = np.ascontiguousarray(map_ori > 0.05, dtype=np.uint8)
 
             if np.sum(binary) == 0:
                 continue
