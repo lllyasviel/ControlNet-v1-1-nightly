@@ -4,10 +4,10 @@ import torch
 from torch import nn
 from torch.autograd.function import Function
 
-from detectron2.config import configurable
-from detectron2.layers import ShapeSpec
-from detectron2.structures import Boxes, Instances, pairwise_iou
-from detectron2.utils.events import get_event_storage
+from annotator.oneformer.detectron2.config import configurable
+from annotator.oneformer.detectron2.layers import ShapeSpec
+from annotator.oneformer.detectron2.structures import Boxes, Instances, pairwise_iou
+from annotator.oneformer.detectron2.utils.events import get_event_storage
 
 from ..box_regression import Box2BoxTransform
 from ..matcher import Matcher

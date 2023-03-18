@@ -1,5 +1,5 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
-import cloudpickle
+# import cloudpickle
 
 
 class PicklableWrapper(object):
@@ -18,9 +18,9 @@ class PicklableWrapper(object):
             obj = obj._obj
         self._obj = obj
 
-    def __reduce__(self):
-        s = cloudpickle.dumps(self._obj)
-        return cloudpickle.loads, (s,)
+    # def __reduce__(self):
+    #     s = cloudpickle.dumps(self._obj)
+    #     return cloudpickle.loads, (s,)
 
     def __call__(self, *args, **kwargs):
         return self._obj(*args, **kwargs)

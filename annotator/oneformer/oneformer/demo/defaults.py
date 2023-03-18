@@ -1,10 +1,10 @@
 import torch
-import detectron2.data.transforms as T
-from detectron2.checkpoint import DetectionCheckpointer
-from detectron2.data import (
+import annotator.oneformer.detectron2.data.transforms as T
+from annotator.oneformer.detectron2.checkpoint import DetectionCheckpointer
+from annotator.oneformer.detectron2.data import (
     MetadataCatalog,
 )
-from detectron2.modeling import build_model
+from annotator.oneformer.detectron2.modeling import build_model
 
 
 __all__ = [

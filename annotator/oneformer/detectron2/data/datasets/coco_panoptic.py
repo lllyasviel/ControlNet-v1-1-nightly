@@ -3,8 +3,8 @@ import copy
 import json
 import os
 
-from detectron2.data import DatasetCatalog, MetadataCatalog
-from detectron2.utils.file_io import PathManager
+from annotator.oneformer.detectron2.data import DatasetCatalog, MetadataCatalog
+from annotator.oneformer.detectron2.utils.file_io import PathManager
 
 from .coco import load_coco_json, load_sem_seg
 
@@ -201,9 +201,9 @@ if __name__ == "__main__":
         "dataset_name" can be "coco_2017_train_panoptic", or other
         pre-registered ones
     """
-    from detectron2.utils.logger import setup_logger
-    from detectron2.utils.visualizer import Visualizer
-    import detectron2.data.datasets  # noqa # add pre-defined metadata
+    from annotator.oneformer.detectron2.utils.logger import setup_logger
+    from annotator.oneformer.detectron2.utils.visualizer import Visualizer
+    import annotator.oneformer.detectron2.data.datasets  # noqa # add pre-defined metadata
     import sys
     from PIL import Image
     import numpy as np

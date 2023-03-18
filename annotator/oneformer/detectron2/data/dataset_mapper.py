@@ -5,7 +5,7 @@ import numpy as np
 from typing import List, Optional, Union
 import torch
 
-from detectron2.config import configurable
+from annotator.oneformer.detectron2.config import configurable
 
 from . import detection_utils as utils
 from . import transforms as T

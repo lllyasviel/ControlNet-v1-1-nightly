@@ -5,9 +5,9 @@ import numpy as np
 from typing import List
 import torch
 
-from detectron2.config import configurable
-from detectron2.structures import Boxes, Instances
-from detectron2.structures.boxes import pairwise_iou
+from annotator.oneformer.detectron2.config import configurable
+from annotator.oneformer.detectron2.structures import Boxes, Instances
+from annotator.oneformer.detectron2.structures.boxes import pairwise_iou
 
 from ..config.config import CfgNode as CfgNode_
 from .base_tracker import TRACKER_HEADS_REGISTRY, BaseTracker

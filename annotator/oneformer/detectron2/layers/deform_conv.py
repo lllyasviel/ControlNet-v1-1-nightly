@@ -8,7 +8,7 @@ from torch.autograd.function import once_differentiable
 from torch.nn.modules.utils import _pair
 from torchvision.ops import deform_conv2d
 
-from detectron2.utils.develop import create_dummy_class, create_dummy_func
+from annotator.oneformer.detectron2.utils.develop import create_dummy_class, create_dummy_func
 
 from .wrappers import _NewEmptyTensorOp
 
@@ -503,7 +503,7 @@ class ModulatedDeformConv(nn.Module):
 
 
 try:
-    from detectron2 import _C
+    from annotator.oneformer.detectron2 import _C
 except ImportError:
     # TODO: register ops natively so there is no need to import _C.
     _msg = "detectron2 is not compiled successfully, please build following the instructions!"

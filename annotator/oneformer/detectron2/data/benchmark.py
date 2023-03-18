@@ -7,7 +7,7 @@ import torch
 import tqdm
 from fvcore.common.timer import Timer
 
-from detectron2.utils import comm
+from annotator.oneformer.detectron2.utils import comm
 
 from .build import build_batch_data_loader
 from .common import DatasetFromList, MapDataset

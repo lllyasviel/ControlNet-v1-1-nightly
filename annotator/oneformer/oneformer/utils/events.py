@@ -1,7 +1,7 @@
 import os
 import wandb
-from detectron2.utils import comm
-from detectron2.utils.events import EventWriter, get_event_storage
+from annotator.oneformer.detectron2.utils import comm
+from annotator.oneformer.detectron2.utils.events import EventWriter, get_event_storage
 
 
 def setup_wandb(cfg, args):

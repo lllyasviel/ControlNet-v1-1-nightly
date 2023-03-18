@@ -2,7 +2,7 @@
 from typing import List
 import torch
 
-from detectron2.layers import nonzero_tuple
+from annotator.oneformer.detectron2.layers import nonzero_tuple
 
 
 # TODO: the name is too general

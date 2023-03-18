@@ -7,8 +7,8 @@ import pycocotools.mask as mask_util
 import torch
 from torch import device
 
-from detectron2.layers.roi_align import ROIAlign
-from detectron2.utils.memory import retry_if_cuda_oom
+from annotator.oneformer.detectron2.layers.roi_align import ROIAlign
+from annotator.oneformer.detectron2.utils.memory import retry_if_cuda_oom
 
 from .boxes import Boxes
 
@@ -521,7 +521,7 @@ class ROIMasks:
         """
         Args: see documentation of :func:`paste_masks_in_image`.
         """
-        from detectron2.layers.mask_ops import paste_masks_in_image, _paste_masks_tensor_shape
+        from annotator.oneformer.detectron2.layers.mask_ops import paste_masks_in_image, _paste_masks_tensor_shape
 
         if torch.jit.is_tracing():
             if isinstance(height, torch.Tensor):

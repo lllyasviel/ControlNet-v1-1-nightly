@@ -4,8 +4,8 @@
 import numpy as np
 from typing import List
 
-from detectron2.config import CfgNode as CfgNode_
-from detectron2.config import configurable
+from annotator.oneformer.detectron2.config import CfgNode as CfgNode_
+from annotator.oneformer.detectron2.config import configurable
 
 from .base_tracker import TRACKER_HEADS_REGISTRY
 from .vanilla_hungarian_bbox_iou_tracker import VanillaHungarianBBoxIOUTracker

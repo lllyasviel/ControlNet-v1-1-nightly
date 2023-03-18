@@ -6,16 +6,16 @@
 import json
 import os
 
-from detectron2.data import DatasetCatalog, MetadataCatalog
-from detectron2.data.datasets import load_sem_seg
-from detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
-from detectron2.utils.file_io import PathManager
+from annotator.oneformer.detectron2.data import DatasetCatalog, MetadataCatalog
+from annotator.oneformer.detectron2.data.datasets import load_sem_seg
+from annotator.oneformer.detectron2.data.datasets.builtin_meta import COCO_CATEGORIES
+from annotator.oneformer.detectron2.utils.file_io import PathManager
 import contextlib
 import logging
 import io
 from fvcore.common.timer import Timer
 import pycocotools.mask as mask_util
-from detectron2.structures import BoxMode
+from annotator.oneformer.detectron2.structures import BoxMode
 
 
 logger = logging.getLogger(__name__)

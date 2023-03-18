@@ -8,9 +8,9 @@ from collections import deque
 import cv2
 import torch
 
-from detectron2.data import MetadataCatalog
+from annotator.oneformer.detectron2.data import MetadataCatalog
 from defaults import DefaultPredictor
-from detectron2.utils.video_visualizer import VideoVisualizer
+from annotator.oneformer.detectron2.utils.video_visualizer import VideoVisualizer
 from visualizer import ColorMode, Visualizer
 
 

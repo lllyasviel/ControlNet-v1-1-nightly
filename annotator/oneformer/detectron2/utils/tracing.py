@@ -1,7 +1,7 @@
 import inspect
 import torch
 
-from detectron2.utils.env import TORCH_VERSION
+from annotator.oneformer.detectron2.utils.env import TORCH_VERSION
 
 try:
     from torch.fx._symbolic_trace import is_fx_tracing as is_fx_tracing_current

@@ -6,10 +6,10 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from detectron2.config import configurable
-from detectron2.layers import Conv2d, ShapeSpec, get_norm
-from detectron2.structures import ImageList
-from detectron2.utils.registry import Registry
+from annotator.oneformer.detectron2.config import configurable
+from annotator.oneformer.detectron2.layers import Conv2d, ShapeSpec, get_norm
+from annotator.oneformer.detectron2.structures import ImageList
+from annotator.oneformer.detectron2.utils.registry import Registry
 
 from ..backbone import Backbone, build_backbone
 from ..postprocessing import sem_seg_postprocess

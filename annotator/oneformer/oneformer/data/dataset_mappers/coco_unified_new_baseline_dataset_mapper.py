@@ -9,13 +9,13 @@ import logging
 import numpy as np
 import torch
 
-from detectron2.data import MetadataCatalog
-from detectron2.config import configurable
-from detectron2.data import detection_utils as utils
-from detectron2.data import transforms as T
-from detectron2.structures import BitMasks, Instances
-from oneformer.utils.box_ops import masks_to_boxes
-from oneformer.data.tokenizer import SimpleTokenizer, Tokenize
+from annotator.oneformer.detectron2.data import MetadataCatalog
+from annotator.oneformer.detectron2.config import configurable
+from annotator.oneformer.detectron2.data import detection_utils as utils
+from annotator.oneformer.detectron2.data import transforms as T
+from annotator.oneformer.detectron2.structures import BitMasks, Instances
+from annotator.oneformer.oneformer.utils.box_ops import masks_to_boxes
+from annotator.oneformer.oneformer.data.tokenizer import SimpleTokenizer, Tokenize
 
 __all__ = ["COCOUnifiedNewBaselineDatasetMapper"]
 

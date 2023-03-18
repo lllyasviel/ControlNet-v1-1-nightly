@@ -70,7 +70,7 @@ def collect_env_info():
     data.append(("numpy", np.__version__))
 
     try:
-        import detectron2  # noqa
+        import annotator.oneformer.detectron2  # noqa
 
         data.append(
             ("detectron2", detectron2.__version__ + " @" + os.path.dirname(detectron2.__file__))
@@ -81,7 +81,7 @@ def collect_env_info():
         data.append(("detectron2", "imported a wrong installation"))
 
     try:
-        import detectron2._C as _C
+        import annotator.oneformer.detectron2._C as _C
     except ImportError as e:
         data.append(("detectron2._C", f"not built correctly: {e}"))
 
@@ -224,7 +224,7 @@ def _test_nccl_worker(rank, num_gpu, dist_url):
 
 if __name__ == "__main__":
     try:
-        from detectron2.utils.collect_env import collect_env_info as f
+        from annotator.oneformer.detectron2.utils.collect_env import collect_env_info as f
 
         print(f())
     except ImportError:

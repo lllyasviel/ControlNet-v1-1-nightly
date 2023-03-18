@@ -4,8 +4,8 @@ import math
 from typing import List, Tuple, Union
 import torch
 
-from detectron2.layers import batched_nms, cat, move_device_like
-from detectron2.structures import Boxes, Instances
+from annotator.oneformer.detectron2.layers import batched_nms, cat, move_device_like
+from annotator.oneformer.detectron2.structures import Boxes, Instances
 
 logger = logging.getLogger(__name__)
 

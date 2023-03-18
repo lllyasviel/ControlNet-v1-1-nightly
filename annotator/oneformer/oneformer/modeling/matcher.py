@@ -13,7 +13,7 @@ from torch import nn
 from torch.cuda.amp import autocast
 import numpy as np
 
-# from detectron2.projects.point_rend.point_features import point_sample
+# from annotator.oneformer.detectron2.projects.point_rend.point_features import point_sample
 
 
 def linear_sum_assignment_with_nan(cost_matrix):

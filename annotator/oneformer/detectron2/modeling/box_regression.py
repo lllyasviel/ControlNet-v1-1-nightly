@@ -5,8 +5,8 @@ import torch
 from fvcore.nn import giou_loss, smooth_l1_loss
 from torch.nn import functional as F
 
-from detectron2.layers import cat, ciou_loss, diou_loss
-from detectron2.structures import Boxes
+from annotator.oneformer.detectron2.layers import cat, ciou_loss, diou_loss
+from annotator.oneformer.detectron2.structures import Boxes
 
 # Value for clamping large dw and dh predictions. The heuristic is that we clamp
 # such that dw and dh are no larger than what would transform a 16px box into a

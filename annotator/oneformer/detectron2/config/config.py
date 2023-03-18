@@ -6,7 +6,7 @@ import inspect
 import logging
 from fvcore.common.config import CfgNode as _CfgNode
 
-from detectron2.utils.file_io import PathManager
+from annotator.oneformer.detectron2.utils.file_io import PathManager
 
 
 class CfgNode(_CfgNode):
@@ -115,7 +115,7 @@ def set_global_cfg(cfg: CfgNode) -> None:
     Assume that the given "cfg" has the key "KEY", after calling
     `set_global_cfg(cfg)`, the key can be accessed by:
     ::
-        from detectron2.config import global_cfg
+        from annotator.oneformer.detectron2.config import global_cfg
         print(global_cfg.KEY)
 
     By using a hacky global config, you can access these configs anywhere,

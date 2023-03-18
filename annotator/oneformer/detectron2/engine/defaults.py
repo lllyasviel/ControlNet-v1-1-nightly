@@ -21,28 +21,28 @@ from fvcore.nn.precise_bn import get_bn_modules
 from omegaconf import OmegaConf
 from torch.nn.parallel import DistributedDataParallel
 
-import detectron2.data.transforms as T
-from detectron2.checkpoint import DetectionCheckpointer
-from detectron2.config import CfgNode, LazyConfig
-from detectron2.data import (
+import annotator.oneformer.detectron2.data.transforms as T
+from annotator.oneformer.detectron2.checkpoint import DetectionCheckpointer
+from annotator.oneformer.detectron2.config import CfgNode, LazyConfig
+from annotator.oneformer.detectron2.data import (
     MetadataCatalog,
     build_detection_test_loader,
     build_detection_train_loader,
 )
-from detectron2.evaluation import (
+from annotator.oneformer.detectron2.evaluation import (
     DatasetEvaluator,
     inference_on_dataset,
     print_csv_format,
     verify_results,
 )
-from detectron2.modeling import build_model
-from detectron2.solver import build_lr_scheduler, build_optimizer
-from detectron2.utils import comm
-from detectron2.utils.collect_env import collect_env_info
-from detectron2.utils.env import seed_all_rng
-from detectron2.utils.events import CommonMetricPrinter, JSONWriter, TensorboardXWriter
-from detectron2.utils.file_io import PathManager
-from detectron2.utils.logger import setup_logger
+from annotator.oneformer.detectron2.modeling import build_model
+from annotator.oneformer.detectron2.solver import build_lr_scheduler, build_optimizer
+from annotator.oneformer.detectron2.utils import comm
+from annotator.oneformer.detectron2.utils.collect_env import collect_env_info
+from annotator.oneformer.detectron2.utils.env import seed_all_rng
+from annotator.oneformer.detectron2.utils.events import CommonMetricPrinter, JSONWriter, TensorboardXWriter
+from annotator.oneformer.detectron2.utils.file_io import PathManager
+from annotator.oneformer.detectron2.utils.logger import setup_logger
 
 from . import hooks
 from .train_loop import AMPTrainer, SimpleTrainer, TrainerBase

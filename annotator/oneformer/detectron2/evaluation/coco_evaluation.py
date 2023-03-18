@@ -15,18 +15,18 @@ from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
 from tabulate import tabulate
 
-import detectron2.utils.comm as comm
-from detectron2.config import CfgNode
-from detectron2.data import MetadataCatalog
-from detectron2.data.datasets.coco import convert_to_coco_json
-from detectron2.structures import Boxes, BoxMode, pairwise_iou
-from detectron2.utils.file_io import PathManager
-from detectron2.utils.logger import create_small_table
+import annotator.oneformer.detectron2.utils.comm as comm
+from annotator.oneformer.detectron2.config import CfgNode
+from annotator.oneformer.detectron2.data import MetadataCatalog
+from annotator.oneformer.detectron2.data.datasets.coco import convert_to_coco_json
+from annotator.oneformer.detectron2.structures import Boxes, BoxMode, pairwise_iou
+from annotator.oneformer.detectron2.utils.file_io import PathManager
+from annotator.oneformer.detectron2.utils.logger import create_small_table
 
 from .evaluator import DatasetEvaluator
 
 try:
-    from detectron2.evaluation.fast_eval_api import COCOeval_opt
+    from annotator.oneformer.detectron2.evaluation.fast_eval_api import COCOeval_opt
 except ImportError:
     COCOeval_opt = COCOeval
 

@@ -6,9 +6,9 @@ import os
 import xml.etree.ElementTree as ET
 from typing import List, Tuple, Union
 
-from detectron2.data import DatasetCatalog, MetadataCatalog
-from detectron2.structures import BoxMode
-from detectron2.utils.file_io import PathManager
+from annotator.oneformer.detectron2.data import DatasetCatalog, MetadataCatalog
+from annotator.oneformer.detectron2.structures import BoxMode
+from annotator.oneformer.detectron2.utils.file_io import PathManager
 
 __all__ = ["load_voc_instances", "register_pascal_voc"]
 

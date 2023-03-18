@@ -642,7 +642,7 @@ _C.VIS_PERIOD = 0
 # You can set them in command line or config files,
 # and access it with:
 #
-# from detectron2.config import global_cfg
+# from annotator.oneformer.detectron2.config import global_cfg
 # print(global_cfg.HACK)
 #
 # Do not commit any configs into it.

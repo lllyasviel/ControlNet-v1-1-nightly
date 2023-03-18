@@ -2,9 +2,9 @@
 import fvcore.nn.weight_init as weight_init
 import torch.nn.functional as F
 
-from detectron2.layers import CNNBlockBase, Conv2d, get_norm
-from detectron2.modeling import BACKBONE_REGISTRY
-from detectron2.modeling.backbone.resnet import (
+from annotator.oneformer.detectron2.layers import CNNBlockBase, Conv2d, get_norm
+from annotator.oneformer.detectron2.modeling import BACKBONE_REGISTRY
+from annotator.oneformer.detectron2.modeling.backbone.resnet import (
     BasicStem,
     BottleneckBlock,
     DeformBottleneckBlock,

@@ -3,9 +3,9 @@ import logging
 import os
 from fvcore.common.timer import Timer
 
-from detectron2.data import DatasetCatalog, MetadataCatalog
-from detectron2.structures import BoxMode
-from detectron2.utils.file_io import PathManager
+from annotator.oneformer.detectron2.data import DatasetCatalog, MetadataCatalog
+from annotator.oneformer.detectron2.structures import BoxMode
+from annotator.oneformer.detectron2.utils.file_io import PathManager
 
 from .builtin_meta import _get_coco_instances_meta
 from .lvis_v0_5_categories import LVIS_CATEGORIES as LVIS_V0_5_CATEGORIES
@@ -220,10 +220,10 @@ if __name__ == "__main__":
     """
     import sys
     import numpy as np
-    from detectron2.utils.logger import setup_logger
+    from annotator.oneformer.detectron2.utils.logger import setup_logger
     from PIL import Image
-    import detectron2.data.datasets  # noqa # add pre-defined metadata
-    from detectron2.utils.visualizer import Visualizer
+    import annotator.oneformer.detectron2.data.datasets  # noqa # add pre-defined metadata
+    from annotator.oneformer.detectron2.utils.visualizer import Visualizer
 
     logger = setup_logger(name=__name__)
     meta = MetadataCatalog.get(sys.argv[3])

@@ -20,7 +20,7 @@ from fvcore.transforms.transform import (
 )
 from PIL import Image
 
-from detectron2.structures import Boxes, pairwise_iou
+from annotator.oneformer.detectron2.structures import Boxes, pairwise_iou
 
 from .augmentation import Augmentation, _transform_to_aug
 from .transform import ExtentTransform, ResizeTransform, RotationTransform

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) Facebook, Inc. and its affiliates.
-from detectron2.config import CfgNode as CN
+from annotator.oneformer.detectron2.config import CfgNode as CN
 
 __all__ = ["add_common_config", "add_oneformer_config", "add_swin_config", 
             "add_dinat_config", "add_beit_adapter_config", "add_convnext_config"]

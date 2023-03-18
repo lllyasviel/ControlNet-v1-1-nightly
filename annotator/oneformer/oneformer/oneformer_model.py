@@ -9,20 +9,19 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from detectron2.config import configurable
-from detectron2.data import MetadataCatalog
-from detectron2.modeling import META_ARCH_REGISTRY, build_backbone, build_sem_seg_head
-from detectron2.modeling.backbone import Backbone
-from detectron2.modeling.postprocessing import sem_seg_postprocess
-from detectron2.structures import Boxes, ImageList, Instances, BitMasks
-from detectron2.utils.memory import retry_if_cuda_oom
+from annotator.oneformer.detectron2.config import configurable
+from annotator.oneformer.detectron2.data import MetadataCatalog
+from annotator.oneformer.detectron2.modeling import META_ARCH_REGISTRY, build_backbone, build_sem_seg_head
+from annotator.oneformer.detectron2.modeling.backbone import Backbone
+from annotator.oneformer.detectron2.modeling.postprocessing import sem_seg_postprocess
+from annotator.oneformer.detectron2.structures import Boxes, ImageList, Instances, BitMasks
+from annotator.oneformer.detectron2.utils.memory import retry_if_cuda_oom
 
-from .modeling.criterion import SetCriterion
 from .modeling.matcher import HungarianMatcher
 from einops import rearrange
 from .modeling.transformer_decoder.text_transformer import TextTransformer
 from .modeling.transformer_decoder.oneformer_transformer_decoder import MLP
-from oneformer.data.tokenizer import SimpleTokenizer, Tokenize
+from annotator.oneformer.oneformer.data.tokenizer import SimpleTokenizer, Tokenize
 
 @META_ARCH_REGISTRY.register()
 class OneFormer(nn.Module):
@@ -39,7 +38,6 @@ class OneFormer(nn.Module):
         task_mlp: nn.Module,
         text_encoder: nn.Module,
         text_projector: nn.Module,
-        criterion: nn.Module,
         prompt_ctx: nn.Embedding,
         num_queries: int,
         object_mask_threshold: float,
@@ -90,7 +88,6 @@ class OneFormer(nn.Module):
         self.text_encoder = text_encoder
         self.text_projector = text_projector
         self.prompt_ctx = prompt_ctx
-        self.criterion = criterion
         self.num_queries = num_queries
         self.overlap_threshold = overlap_threshold
         self.object_mask_threshold = object_mask_threshold
@@ -174,18 +171,6 @@ class OneFormer(nn.Module):
 
         losses = ["labels", "masks", "contrastive"]
 
-        criterion = SetCriterion(
-            sem_seg_head.num_classes,
-            matcher=matcher,
-            weight_dict=weight_dict,
-            eos_coef=no_object_weight,
-            contrast_temperature=cfg.MODEL.ONE_FORMER.CONTRASTIVE_TEMPERATURE,
-            losses=losses,
-            num_points=cfg.MODEL.ONE_FORMER.TRAIN_NUM_POINTS,
-            oversample_ratio=cfg.MODEL.ONE_FORMER.OVERSAMPLE_RATIO,
-            importance_sample_ratio=cfg.MODEL.ONE_FORMER.IMPORTANCE_SAMPLE_RATIO,
-        )
-
         return {
             "backbone": backbone,
             "sem_seg_head": sem_seg_head,
@@ -193,7 +178,6 @@ class OneFormer(nn.Module):
             "prompt_ctx": prompt_ctx,
             "text_encoder": text_encoder,
             "text_projector": text_projector,
-            "criterion": criterion,
             "num_queries": cfg.MODEL.ONE_FORMER.NUM_OBJECT_QUERIES,
             "object_mask_threshold": cfg.MODEL.TEST.OBJECT_MASK_THRESHOLD,
             "overlap_threshold": cfg.MODEL.TEST.OVERLAP_THRESHOLD,

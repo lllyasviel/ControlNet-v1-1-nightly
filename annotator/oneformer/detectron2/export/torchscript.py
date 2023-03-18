@@ -3,7 +3,7 @@
 import os
 import torch
 
-from detectron2.utils.file_io import PathManager
+from annotator.oneformer.detectron2.utils.file_io import PathManager
 
 from .torchscript_patch import freeze_training_mode, patch_instances
 

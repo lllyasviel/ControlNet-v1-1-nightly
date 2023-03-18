@@ -3,19 +3,19 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 import torch
 
-from detectron2.config import get_cfg
-from detectron2.projects.deeplab import add_deeplab_config
-from detectron2.data import MetadataCatalog
+from annotator.oneformer.detectron2.config import get_cfg
+from annotator.oneformer.detectron2.projects.deeplab import add_deeplab_config
+from annotator.oneformer.detectron2.data import MetadataCatalog
 
-from oneformer import (
+from annotator.oneformer.oneformer import (
     add_oneformer_config,
     add_common_config,
     add_swin_config,
     add_dinat_config,
 )
 
-from oneformer.demo.defaults import DefaultPredictor
-from oneformer.demo.visualizer import Visualizer, ColorMode
+from annotator.oneformer.oneformer.demo.defaults import DefaultPredictor
+from annotator.oneformer.oneformer.demo.visualizer import Visualizer, ColorMode
 
 
 def make_detectron2_model(config_path, ckpt_path):
