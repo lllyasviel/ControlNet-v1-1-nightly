@@ -78,7 +78,7 @@ This is Mukosame/Anime2Sketch.
 
 ![p](github_misc/7.png)
 
-# Lineart (Anime)
+# Lineart (Realistic)
 
 This is awacke1/Image-to-Line-Drawings.
 
