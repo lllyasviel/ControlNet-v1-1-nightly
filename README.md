@@ -1,5 +1,7 @@
 # AnnotatorV3
 
+**Please keep this repo confidential before the release of ControlNet 1.1!**
+
 AnnotatorV3 is a project conducted by ControlNet team to find out SOTA methods to interpret images.
 
 All codes are production-ready: The installation must be super easy and all codes are implemented with pure python and pure PyTorch and those "easy-to-install" packages.
