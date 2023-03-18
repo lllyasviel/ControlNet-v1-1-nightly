@@ -26,7 +26,7 @@ __all__ = ["ColorMode", "VisImage", "Visualizer"]
 
 _SMALL_OBJECT_AREA_THRESH = 1000
 _LARGE_MASK_AREA_THRESH = 120000
-_OFF_WHITE = (1.0, 1.0, 240.0 / 255)
+_OFF_WHITE = (1.0, 1.0, 1.0)
 _BLACK = (0, 0, 0)
 _RED = (1.0, 0, 0)
 
@@ -533,7 +533,7 @@ class Visualizer:
         )
         return self.output
 
-    def draw_sem_seg(self, sem_seg, area_threshold=None, alpha=0.8, is_text=True):
+    def draw_sem_seg(self, sem_seg, area_threshold=None, alpha=0.8, is_text=True, edge_color=_OFF_WHITE):
         """
         Draw semantic segmentation predictions/labels.
         Args:
@@ -560,7 +560,7 @@ class Visualizer:
             self.draw_binary_mask(
                 binary_mask,
                 color=mask_color,
-                edge_color=_OFF_WHITE,
+                edge_color=edge_color,
                 text=text,
                 alpha=alpha,
                 area_threshold=area_threshold,
@@ -687,13 +687,13 @@ class Visualizer:
             self.draw_sem_seg(sem_seg, area_threshold=0, alpha=0.5)
 
         pan_seg = dic.get("pan_seg", None)
-        if pan_seg is None and "pan_seg_file_name" in dic:
-            with PathManager.open(dic["pan_seg_file_name"], "rb") as f:
-                pan_seg = Image.open(f)
-                pan_seg = np.asarray(pan_seg)
-                from panopticapi.utils import rgb2id
-
-                pan_seg = rgb2id(pan_seg)
+        # if pan_seg is None and "pan_seg_file_name" in dic:
+        #     with PathManager.open(dic["pan_seg_file_name"], "rb") as f:
+        #         pan_seg = Image.open(f)
+        #         pan_seg = np.asarray(pan_seg)
+        #         from panopticapi.utils import rgb2id
+        #
+        #         pan_seg = rgb2id(pan_seg)
         if pan_seg is not None:
             segments_info = dic["segments_info"]
             pan_seg = torch.tensor(pan_seg)
