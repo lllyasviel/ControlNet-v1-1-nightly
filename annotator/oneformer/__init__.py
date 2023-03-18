@@ -24,7 +24,7 @@ class OneformerADE20kDetector:
         if not os.path.exists(modelpath):
             from basicsr.utils.download_util import load_file_from_url
             load_file_from_url(remote_model_path, model_dir=annotator_ckpts_path)
-        config = os.path.join(os.path.dirname(__file__), 'configs/coco/oneformer_swin_large_IN21k_384_bs16_160k.yaml')
+        config = os.path.join(os.path.dirname(__file__), 'configs/ade20k/oneformer_swin_large_IN21k_384_bs16_160k.yaml')
         self.model, self.meta = make_detectron2_model(config, modelpath)
 
     def __call__(self, img):
