@@ -74,6 +74,10 @@ The ControlNet team made significant efforts to improve this. The differences ar
 
 ![p](github_misc/6.png)
 
+Multiple person in the wild:
+
+![p](github_misc/6b.png)
+
 # Lineart (Anime)
 
 This is Mukosame/Anime2Sketch.
