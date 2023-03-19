@@ -107,3 +107,9 @@ Below is our previous Uniformer. This model is out-of-date and will be replaced 
 This is OneFormer. This method is SOTA. The ControlNet team made significant efforts to remove unnecessary dependencies so that anyone can use this model in nearly any environment without worrying about many difficult dependencies.
 
 ![p](github_misc/11.png)
+
+# Content Reshuffle
+
+Use a simple random flow to reshuffle the content of an image. This can be used to train style-based ControlNets without being limited to the model scope of Clip-Vision tokenizer. This may also result in several interesting applications.
+
+![p](github_misc/12.png)

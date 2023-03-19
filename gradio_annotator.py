@@ -172,6 +172,19 @@ def oneformer_ade20k(img, res):
     return [result]
 
 
+model_shuffler = None
+
+
+def shuffler(img, res):
+    img = resize_image(HWC3(img), res)
+    global model_shuffler
+    if model_shuffler is None:
+        from annotator.shuffle import ShuffleDetector
+        model_shuffler = ShuffleDetector()
+    result = model_shuffler(img)
+    return [result]
+
+
 block = gr.Blocks().queue()
 with block:
     with gr.Row():
@@ -323,6 +336,17 @@ with block:
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
     run_button.click(fn=oneformer_ade20k, inputs=[input_image, resolution], outputs=[gallery])
+
+    with gr.Row():
+        gr.Markdown("## Content Shuffle")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=shuffler, inputs=[input_image, resolution], outputs=[gallery])
 
 
 block.launch(server_name='0.0.0.0')
