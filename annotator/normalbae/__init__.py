@@ -41,6 +41,9 @@ class NormalBaeDetector:
 
             normal = self.model(image_normal)
             normal = normal[0][-1][:, :3]
+            d = torch.sum(normal ** 2.0, dim=1, keepdim=True) ** 0.5
+            d = torch.maximum(d, torch.ones_like(d) * 1e-5)
+            normal /= d
             normal = ((normal + 1) * 0.5).clip(0, 1)
 
             normal = rearrange(normal[0], 'c h w -> h w c').cpu().numpy()
