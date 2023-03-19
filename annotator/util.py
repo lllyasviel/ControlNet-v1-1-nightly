@@ -57,9 +57,15 @@ def nms(x, t, s):
 
 
 def make_noise_disk(H, W, C, F):
-    noise = np.random.uniform(low=0, high=1, size=(2 * H // F, 2 * W // F, C))
-    noise = cv2.resize(noise, (W * 2, H * 2), interpolation=cv2.INTER_CUBIC)
-    noise = noise[H // 2: H // 2 + H, W // 2: W // 2 + W]
+    noise = np.random.uniform(low=0, high=1, size=((H // F) + 2, (W // F) + 2, C))
+    noise = cv2.resize(noise, (W + 2 * F, H + 2 * F), interpolation=cv2.INTER_CUBIC)
+    noise = noise[F: F + H, F: F + W]
     noise -= np.min(noise)
     noise /= np.max(noise)
     return noise
+
+
+def min_max_norm(x):
+    x -= np.min(x)
+    x /= np.maximum(np.max(x), 1e-5)
+    return x

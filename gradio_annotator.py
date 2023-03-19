@@ -172,29 +172,29 @@ def oneformer_ade20k(img, res):
     return [result]
 
 
-model_shuffler = None
+model_content_shuffler = None
 
 
-def shuffler(img, res):
+def content_shuffler(img, res):
     img = resize_image(HWC3(img), res)
-    global model_shuffler
-    if model_shuffler is None:
-        from annotator.shuffle import ShuffleDetector
-        model_shuffler = ShuffleDetector()
-    result = model_shuffler(img)
+    global model_content_shuffler
+    if model_content_shuffler is None:
+        from annotator.shuffle import ContentShuffleDetector
+        model_content_shuffler = ContentShuffleDetector()
+    result = model_content_shuffler(img)
     return [result]
 
 
-model_deluma = None
+model_color_shuffler = None
 
 
-def deluma(img, res):
+def color_shuffler(img, res):
     img = resize_image(HWC3(img), res)
-    global model_deluma
-    if model_deluma is None:
-        from annotator.deluma import DelumaDetector
-        model_deluma = DelumaDetector()
-    result = model_deluma(img)
+    global model_color_shuffler
+    if model_color_shuffler is None:
+        from annotator.shuffle import ColorShuffleDetector
+        model_color_shuffler = ColorShuffleDetector()
+    result = model_color_shuffler(img)
     return [result]
 
 
@@ -359,10 +359,10 @@ with block:
             run_button = gr.Button(label="Run")
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
-    run_button.click(fn=shuffler, inputs=[input_image, resolution], outputs=[gallery])
+    run_button.click(fn=content_shuffler, inputs=[input_image, resolution], outputs=[gallery])
 
     with gr.Row():
-        gr.Markdown("## Luminance Removal")
+        gr.Markdown("## Color Shuffle")
     with gr.Row():
         with gr.Column():
             input_image = gr.Image(source='upload', type="numpy")
@@ -370,7 +370,7 @@ with block:
             run_button = gr.Button(label="Run")
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
-    run_button.click(fn=deluma, inputs=[input_image, resolution], outputs=[gallery])
+    run_button.click(fn=color_shuffler, inputs=[input_image, resolution], outputs=[gallery])
 
 
 block.launch(server_name='0.0.0.0')

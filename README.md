@@ -121,10 +121,10 @@ This may also result in several interesting applications.
 ![p](github_misc/12.png)
 
 
-# Luminance Removal
+# Color Reshuffle
 
-Removing the luminance in images. Will result in a useful ControlNet for relighting.
+Randomly shuffle the color of each pixel but preserve the image structure. 
 
-We recommend to multiply this result image with random color to synthesize different albedo if they are used in your training.
+Useful in training re-coloring ControlNets.
 
-![p](github_misc/13b.png)
+![p](github_misc/14.png)
