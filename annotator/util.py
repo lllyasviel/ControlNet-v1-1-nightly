@@ -78,6 +78,4 @@ def img2mask(img, H, W):
     y = cv2.resize(y, (W, H), interpolation=cv2.INTER_CUBIC)
     if random.uniform(0, 1) < 0.5:
         y = 255 - y
-    mask = np.ones_like(y).astype(np.float32)
-    mask[y < np.percentile(y, random.randrange(30, 70))] = 0
-    return mask
+    return np.ascontiguousarray(y < np.percentile(y, random.randrange(30, 70)), dtype=np.float32)
