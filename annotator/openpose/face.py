@@ -331,7 +331,7 @@ class Face(object):
     def __call__(self, face_img):
         H, W, C = face_img.shape
 
-        x_data = torch.from_numpy(util.smart_resize(face_img, 384)).permute([2, 0, 1]) / 256.0 - 0.5
+        x_data = torch.from_numpy(util.smart_resize(face_img, (384, 384))).permute([2, 0, 1]) / 256.0 - 0.5
 
         if torch.cuda.is_available():
             x_data = x_data.cuda()
