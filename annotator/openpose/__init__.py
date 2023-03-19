@@ -57,7 +57,8 @@ class OpenposeDetector:
                 for x, y, w in faces_list:
                     heatmaps = self.face_estimation(oriImg[y:y+w, x:x+w, :])
                     peaks = self.face_estimation.compute_peaks_from_heatmaps(heatmaps)
-                    peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
-                    peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
-                    canvas = util.draw_facepose(canvas, peaks)
+                    if peaks.ndim == 2 and peaks.shape[1] == 2:
+                        peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
+                        peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
+                        canvas = util.draw_facepose(canvas, peaks)
             return canvas, dict(candidate=candidate.tolist(), subset=subset.tolist())
