@@ -1,9 +1,11 @@
+import cv2
 import numpy as np
 
 
 class DelumaDetector:
-    def __call__(self, img):
+    def __call__(self, img, high_quality=True):
         y = img.astype(np.float32)
+        y = cv2.bilateralFilter(y, 24, 32, 32)
 
         luma = 0.299 * y[:, :, 0] + 0.587 * y[:, :, 1] + 0.114 * y[:, :, 2]
         color = y - luma[:, :, None]
