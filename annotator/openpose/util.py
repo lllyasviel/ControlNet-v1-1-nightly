@@ -204,49 +204,43 @@ def faceDetect(candidate, subset, oriImg):
         if not has_head:
             continue
 
-        has_neck = person[1] > -1
         has_left_eye = person[14] > -1
         has_right_eye = person[15] > -1
         has_left_ear = person[16] > -1
         has_right_ear = person[17] > -1
 
-        if not (has_neck or has_left_eye or has_right_eye or has_left_ear or has_right_ear):
+        if not (has_left_eye or has_right_eye or has_left_ear or has_right_ear):
             continue
 
-        head, neck, left_eye, right_eye, left_ear, right_ear = person[[0, 1, 14, 15, 16, 17]]
+        head, left_eye, right_eye, left_ear, right_ear = person[[0, 14, 15, 16, 17]]
 
         width = 0.0
         x0, y0 = candidate[head][:2]
 
-        if has_neck:
-            x1, y1 = candidate[neck][:2]
-            d = math.sqrt((x0 - x1) ** 2 + (y0 - y1) ** 2)
-            width = max(width, d * 1.5)
-
         if has_left_eye:
             x1, y1 = candidate[left_eye][:2]
-            d = math.sqrt((x0 - x1) ** 2 + (y0 - y1) ** 2)
-            width = max(width, d * 2.5)
+            d = max(abs(x0 - x1), abs(y0 - y1))
+            width = max(width, d * 3.0)
 
         if has_right_eye:
             x1, y1 = candidate[right_eye][:2]
-            d = math.sqrt((x0 - x1) ** 2 + (y0 - y1) ** 2)
-            width = max(width, d * 2.5)
+            d = max(abs(x0 - x1), abs(y0 - y1))
+            width = max(width, d * 3.0)
 
         if has_left_ear:
             x1, y1 = candidate[left_ear][:2]
-            d = math.sqrt((x0 - x1) ** 2 + (y0 - y1) ** 2)
+            d = max(abs(x0 - x1), abs(y0 - y1))
             width = max(width, d * 1.5)
 
         if has_right_ear:
             x1, y1 = candidate[right_ear][:2]
-            d = math.sqrt((x0 - x1) ** 2 + (y0 - y1) ** 2)
+            d = max(abs(x0 - x1), abs(y0 - y1))
             width = max(width, d * 1.5)
 
         x, y = x0, y0
 
-        x -= width / 2
-        y -= width / 2
+        x -= width
+        y -= width
 
         if x < 0:
             x = 0
@@ -254,8 +248,8 @@ def faceDetect(candidate, subset, oriImg):
         if y < 0:
             y = 0
 
-        width1 = width
-        width2 = width
+        width1 = width * 2
+        width2 = width * 2
 
         if x + width > image_width:
             width1 = image_width - x
