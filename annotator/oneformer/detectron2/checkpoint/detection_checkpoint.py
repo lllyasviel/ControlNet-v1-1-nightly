@@ -59,6 +59,8 @@ class DetectionCheckpointer(Checkpointer):
             self._parsed_url_during_load = parsed_url
             path = parsed_url._replace(query="").geturl()  # remove query from filename
             path = self.path_manager.get_local_path(path)
+
+        self.logger.setLevel('CRITICAL')
         ret = super().load(path, *args, **kwargs)
 
         if need_sync:
