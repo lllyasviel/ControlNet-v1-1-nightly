@@ -318,7 +318,7 @@ with block:
     with gr.Row():
         with gr.Column():
             input_image = gr.Image(source='upload', type="numpy")
-            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=640, step=64)
             run_button = gr.Button(label="Run")
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
