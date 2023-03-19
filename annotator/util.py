@@ -74,8 +74,17 @@ def min_max_norm(x):
 
 
 def img2mask(img, H, W):
-    y = img[:, :, random.randrange(0, img.shape[2])]
+    assert img.ndim == 3 or img.ndim == 2
+    assert img.dtype == np.uint8
+
+    if img.ndim == 3:
+        y = img[:, :, random.randrange(0, img.shape[2])]
+    else:
+        y = img
+
     y = cv2.resize(y, (W, H), interpolation=cv2.INTER_CUBIC)
+    
     if random.uniform(0, 1) < 0.5:
         y = 255 - y
+
     return np.ascontiguousarray(y < np.percentile(y, random.randrange(30, 70)), dtype=np.float32)
