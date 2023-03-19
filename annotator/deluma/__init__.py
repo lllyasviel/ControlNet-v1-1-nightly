@@ -5,7 +5,8 @@ class DelumaDetector:
     def __call__(self, img):
         y = img.astype(np.float32)
 
-        color = y - np.mean(y, axis=2, keepdims=True)
+        luma = 0.299 * y[:, :, 0] + 0.587 * y[:, :, 1] + 0.114 * y[:, :, 2]
+        color = y - luma[:, :, None]
         intensity = np.min(y, axis=2, keepdims=True) - np.max(y, axis=2, keepdims=True)
 
         intensity -= np.min(intensity)
