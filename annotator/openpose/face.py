@@ -5,7 +5,7 @@ import torch
 import torch.nn.functional as F
 import cv2
 
-from skimage.measure import label
+from . import util
 from torch.nn import Conv2d, Module, ReLU, MaxPool2d, init
 
 
@@ -303,19 +303,6 @@ params = {
 }
 
 
-def min_resize_image(input_image, resolution):
-    H, W, C = input_image.shape
-    H = float(H)
-    W = float(W)
-    k = float(resolution) / min(H, W)
-    H *= k
-    W *= k
-    H = int(np.round(H / 64.0)) * 64
-    W = int(np.round(W / 64.0)) * 64
-    img = cv2.resize(input_image, (W, H), interpolation=cv2.INTER_LANCZOS4 if k > 1 else cv2.INTER_AREA)
-    return img
-
-
 class Face(object):
     """
     The OpenPose face landmark detector model.
@@ -344,7 +331,7 @@ class Face(object):
     def __call__(self, face_img):
         H, W, C = face_img.shape
 
-        x_data = torch.from_numpy(min_resize_image(face_img, 384)).permute([2, 0, 1]) / 256.0 - 0.5
+        x_data = torch.from_numpy(util.smart_resize(face_img, 384)).permute([2, 0, 1]) / 256.0 - 0.5
 
         if torch.cuda.is_available():
             x_data = x_data.cuda()
