@@ -16,7 +16,7 @@ class ContentShuffleDetector:
 class ColorShuffleDetector:
     def __call__(self, img):
         H, W, C = img.shape
-        F = 256
+        F = 128
         A = make_noise_disk(H, W, 3, F)
         B = make_noise_disk(H, W, 3, F)
         C = (A + B) / 2.0
