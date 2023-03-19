@@ -114,6 +114,8 @@ Use a simple random flow to reshuffle the content of an image. This can be used 
 
 We already see many clip-based token-based methods and none of them can very accurately reproduce the style of input images. Let us see will this method be much better.
 
+This method should work because ControlNet Encoder has many self-attentions and cross-attentions.
+
 This may also result in several interesting applications.
 
 ![p](github_misc/12.png)
