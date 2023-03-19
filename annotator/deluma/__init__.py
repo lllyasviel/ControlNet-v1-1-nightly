@@ -6,7 +6,7 @@ class DelumaDetector:
         y = img.astype(np.float32)
 
         color = y - np.mean(y, axis=2, keepdims=True)
-        intensity = np.mean(y - np.max(y, axis=2, keepdims=True), axis=2, keepdims=True)
+        intensity = np.min(y - np.max(y, axis=2, keepdims=True), axis=2, keepdims=True)
 
         intensity -= np.min(intensity)
         intensity /= np.maximum(np.max(intensity), 1e-5)
