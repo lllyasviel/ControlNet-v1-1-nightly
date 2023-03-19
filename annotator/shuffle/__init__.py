@@ -20,9 +20,11 @@ class ColorShuffleDetector:
         A = make_noise_disk(H, W, 3, F)
         B = make_noise_disk(H, W, 3, F)
         C = (A + B) / 2.0
-        A = (C + (A - C) * 2.0).clip(0, 1)
-        B = (C + (B - C) * 2.0).clip(0, 1)
+        A = (C + (A - C) * 3.0).clip(0, 1)
+        B = (C + (B - C) * 3.0).clip(0, 1)
         L = img.astype(np.float32) / 255.0
         Y = A * L + B * (1 - L)
-        Y = min_max_norm(Y) * 255.0
+        Y -= np.min(Y, axis=(0, 1), keepdims=True)
+        Y /= np.maximum(np.max(Y, axis=(0, 1), keepdims=True), 1e-5)
+        Y *= 255.0
         return Y.clip(0, 255).astype(np.uint8)
