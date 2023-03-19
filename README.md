@@ -110,6 +110,10 @@ This is OneFormer. This method is SOTA. The ControlNet team made significant eff
 
 # Content Reshuffle
 
-Use a simple random flow to reshuffle the content of an image. This can be used to train style-based ControlNets without being limited to the model scope of Clip-Vision tokenizer. This may also result in several interesting applications.
+Use a simple random flow to reshuffle the content of an image. This can be used to train style-based ControlNets without being limited to the model scope of Clip-Vision tokenizer. 
+
+We already see many clip-based token-based methods and none of them can very accurately reproduce the style of input images. Let us see will this method be much better.
+
+This may also result in several interesting applications.
 
 ![p](github_misc/12.png)
