@@ -125,4 +125,6 @@ This may also result in several interesting applications.
 
 Removing the luminance in images. Will result in a useful ControlNet for relighting.
 
+We recommend to multiply this result image with random color to synthesize different albedo if they are used in your training.
+
 ![p](github_misc/13b.png)
