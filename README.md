@@ -4,7 +4,7 @@
 
 AnnotatorV3 is a project conducted by ControlNet team to find out SOTA methods to interpret images.
 
-All codes are production-ready: The installation must be super easy and all codes are implemented with pure python and pure PyTorch and those "easy-to-install" packages.
+All codes are production-ready: The installation is super easy and all codes are implemented with pure python and pure PyTorch and those "easy-to-install" packages.
 
 The performance, quality, and inference "correctness" of all models are carefully reviewed by the ControlNet team to ensure that they are basically the correct implementation of SOTA models.
 
