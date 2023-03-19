@@ -33,7 +33,7 @@ class ColorShuffleDetector:
 
 
 class Image2MaskShuffleDetector:
-    def __init__(self, resolution=(768, 512)):
+    def __init__(self, resolution=(640, 512)):
         self.H, self.W = resolution
 
     def __call__(self, img):
