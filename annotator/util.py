@@ -78,7 +78,7 @@ def img2mask(img, H, W):
     H, W, C = y.shape
     y = y[:, :, random.randrange(0, C)]
     mask = np.ones_like(y).astype(np.float32)
-    a, b = random.randrange(0, 256), random.randrange(0, 256)
+    a, b = random.randrange(0, 256 - 64), random.randrange(64, 256)
     mask[y < np.minimum(a, b)] = 0
     mask[y > np.maximum(a, b)] = 0
     return mask
