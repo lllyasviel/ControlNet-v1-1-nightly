@@ -43,6 +43,7 @@ class OpenposeDetector:
             canvas = np.zeros_like(oriImg)
             canvas = util.draw_bodypose(canvas, candidate, subset)
             if hand_and_face:
+                # Hand
                 hands_list = util.handDetect(candidate, subset, oriImg)
                 all_hand_peaks = []
                 for x, y, w, is_left in hands_list:
@@ -51,7 +52,12 @@ class OpenposeDetector:
                     peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
                     all_hand_peaks.append(peaks)
                 canvas = util.draw_handpose(canvas, all_hand_peaks)
-                heatmaps = self.face_estimation(oriImg)
-                lmk = self.face_estimation.compute_peaks_from_heatmaps(heatmaps)
-                canvas = util.draw_facepose(canvas, lmk)
+                # Face
+                faces_list = util.faceDetect(candidate, subset, oriImg)
+                for x, y, w in faces_list:
+                    heatmaps = self.face_estimation(oriImg[y:y+w, x:x+w, :])
+                    peaks = self.face_estimation.compute_peaks_from_heatmaps(heatmaps)
+                    peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
+                    peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
+                    canvas = util.draw_facepose(canvas, peaks)
             return canvas, dict(candidate=candidate.tolist(), subset=subset.tolist())

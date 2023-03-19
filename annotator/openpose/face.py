@@ -344,7 +344,7 @@ class Face(object):
     def __call__(self, face_img):
         H, W, C = face_img.shape
 
-        x_data = torch.from_numpy(min_resize_image(face_img, 768)).permute([2, 0, 1]) / 256.0 - 0.5
+        x_data = torch.from_numpy(min_resize_image(face_img, 384)).permute([2, 0, 1]) / 256.0 - 0.5
 
         if torch.cuda.is_available():
             x_data = x_data.cuda()
@@ -366,13 +366,10 @@ class Face(object):
             if np.sum(binary) == 0:
                 continue
 
-            label_img, label_numbers = label(binary, return_num=True, connectivity=binary.ndim)
-
-            for i in range(1, label_numbers + 1):
-                positions = np.where(label_img == i)
-                intensities = map_ori[positions]
-                mi = np.argmax(intensities)
-                y, x = positions[0][mi], positions[1][mi]
-                all_peaks.append([x, y])
+            positions = np.where(binary > 0.5)
+            intensities = map_ori[positions]
+            mi = np.argmax(intensities)
+            y, x = positions[0][mi], positions[1][mi]
+            all_peaks.append([x, y])
 
         return np.array(all_peaks)
