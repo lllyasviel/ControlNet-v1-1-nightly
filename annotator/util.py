@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 import cv2
 import os
@@ -69,3 +71,14 @@ def min_max_norm(x):
     x -= np.min(x)
     x /= np.maximum(np.max(x), 1e-5)
     return x
+
+
+def img2mask(img, H, W):
+    y = cv2.resize(img, (W, H), interpolation=cv2.INTER_CUBIC)
+    H, W, C = y.shape
+    y = y[:, :, random.randrange(0, C)]
+    mask = np.ones_like(y).astype(np.float32)
+    a, b = random.randrange(0, 256), random.randrange(0, 256)
+    mask[y < np.minimum(a, b)] = 0
+    mask[y > np.maximum(a, b)] = 0
+    return mask
