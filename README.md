@@ -119,3 +119,10 @@ This method should work because ControlNet Encoder has many self-attentions and 
 This may also result in several interesting applications.
 
 ![p](github_misc/12.png)
+
+
+# Luminance Removal
+
+Removing the luminance in images. Will result in a useful ControlNet for relighting.
+
+![p](github_misc/13.png)

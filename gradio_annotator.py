@@ -185,6 +185,19 @@ def shuffler(img, res):
     return [result]
 
 
+model_deluma = None
+
+
+def deluma(img, res):
+    img = resize_image(HWC3(img), res)
+    global model_deluma
+    if model_deluma is None:
+        from annotator.deluma import DelumaDetector
+        model_deluma = DelumaDetector()
+    result = model_deluma(img)
+    return [result]
+
+
 block = gr.Blocks().queue()
 with block:
     with gr.Row():
@@ -347,6 +360,17 @@ with block:
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
     run_button.click(fn=shuffler, inputs=[input_image, resolution], outputs=[gallery])
+
+    with gr.Row():
+        gr.Markdown("## Luminance Removal")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            resolution = gr.Slider(label="resolution", minimum=256, maximum=1024, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=deluma, inputs=[input_image, resolution], outputs=[gallery])
 
 
 block.launch(server_name='0.0.0.0')
