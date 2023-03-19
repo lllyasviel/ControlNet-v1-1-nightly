@@ -2,7 +2,7 @@ import random
 
 import cv2
 import numpy as np
-from annotator.util import make_noise_disk, min_max_norm
+from annotator.util import make_noise_disk, img2mask
 
 
 class ContentShuffleDetector:
@@ -30,3 +30,13 @@ class ColorShuffleDetector:
         Y /= np.maximum(np.max(Y, axis=(0, 1), keepdims=True), 1e-5)
         Y *= 255.0
         return Y.clip(0, 255).astype(np.uint8)
+
+
+class Image2MaskShuffleDetector:
+    def __init__(self, resolution=(768, 512)):
+        self.H, self.W = resolution
+
+    def __call__(self, img):
+        m = img2mask(img, self.H, self.W)
+        m *= 255.0
+        return m.clip(0, 255).astype(np.uint8)

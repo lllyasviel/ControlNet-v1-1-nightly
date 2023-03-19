@@ -87,4 +87,4 @@ def img2mask(img, H, W):
     if random.uniform(0, 1) < 0.5:
         y = 255 - y
 
-    return np.ascontiguousarray(y < np.percentile(y, random.randrange(30, 70)), dtype=np.float32)
+    return np.ascontiguousarray(y < np.percentile(y, random.randrange(10, 50)), dtype=np.float32)
