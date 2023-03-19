@@ -1,3 +1,5 @@
+import random
+
 import cv2
 import numpy as np
 from annotator.util import make_noise_disk, min_max_norm
@@ -16,7 +18,7 @@ class ContentShuffleDetector:
 class ColorShuffleDetector:
     def __call__(self, img):
         H, W, C = img.shape
-        F = 128
+        F = random.randint(64, 384)
         A = make_noise_disk(H, W, 3, F)
         B = make_noise_disk(H, W, 3, F)
         C = (A + B) / 2.0
