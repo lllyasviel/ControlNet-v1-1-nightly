@@ -74,9 +74,8 @@ def min_max_norm(x):
 
 
 def img2mask(img, H, W):
-    y = cv2.resize(img, (W, H), interpolation=cv2.INTER_CUBIC)
-    H, W, C = y.shape
-    y = y[:, :, random.randrange(0, C)]
+    y = img[:, :, random.randrange(0, img.shape[2])]
+    y = cv2.resize(y, (W, H), interpolation=cv2.INTER_CUBIC)
     if random.uniform(0, 1) < 0.5:
         y = 255 - y
     mask = np.ones_like(y).astype(np.float32)
