@@ -83,7 +83,7 @@ def img2mask(img, H, W):
         y = img
 
     y = cv2.resize(y, (W, H), interpolation=cv2.INTER_CUBIC)
-    
+
     if random.uniform(0, 1) < 0.5:
         y = 255 - y
 
