@@ -341,14 +341,7 @@ class Face(object):
             print('cuda')
         self.model.eval()
 
-    def detect(self, face_img):
-        """face_img is an RGB PIL image """
-
-        heatmaps = self._detect(face_img)
-        keypoints = self._compute_peaks_from_heatmaps(heatmaps[:-1])
-        return keypoints
-
-    def _detect(self, face_img):
+    def __call__(self, face_img):
         H, W, C = face_img.shape
 
         x_data = torch.from_numpy(min_resize_image(face_img, 768)).permute([2, 0, 1]) / 256.0 - 0.5
@@ -364,7 +357,7 @@ class Face(object):
                 mode='bilinear', align_corners=True).cpu().numpy()[0]
         return heatmaps
 
-    def _compute_peaks_from_heatmaps(self, heatmaps):
+    def compute_peaks_from_heatmaps(self, heatmaps):
         all_peaks = []
         for part in range(heatmaps.shape[0]):
             map_ori = heatmaps[part].copy()
