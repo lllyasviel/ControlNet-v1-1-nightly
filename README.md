@@ -8,7 +8,7 @@ All codes are production-ready: The installation is super easy and all codes are
 
 The performance, quality, and inference "correctness" of all models are carefully reviewed by the ControlNet team to ensure that they are basically the correct implementation of SOTA models.
 
-No MMCV. No Detectron2. NO MSDeformAttn. No NATTEN. We say NO to any CUDA operations that need users to compile.
+No MMCV. No Detectron2. NO MSDeformAttn. No NATTEN. We say NO to any C-based or CUDA-based operations that need users to compile and cause lots of troubles.
 
 Also, no online TorchHub. Everything is offline.
 
