@@ -36,16 +36,23 @@ class OpenposeDetector:
         self.hand_estimation = Hand(hand_modelpath)
         self.face_estimation = Face(face_modelpath)
 
-    def draw_pose(self, pose, H, W):
+    def draw_pose(self, pose, H, W, draw_body=True, draw_hand=True, draw_face=True):
         bodies = pose['bodies']
         faces = pose['faces']
         hands = pose['hands']
         candidate = bodies['candidate']
         subset = bodies['subset']
         canvas = np.zeros(shape=(H, W, 3), dtype=np.uint8)
-        canvas = util.draw_bodypose(canvas, candidate, subset)
-        canvas = util.draw_handpose(canvas, hands)
-        canvas = util.draw_facepose(canvas, faces)
+
+        if draw_body:
+            canvas = util.draw_bodypose(canvas, candidate, subset)
+
+        if draw_hand:
+            canvas = util.draw_handpose(canvas, hands)
+
+        if draw_face:
+            canvas = util.draw_facepose(canvas, faces)
+        
         return canvas
 
     def __call__(self, oriImg, hand_and_face=False, return_is_index=False):
