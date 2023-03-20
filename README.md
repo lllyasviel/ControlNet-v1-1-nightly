@@ -36,7 +36,7 @@ The canny edge detection - nothing special but very frequently used.
 
 ### Soft Edge
 
-The soft edge of HED and PIDI. It seems that PIPI is more abstracted. 
+The soft edge of HED and PIDI. It seems that PIDI is more abstracted. 
 
 Perhaps we can use both in training as a data augmentation.
 
