@@ -102,7 +102,7 @@ def draw_bodypose(canvas, candidate, subset):
     return canvas
 
 
-def draw_handpose(canvas, all_hand_peaks, show_number=False):
+def draw_handpose(canvas, all_hand_peaks):
     H, W, C = canvas.shape
 
     edges = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [0, 9], [9, 10], \
@@ -112,22 +112,21 @@ def draw_handpose(canvas, all_hand_peaks, show_number=False):
         peaks = np.array(peaks)
 
         for ie, e in enumerate(edges):
-            if np.sum(np.all(peaks[e], axis=1)==0)==0:
-                x1, y1 = peaks[e[0]]
-                x2, y2 = peaks[e[1]]
-                x1 = int(x1 * W)
-                y1 = int(y1 * H)
-                x2 = int(x2 * W)
-                y2 = int(y2 * H)
-                cv2.line(canvas, (x1, y1), (x2, y2), matplotlib.colors.hsv_to_rgb([ie/float(len(edges)), 1.0, 1.0])*255, thickness=2)
+            x1, y1 = peaks[e[0]]
+            x2, y2 = peaks[e[1]]
+            x1 = int(x1 * W)
+            y1 = int(y1 * H)
+            x2 = int(x2 * W)
+            y2 = int(y2 * H)
+            if x1 >= 0 and y1 >= 0 and x2 >= 0 and y2 >= 0:
+                cv2.line(canvas, (x1, y1), (x2, y2), matplotlib.colors.hsv_to_rgb([ie / float(len(edges)), 1.0, 1.0]) * 255, thickness=2)
 
         for i, keyponit in enumerate(peaks):
             x, y = keyponit
             x = int(x * W)
             y = int(y * H)
-            cv2.circle(canvas, (x, y), 4, (0, 0, 255), thickness=-1)
-            if show_number:
-                cv2.putText(canvas, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0, 0, 0), lineType=cv2.LINE_AA)
+            if x >= 0 and y >= 0:
+                cv2.circle(canvas, (x, y), 4, (0, 0, 255), thickness=-1)
     return canvas
 
 
@@ -139,7 +138,8 @@ def draw_facepose(canvas, all_lmks):
             x, y = lmk
             x = int(x * W)
             y = int(y * H)
-            cv2.circle(canvas, (x, y), 4, (255, 255, 255), thickness=-1)
+            if x >= 0 and y >= 0:
+                cv2.circle(canvas, (x, y), 4, (255, 255, 255), thickness=-1)
     return canvas
 
 
