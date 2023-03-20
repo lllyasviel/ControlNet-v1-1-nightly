@@ -120,10 +120,11 @@ def draw_handpose(canvas, all_hand_peaks, show_number=False):
     return canvas
 
 
-def draw_facepose(canvas, lmks):
-    for lmk in lmks:
-        x, y = lmk
-        cv2.circle(canvas, (x, y), 4, (255, 255, 255), thickness=-1)
+def draw_facepose(canvas, all_lmks):
+    for lmks in all_lmks:
+        for lmk in lmks:
+            x, y = lmk
+            cv2.circle(canvas, (x, y), 4, (255, 255, 255), thickness=-1)
     return canvas
 
 

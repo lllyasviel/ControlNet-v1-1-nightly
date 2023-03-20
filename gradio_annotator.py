@@ -103,7 +103,7 @@ def openpose(img, res, hand_and_face):
     if model_openpose is None:
         from annotator.openpose import OpenposeDetector
         model_openpose = OpenposeDetector()
-    result, _ = model_openpose(img, hand_and_face)
+    result = model_openpose(img, hand_and_face)
     return [result]
 
 

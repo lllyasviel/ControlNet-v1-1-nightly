@@ -36,23 +36,35 @@ class OpenposeDetector:
         self.hand_estimation = Hand(hand_modelpath)
         self.face_estimation = Face(face_modelpath)
 
-    def __call__(self, oriImg, hand_and_face=False):
+    def draw_pose(self, pose, H, W):
+        bodies = pose['bodies']
+        faces = pose['faces']
+        hands = pose['hands']
+        candidate = bodies['candidate']
+        subset = bodies['subset']
+        canvas = np.zeros(shape=(H, W, 3), dtype=np.uint8)
+        canvas = util.draw_bodypose(canvas, candidate, subset)
+        canvas = util.draw_handpose(canvas, hands)
+        canvas = util.draw_facepose(canvas, faces)
+        return canvas
+
+    def __call__(self, oriImg, hand_and_face=False, return_is_index=False):
         oriImg = oriImg[:, :, ::-1].copy()
+        H, W, C = oriImg.shape
         with torch.no_grad():
             candidate, subset = self.body_estimation(oriImg)
-            canvas = np.zeros_like(oriImg)
-            canvas = util.draw_bodypose(canvas, candidate, subset)
+            bodies = dict(candidate=candidate, subset=subset)
+            hands = []
+            faces = []
             if hand_and_face:
                 # Hand
                 hands_list = util.handDetect(candidate, subset, oriImg)
-                all_hand_peaks = []
                 for x, y, w, is_left in hands_list:
                     peaks = self.hand_estimation(oriImg[y:y+w, x:x+w, :])
                     if peaks.ndim == 2 and peaks.shape[1] == 2:
                         peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
                         peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
-                        all_hand_peaks.append(peaks)
-                canvas = util.draw_handpose(canvas, all_hand_peaks)
+                        hands.append(peaks)
                 # Face
                 faces_list = util.faceDetect(candidate, subset, oriImg)
                 for x, y, w in faces_list:
@@ -61,5 +73,9 @@ class OpenposeDetector:
                     if peaks.ndim == 2 and peaks.shape[1] == 2:
                         peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
                         peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
-                        canvas = util.draw_facepose(canvas, peaks)
-            return canvas, dict(candidate=candidate.tolist(), subset=subset.tolist())
+                        faces.append(peaks)
+            pose = dict(bodies=bodies, hands=hands, faces=faces)
+            if return_is_index:
+                return pose
+            else:
+                return self.draw_pose(pose, H, W)
