@@ -53,7 +53,7 @@ class OpenposeDetector:
         H, W, C = oriImg.shape
         with torch.no_grad():
             candidate, subset = self.body_estimation(oriImg)
-            bodies = dict(candidate=candidate, subset=subset)
+            bodies = dict(candidate=candidate.tolist(), subset=subset.tolist())
             hands = []
             faces = []
             if hand_and_face:
@@ -64,7 +64,7 @@ class OpenposeDetector:
                     if peaks.ndim == 2 and peaks.shape[1] == 2:
                         peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
                         peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
-                        hands.append(peaks)
+                        hands.append(peaks.tolist())
                 # Face
                 faces_list = util.faceDetect(candidate, subset, oriImg)
                 for x, y, w in faces_list:
@@ -73,7 +73,7 @@ class OpenposeDetector:
                     if peaks.ndim == 2 and peaks.shape[1] == 2:
                         peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
                         peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
-                        faces.append(peaks)
+                        faces.append(peaks.tolist())
             pose = dict(bodies=bodies, hands=hands, faces=faces)
             if return_is_index:
                 return pose

@@ -65,6 +65,9 @@ def transfer(model, model_weights):
 
 # draw the body keypoint and lims
 def draw_bodypose(canvas, candidate, subset):
+    candidate = np.array(candidate)
+    subset = np.array(subset)
+
     stickwidth = 4
     limbSeq = [[2, 3], [2, 6], [3, 4], [4, 5], [6, 7], [7, 8], [2, 9], [9, 10], \
                [10, 11], [2, 12], [12, 13], [13, 14], [2, 1], [1, 15], [15, 17], \
@@ -106,6 +109,8 @@ def draw_handpose(canvas, all_hand_peaks, show_number=False):
              [10, 11], [11, 12], [0, 13], [13, 14], [14, 15], [15, 16], [0, 17], [17, 18], [18, 19], [19, 20]]
 
     for peaks in all_hand_peaks:
+        peaks = np.array(peaks)
+
         for ie, e in enumerate(edges):
             if np.sum(np.all(peaks[e], axis=1)==0)==0:
                 x1, y1 = peaks[e[0]]
@@ -122,6 +127,7 @@ def draw_handpose(canvas, all_hand_peaks, show_number=False):
 
 def draw_facepose(canvas, all_lmks):
     for lmks in all_lmks:
+        lmks = np.array(lmks)
         for lmk in lmks:
             x, y = lmk
             cv2.circle(canvas, (x, y), 4, (255, 255, 255), thickness=-1)
