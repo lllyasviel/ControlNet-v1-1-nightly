@@ -55,7 +55,6 @@ def padRightDownCorner(img, stride, padValue):
     return img_padded, pad
 
 
-# transfer caffe model to pytorch which will match the layer name
 def transfer(model, model_weights):
     transfered_model_weights = {}
     for weights_name in model.state_dict().keys():
@@ -63,7 +62,6 @@ def transfer(model, model_weights):
     return transfered_model_weights
 
 
-# draw the body keypoint and lims
 def draw_bodypose(canvas, candidate, subset):
     candidate = np.array(candidate)
     subset = np.array(subset)
@@ -98,12 +96,9 @@ def draw_bodypose(canvas, candidate, subset):
             polygon = cv2.ellipse2Poly((int(mY), int(mX)), (int(length / 2), stickwidth), int(angle), 0, 360, 1)
             cv2.fillConvexPoly(cur_canvas, polygon, colors[i])
             canvas = cv2.addWeighted(canvas, 0.4, cur_canvas, 0.6, 0)
-    # plt.imsave("preview.jpg", canvas[:, :, [2, 1, 0]])
-    # plt.imshow(canvas[:, :, [2, 1, 0]])
     return canvas
 
 
-# image drawed by opencv is not good.
 def draw_handpose(canvas, all_hand_peaks, show_number=False):
     edges = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [0, 9], [9, 10], \
              [10, 11], [11, 12], [0, 13], [13, 14], [14, 15], [15, 16], [0, 17], [17, 18], [18, 19], [19, 20]]
