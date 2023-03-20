@@ -122,7 +122,7 @@ class SimpleTokenizer(object):
         self.byte_encoder = bytes_to_unicode()
         self.byte_decoder = {v: k for k, v in self.byte_encoder.items()}
         
-        with open(bpe_path) as f:
+        with open(bpe_path, encoding='UTF-8') as f:
             contents = f.readlines()
         merges = []
         for cnt in contents:
