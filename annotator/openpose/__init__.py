@@ -81,6 +81,7 @@ class OpenposeDetector:
                         peaks[:, 1] = np.where(peaks[:, 1] < 1e-6, -1, peaks[:, 1] + y) / float(H)
                         faces.append(peaks.tolist())
             if candidate.ndim == 2 and candidate.shape[1] == 4:
+                candidate = candidate[:, :2]
                 candidate[:, 0] /= float(W)
                 candidate[:, 1] /= float(H)
             bodies = dict(candidate=candidate.tolist(), subset=subset.tolist())
