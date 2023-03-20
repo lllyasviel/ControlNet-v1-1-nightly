@@ -63,6 +63,7 @@ def transfer(model, model_weights):
 
 
 def draw_bodypose(canvas, candidate, subset):
+    H, W, C = canvas.shape
     candidate = np.array(candidate)
     subset = np.array(subset)
 
@@ -80,6 +81,8 @@ def draw_bodypose(canvas, candidate, subset):
             if index == -1:
                 continue
             x, y = candidate[index][0:2]
+            x = int(x * W)
+            y = int(y * H)
             cv2.circle(canvas, (int(x), int(y)), 4, colors[i], thickness=-1)
     for i in range(17):
         for n in range(len(subset)):
@@ -87,8 +90,8 @@ def draw_bodypose(canvas, candidate, subset):
             if -1 in index:
                 continue
             cur_canvas = canvas.copy()
-            Y = candidate[index.astype(int), 0]
-            X = candidate[index.astype(int), 1]
+            Y = candidate[index.astype(int), 0] * float(W)
+            X = candidate[index.astype(int), 1] * float(H)
             mX = np.mean(X)
             mY = np.mean(Y)
             length = ((X[0] - X[1]) ** 2 + (Y[0] - Y[1]) ** 2) ** 0.5
@@ -100,6 +103,8 @@ def draw_bodypose(canvas, candidate, subset):
 
 
 def draw_handpose(canvas, all_hand_peaks, show_number=False):
+    H, W, C = canvas.shape
+
     edges = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [0, 9], [9, 10], \
              [10, 11], [11, 12], [0, 13], [13, 14], [14, 15], [15, 16], [0, 17], [17, 18], [18, 19], [19, 20]]
 
@@ -110,10 +115,16 @@ def draw_handpose(canvas, all_hand_peaks, show_number=False):
             if np.sum(np.all(peaks[e], axis=1)==0)==0:
                 x1, y1 = peaks[e[0]]
                 x2, y2 = peaks[e[1]]
+                x1 = int(x1 * W)
+                y1 = int(y1 * H)
+                x2 = int(x2 * W)
+                y2 = int(y2 * H)
                 cv2.line(canvas, (x1, y1), (x2, y2), matplotlib.colors.hsv_to_rgb([ie/float(len(edges)), 1.0, 1.0])*255, thickness=2)
 
         for i, keyponit in enumerate(peaks):
             x, y = keyponit
+            x = int(x * W)
+            y = int(y * H)
             cv2.circle(canvas, (x, y), 4, (0, 0, 255), thickness=-1)
             if show_number:
                 cv2.putText(canvas, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0, 0, 0), lineType=cv2.LINE_AA)
@@ -121,10 +132,13 @@ def draw_handpose(canvas, all_hand_peaks, show_number=False):
 
 
 def draw_facepose(canvas, all_lmks):
+    H, W, C = canvas.shape
     for lmks in all_lmks:
         lmks = np.array(lmks)
         for lmk in lmks:
             x, y = lmk
+            x = int(x * W)
+            y = int(y * H)
             cv2.circle(canvas, (x, y), 4, (255, 255, 255), thickness=-1)
     return canvas
 

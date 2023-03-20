@@ -53,27 +53,29 @@ class OpenposeDetector:
         H, W, C = oriImg.shape
         with torch.no_grad():
             candidate, subset = self.body_estimation(oriImg)
-            bodies = dict(candidate=candidate.tolist(), subset=subset.tolist())
             hands = []
             faces = []
             if hand_and_face:
                 # Hand
                 hands_list = util.handDetect(candidate, subset, oriImg)
                 for x, y, w, is_left in hands_list:
-                    peaks = self.hand_estimation(oriImg[y:y+w, x:x+w, :])
+                    peaks = self.hand_estimation(oriImg[y:y+w, x:x+w, :]).astype(np.float32)
                     if peaks.ndim == 2 and peaks.shape[1] == 2:
-                        peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
-                        peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
+                        peaks[:, 0] = np.where(peaks[:, 0] < 1e-6, -1, peaks[:, 0] + x) / float(W)
+                        peaks[:, 1] = np.where(peaks[:, 1] < 1e-6, -1, peaks[:, 1] + y) / float(H)
                         hands.append(peaks.tolist())
                 # Face
                 faces_list = util.faceDetect(candidate, subset, oriImg)
                 for x, y, w in faces_list:
                     heatmaps = self.face_estimation(oriImg[y:y+w, x:x+w, :])
-                    peaks = self.face_estimation.compute_peaks_from_heatmaps(heatmaps)
+                    peaks = self.face_estimation.compute_peaks_from_heatmaps(heatmaps).astype(np.float32)
                     if peaks.ndim == 2 and peaks.shape[1] == 2:
-                        peaks[:, 0] = np.where(peaks[:, 0] == 0, peaks[:, 0], peaks[:, 0] + x)
-                        peaks[:, 1] = np.where(peaks[:, 1] == 0, peaks[:, 1], peaks[:, 1] + y)
+                        peaks[:, 0] = np.where(peaks[:, 0] < 1e-6, -1, peaks[:, 0] + x) / float(W)
+                        peaks[:, 1] = np.where(peaks[:, 1] < 1e-6, -1, peaks[:, 1] + y) / float(H)
                         faces.append(peaks.tolist())
+            candidate[:, 0] /= float(W)
+            candidate[:, 1] /= float(H)
+            bodies = dict(candidate=candidate.tolist(), subset=subset.tolist())
             pose = dict(bodies=bodies, hands=hands, faces=faces)
             if return_is_index:
                 return pose
