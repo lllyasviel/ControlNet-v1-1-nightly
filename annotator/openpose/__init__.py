@@ -52,7 +52,7 @@ class OpenposeDetector:
 
         if draw_face:
             canvas = util.draw_facepose(canvas, faces)
-        
+
         return canvas
 
     def __call__(self, oriImg, hand_and_face=False, return_is_index=False):
