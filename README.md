@@ -8,9 +8,7 @@ All codes are production-ready: The installation is super easy and all codes are
 
 The performance, quality, and inference "correctness" of all models are carefully reviewed by the ControlNet team to ensure that they are basically the correct implementation of SOTA models.
 
-You do not need to install MMCV, Detectron2, MSDeformAttn, NATTEN, or any C-based or CUDA-based operations that need compiling and cause lots of troubles.
-
-Also, no online TorchHub. Everything is offline.
+You do not need to install MMCV, Detectron2, MSDeformAttn, NATTEN, or any C-based or CUDA-based operations that need compiling and cause lots of troubles. Also, no online TorchHub. Everything is offline. Because of this, all these codes can be directly used in WebUI plugins.
 
 # Just Try This
 
