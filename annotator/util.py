@@ -64,6 +64,8 @@ def make_noise_disk(H, W, C, F):
     noise = noise[F: F + H, F: F + W]
     noise -= np.min(noise)
     noise /= np.max(noise)
+    if C == 1:
+        noise = noise[:, :, None]
     return noise
 
 
@@ -73,7 +75,7 @@ def min_max_norm(x):
     return x
 
 
-def img2mask(img, H, W):
+def img2mask(img, H, W, low=10, high=90):
     assert img.ndim == 3 or img.ndim == 2
     assert img.dtype == np.uint8
 
@@ -87,4 +89,4 @@ def img2mask(img, H, W):
     if random.uniform(0, 1) < 0.5:
         y = 255 - y
 
-    return np.ascontiguousarray(y < np.percentile(y, random.randrange(10, 50)), dtype=np.float32)
+    return y < np.percentile(y, random.randrange(low, high))
