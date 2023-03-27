@@ -14,6 +14,27 @@ body_model_path = "https://huggingface.co/lllyasviel/Annotators/resolve/main/bod
 hand_model_path = "https://huggingface.co/lllyasviel/Annotators/resolve/main/hand_pose_model.pth"
 face_model_path = "https://huggingface.co/lllyasviel/Annotators/resolve/main/facenet.pth"
 
+
+def draw_pose(pose, H, W, draw_body=True, draw_hand=True, draw_face=True):
+    bodies = pose['bodies']
+    faces = pose['faces']
+    hands = pose['hands']
+    candidate = bodies['candidate']
+    subset = bodies['subset']
+    canvas = np.zeros(shape=(H, W, 3), dtype=np.uint8)
+
+    if draw_body:
+        canvas = util.draw_bodypose(canvas, candidate, subset)
+
+    if draw_hand:
+        canvas = util.draw_handpose(canvas, hands)
+
+    if draw_face:
+        canvas = util.draw_facepose(canvas, faces)
+
+    return canvas
+
+
 class OpenposeDetector:
     def __init__(self):
         body_modelpath = os.path.join(annotator_ckpts_path, "body_pose_model.pth")
@@ -35,25 +56,6 @@ class OpenposeDetector:
         self.body_estimation = Body(body_modelpath)
         self.hand_estimation = Hand(hand_modelpath)
         self.face_estimation = Face(face_modelpath)
-
-    def draw_pose(self, pose, H, W, draw_body=True, draw_hand=True, draw_face=True):
-        bodies = pose['bodies']
-        faces = pose['faces']
-        hands = pose['hands']
-        candidate = bodies['candidate']
-        subset = bodies['subset']
-        canvas = np.zeros(shape=(H, W, 3), dtype=np.uint8)
-
-        if draw_body:
-            canvas = util.draw_bodypose(canvas, candidate, subset)
-
-        if draw_hand:
-            canvas = util.draw_handpose(canvas, hands)
-
-        if draw_face:
-            canvas = util.draw_facepose(canvas, faces)
-
-        return canvas
 
     def __call__(self, oriImg, hand_and_face=False, return_is_index=False):
         oriImg = oriImg[:, :, ::-1].copy()
@@ -89,4 +91,4 @@ class OpenposeDetector:
             if return_is_index:
                 return pose
             else:
-                return self.draw_pose(pose, H, W)
+                return draw_pose(pose, H, W)
