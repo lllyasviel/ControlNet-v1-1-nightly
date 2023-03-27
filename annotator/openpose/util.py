@@ -4,6 +4,9 @@ import matplotlib
 import cv2
 
 
+eps = 0.01
+
+
 def smart_resize(x, s):
     Ht, Wt = s
     if x.ndim == 2:
@@ -118,14 +121,14 @@ def draw_handpose(canvas, all_hand_peaks):
             y1 = int(y1 * H)
             x2 = int(x2 * W)
             y2 = int(y2 * H)
-            if x1 >= 0 and y1 >= 0 and x2 >= 0 and y2 >= 0:
+            if x1 > eps and y1 > eps and x2 > eps and y2 > eps:
                 cv2.line(canvas, (x1, y1), (x2, y2), matplotlib.colors.hsv_to_rgb([ie / float(len(edges)), 1.0, 1.0]) * 255, thickness=2)
 
         for i, keyponit in enumerate(peaks):
             x, y = keyponit
             x = int(x * W)
             y = int(y * H)
-            if x >= 0 and y >= 0:
+            if x > eps and y > eps:
                 cv2.circle(canvas, (x, y), 4, (0, 0, 255), thickness=-1)
     return canvas
 
@@ -138,7 +141,7 @@ def draw_facepose(canvas, all_lmks):
             x, y = lmk
             x = int(x * W)
             y = int(y * H)
-            if x >= 0 and y >= 0:
+            if x > eps and y > eps:
                 cv2.circle(canvas, (x, y), 3, (255, 255, 255), thickness=-1)
     return canvas
 
