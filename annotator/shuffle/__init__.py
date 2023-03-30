@@ -32,6 +32,13 @@ class ColorShuffleDetector:
         return Y.clip(0, 255).astype(np.uint8)
 
 
+class GrayDetector:
+    def __call__(self, img):
+        Y = np.mean(img, axis=2)
+        Y = np.stack([Y] * 3, axis=2)
+        return Y.clip(0, 255).astype(np.uint8)
+
+
 class Image2MaskShuffleDetector:
     def __init__(self, resolution=(640, 512)):
         self.H, self.W = resolution
