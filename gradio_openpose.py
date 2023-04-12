@@ -93,7 +93,7 @@ with block:
             run_button = gr.Button(label="Run")
             num_samples = gr.Slider(label="Images", minimum=1, maximum=12, value=1, step=1)
             seed = gr.Slider(label="Seed", minimum=-1, maximum=2147483647, step=1, value=12345)
-            det = gr.Radio(choices=["Openpose", "None"], type="value", value="openpose", label="Preprocessor")
+            det = gr.Radio(choices=["Openpose", "None"], type="value", value="Openpose", label="Preprocessor")
             hand_and_face = gr.Checkbox(label='Hand and Face', value=True)
             with gr.Accordion("Advanced options", open=False):
                 image_resolution = gr.Slider(label="Image Resolution", minimum=256, maximum=768, value=512, step=64)
