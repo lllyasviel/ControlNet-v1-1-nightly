@@ -8,4 +8,8 @@ We promise that we will not change the neural network architecture before Contro
 
 ControlNet 1.1 includes all previous models with improved robustness and result quality. Several new models are added.
 
+# Model Specification
+
+Starting from ControlNet 1.1, we will use the Standard ControlNet Naming Rules (SCNNRs) to name all models. We hope that this naming rule can improve the user experience.
+
 
