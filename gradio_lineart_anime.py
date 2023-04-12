@@ -30,7 +30,7 @@ model = model.cuda()
 ddim_sampler = DDIMSampler(model)
 
 
-def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, guess_mode, strength, scale, seed, eta):
+def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, strength, scale, seed, eta):
     global preprocessor
 
     if det == 'Lineart_Anime':
@@ -63,15 +63,13 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_res
             model.low_vram_shift(is_diffusing=False)
 
         cond = {"c_concat": [control], "c_crossattn": [model.get_learned_conditioning([prompt + ', ' + a_prompt] * num_samples)]}
-        un_cond = {"c_concat": None if guess_mode else [control], "c_crossattn": [model.get_learned_conditioning([n_prompt] * num_samples)]}
+        un_cond = {"c_concat": [control], "c_crossattn": [model.get_learned_conditioning([n_prompt] * num_samples)]}
         shape = (4, H // 8, W // 8)
 
         if config.save_memory:
             model.low_vram_shift(is_diffusing=True)
 
-        model.control_scales = [strength * (0.825 ** float(12 - i)) for i in range(13)] if guess_mode else ([strength] * 13)
-        # Magic number. IDK why. Perhaps because 0.825**12<0.01 but 0.826**12>0.01
-
+        model.control_scales = [strength] * 13
         samples, intermediates = ddim_sampler.sample(ddim_steps, num_samples,
                                                      shape, cond, verbose=False, eta=eta,
                                                      unconditional_guidance_scale=scale,
@@ -102,7 +100,6 @@ with block:
             with gr.Accordion("Advanced options", open=False):
                 image_resolution = gr.Slider(label="Image Resolution", minimum=256, maximum=2048, value=512, step=64)
                 strength = gr.Slider(label="Control Strength", minimum=0.0, maximum=2.0, value=1.0, step=0.01)
-                guess_mode = gr.Checkbox(label='Guess Mode', value=False)
                 detect_resolution = gr.Slider(label="Preprocessor Resolution", minimum=128, maximum=1024, value=512, step=1)
                 ddim_steps = gr.Slider(label="Steps", minimum=1, maximum=100, value=20, step=1)
                 scale = gr.Slider(label="Guidance Scale", minimum=0.1, maximum=30.0, value=9.0, step=0.1)
@@ -111,7 +108,7 @@ with block:
                 n_prompt = gr.Textbox(label="Negative Prompt", value='longbody, lowres, bad anatomy, bad hands, missing fingers, pubic hair,extra digit, fewer digits, cropped, worst quality, low quality')
         with gr.Column():
             result_gallery = gr.Gallery(label='Output', show_label=False, elem_id="gallery").style(grid=2, height='auto')
-    ips = [det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, guess_mode, strength, scale, seed, eta]
+    ips = [det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, strength, scale, seed, eta]
     run_button.click(fn=process, inputs=ips, outputs=[result_gallery])
 
 
