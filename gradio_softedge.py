@@ -71,7 +71,7 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_res
 
         model.control_scales = [strength * (0.825 ** float(12 - i)) for i in range(13)] if guess_mode else ([strength] * 13)
         # Magic number. IDK why. Perhaps because 0.825**12<0.01 but 0.826**12>0.01
-        
+
         samples, intermediates = ddim_sampler.sample(ddim_steps, num_samples,
                                                      shape, cond, verbose=False, eta=eta,
                                                      unconditional_guidance_scale=scale,
