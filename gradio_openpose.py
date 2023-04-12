@@ -25,10 +25,10 @@ model = model.cuda()
 ddim_sampler = DDIMSampler(model)
 
 
-def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, guess_mode, strength, scale, seed, eta, hand_and_face):
+def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, guess_mode, strength, scale, seed, eta):
     global preprocessor
 
-    if det == 'Openpose':
+    if 'Openpose' in det:
         if not isinstance(preprocessor, OpenposeDetector):
             preprocessor = OpenposeDetector()
 
@@ -38,7 +38,7 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_res
         if det == 'None':
             detected_map = input_image.copy()
         else:
-            detected_map = preprocessor(resize_image(input_image, detect_resolution), hand_and_face=hand_and_face)
+            detected_map = preprocessor(resize_image(input_image, detect_resolution), hand_and_face='Full' in det)
             detected_map = HWC3(detected_map)
 
         img = resize_image(input_image, image_resolution)
@@ -93,8 +93,7 @@ with block:
             run_button = gr.Button(label="Run")
             num_samples = gr.Slider(label="Images", minimum=1, maximum=12, value=1, step=1)
             seed = gr.Slider(label="Seed", minimum=-1, maximum=2147483647, step=1, value=12345)
-            det = gr.Radio(choices=["Openpose", "None"], type="value", value="Openpose", label="Preprocessor")
-            hand_and_face = gr.Checkbox(label='Hand and Face', value=True)
+            det = gr.Radio(choices=["Openpose_Full", "Openpose", "None"], type="value", value="Openpose_Full", label="Preprocessor")
             with gr.Accordion("Advanced options", open=False):
                 image_resolution = gr.Slider(label="Image Resolution", minimum=256, maximum=768, value=512, step=64)
                 strength = gr.Slider(label="Control Strength", minimum=0.0, maximum=2.0, value=1.0, step=0.01)
@@ -107,7 +106,7 @@ with block:
                 n_prompt = gr.Textbox(label="Negative Prompt", value='lowres, bad anatomy, bad hands, cropped, worst quality')
         with gr.Column():
             result_gallery = gr.Gallery(label='Output', show_label=False, elem_id="gallery").style(grid=2, height='auto')
-    ips = [det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, guess_mode, strength, scale, seed, eta, hand_and_face]
+    ips = [det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, guess_mode, strength, scale, seed, eta]
     run_button.click(fn=process, inputs=ips, outputs=[result_gallery])
 
 
