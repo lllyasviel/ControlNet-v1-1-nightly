@@ -3,7 +3,7 @@ import cv2
 import os
 import torch
 from einops import rearrange
-from annotator.util import annotator_ckpts_path
+from annotator.util import annotator_ckpts_path, safe_step
 
 
 class Network(torch.nn.Module):
@@ -102,7 +102,7 @@ class HEDdetector:
             load_file_from_url(remote_model_path, model_dir=annotator_ckpts_path)
         self.netNetwork = Network(modelpath).cuda().eval()
 
-    def __call__(self, input_image):
+    def __call__(self, input_image, safe=False):
         assert input_image.ndim == 3
         input_image = input_image[:, :, ::-1].copy()
         with torch.no_grad():
@@ -110,5 +110,8 @@ class HEDdetector:
             image_hed = image_hed / 255.0
             image_hed = rearrange(image_hed, 'h w c -> 1 c h w')
             edge = self.netNetwork(image_hed)[0]
-            edge = (edge.cpu().numpy() * 255.0).clip(0, 255).astype(np.uint8)
+            edge = edge.cpu().numpy()
+            if safe:
+                edge = safe_step(edge)
+            edge = (edge * 255.0).clip(0, 255).astype(np.uint8)
             return edge[0]

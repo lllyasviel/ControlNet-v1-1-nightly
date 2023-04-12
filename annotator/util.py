@@ -75,6 +75,12 @@ def min_max_norm(x):
     return x
 
 
+def safe_step(x, step=2):
+    y = x.astype(np.float32) * float(step + 1)
+    y = y.astype(np.int32).astype(np.float32) / float(step)
+    return y
+
+
 def img2mask(img, H, W, low=10, high=90):
     assert img.ndim == 3 or img.ndim == 2
     assert img.dtype == np.uint8
