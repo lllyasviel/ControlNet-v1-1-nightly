@@ -1,4 +1,4 @@
-name: annotator-v3
+name: control-v11
 channels:
   - pytorch
   - defaults
