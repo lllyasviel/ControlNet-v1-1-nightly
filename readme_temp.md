@@ -37,3 +37,7 @@ You need to download Stable Diffusion 1.5 model ["v1-5-pruned.ckpt"](https://hug
 
 Our python codes will automatically download other annotator models like HED and OpenPose. Nevertheless, if you want to manually download these, you can download all other annotator models from [here](https://huggingface.co/lllyasviel/Annotators/tree/main). All these models should be put in folder "annotator/ckpts". 
 
+To install:
+
+    conda env create -f environment.yaml
+    conda activate control-v11
