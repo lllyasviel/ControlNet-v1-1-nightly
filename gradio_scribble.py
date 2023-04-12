@@ -103,7 +103,7 @@ with block:
             run_button = gr.Button(label="Run")
             num_samples = gr.Slider(label="Images", minimum=1, maximum=12, value=1, step=1)
             seed = gr.Slider(label="Seed", minimum=-1, maximum=2147483647, step=1, value=12345)
-            det = gr.Radio(choices=["Scribble_HED", "Scribble_PIDI", "None"], type="value", value="HED", label="Preprocessor")
+            det = gr.Radio(choices=["Scribble_HED", "Scribble_PIDI", "None"], type="value", value="Scribble_HED", label="Preprocessor")
             with gr.Accordion("Advanced options", open=False):
                 image_resolution = gr.Slider(label="Image Resolution", minimum=256, maximum=768, value=512, step=64)
                 strength = gr.Slider(label="Control Strength", minimum=0.0, maximum=2.0, value=1.0, step=0.01)
