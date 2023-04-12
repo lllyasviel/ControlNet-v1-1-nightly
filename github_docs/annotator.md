@@ -90,6 +90,6 @@ This is OneFormer. This method is SOTA. The ControlNet team made significant eff
 
 Use a simple random flow to reshuffle the content of an image. This can be used to train style-based ControlNets without being limited to the model scope of Clip-Vision tokenizer. 
 
-This method is proposed in [Two-stage Sketch Colorization](https://www.cse.cuhk.edu.hk/~ttwong/papers/colorize/colorize.html) to guide the style of image-to-image translation.
+This method was first proposed in [Two-stage Sketch Colorization](https://www.cse.cuhk.edu.hk/~ttwong/papers/colorize/colorize.html) to guide the style of image-to-image translation.
 
 ![p](annotator_imgs/12.png)
