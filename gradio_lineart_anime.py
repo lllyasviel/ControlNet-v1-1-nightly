@@ -93,8 +93,8 @@ with block:
         with gr.Column():
             input_image = gr.Image(source='upload', type="numpy")
             prompt = gr.Textbox(label="Prompt")
-            a_prompt = gr.Textbox(label="Added Prompt (Usually do not need to change)", value='masterpiece, best quality, ultra-detailed, illustration, disheveled hair')
-            n_prompt = gr.Textbox(label="Negative Prompt (Usually do not need to change)",
+            a_prompt = gr.Textbox(label="Added Prompt (Beginners do not need to change)", value='masterpiece, best quality, ultra-detailed, illustration, disheveled hair')
+            n_prompt = gr.Textbox(label="Negative Prompt (Beginners do not need to change)",
                                   value='longbody, lowres, bad anatomy, bad hands, missing fingers, pubic hair,extra digit, fewer digits, cropped, worst quality, low quality')
             run_button = gr.Button(label="Run")
             num_samples = gr.Slider(label="Images", minimum=1, maximum=12, value=1, step=1)
