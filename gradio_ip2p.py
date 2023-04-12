@@ -14,7 +14,7 @@ from cldm.model import create_model, load_state_dict
 from cldm.ddim_hacked import DDIMSampler
 
 
-model_name = 'control_v11p_sd15_ip2p'
+model_name = 'control_v11e_sd15_ip2p'
 model = create_model(f'./models/{model_name}.yaml').cpu()
 model.load_state_dict(load_state_dict('./models/v1-5-pruned.ckpt', location='cuda'), strict=False)
 model.load_state_dict(load_state_dict(f'./models/{model_name}.pth', location='cuda'), strict=False)
