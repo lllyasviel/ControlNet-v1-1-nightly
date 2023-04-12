@@ -1,4 +1,4 @@
-# AnnotatorV3
+# AnnotatorV3 - we are finalizing the files!
 
 **Please keep this repo confidential before the release of ControlNet 1.1!**
 
