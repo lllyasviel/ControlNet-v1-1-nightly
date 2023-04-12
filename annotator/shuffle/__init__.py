@@ -6,11 +6,16 @@ from annotator.util import make_noise_disk, img2mask
 
 
 class ContentShuffleDetector:
-    def __call__(self, img):
+    def __call__(self, img, h=None, w=None, f=None):
         H, W, C = img.shape
-        F = 256
-        x = make_noise_disk(H, W, 1, F) * float(W - 1)
-        y = make_noise_disk(H, W, 1, F) * float(H - 1)
+        if h is None:
+            h = H
+        if w is None:
+            w = W
+        if f is None:
+            f = 256
+        x = make_noise_disk(h, w, 1, f) * float(W - 1)
+        y = make_noise_disk(h, w, 1, f) * float(H - 1)
         flow = np.concatenate([x, y], axis=2).astype(np.float32)
         return cv2.remap(img, flow, None, cv2.INTER_LINEAR)
 
@@ -34,9 +39,29 @@ class ColorShuffleDetector:
 
 class GrayDetector:
     def __call__(self, img):
-        Y = np.mean(img, axis=2)
+        eps = 1e-5
+        X = img.astype(np.float32)
+        r, g, b = X[:, :, 0], X[:, :, 1], X[:, :, 2]
+        kr, kg, kb = [random.random() + eps for _ in range(3)]
+        ks = kr + kg + kb
+        kr /= ks
+        kg /= ks
+        kb /= ks
+        Y = r * kr + g * kg + b * kb
         Y = np.stack([Y] * 3, axis=2)
         return Y.clip(0, 255).astype(np.uint8)
+
+
+class DownSampleDetector:
+    def __call__(self, img, level=3, k=16.0):
+        h = img.astype(np.float32)
+        for _ in range(level):
+            h += np.random.normal(loc=0.0, scale=k, size=h.shape)
+            h = cv2.pyrDown(h)
+        for _ in range(level):
+            h = cv2.pyrUp(h)
+            h += np.random.normal(loc=0.0, scale=k, size=h.shape)
+        return h.clip(0, 255).astype(np.uint8)
 
 
 class Image2MaskShuffleDetector:
