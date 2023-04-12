@@ -30,4 +30,4 @@ class PidiNetDetector:
             if safe:
                 edge = safe_step(edge)
             edge = (edge * 255.0).clip(0, 255).astype(np.uint8)
-            return edge[0]
+            return edge[0][0]
