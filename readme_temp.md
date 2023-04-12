@@ -10,6 +10,6 @@ ControlNet 1.1 includes all previous models with improved robustness and result 
 
 # Model Specification
 
-Starting from ControlNet 1.1, we will use the Standard ControlNet Naming Rules (SCNNRs) to name all models. We hope that this naming rule can improve the user experience.
+Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rules (SCNNRs) to name all models. We hope that this naming rule can improve the user experience.
 
 
