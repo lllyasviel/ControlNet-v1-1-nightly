@@ -41,3 +41,5 @@ To install:
 
     conda env create -f environment.yaml
     conda activate control-v11
+
+## ControlNet Depth 1.1
