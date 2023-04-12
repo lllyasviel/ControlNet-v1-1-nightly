@@ -93,8 +93,8 @@ with block:
             run_button = gr.Button(label="Run")
             num_samples = gr.Slider(label="Images", minimum=1, maximum=12, value=1, step=1)
             seed = gr.Slider(label="Seed", minimum=-1, maximum=2147483647, step=1, value=12345)
+            det = gr.Radio(choices=["Canny", "None"], type="value", value="Canny", label="Preprocessor")
             with gr.Accordion("Advanced options", open=False):
-                det = gr.Radio(choices=["Canny", "None"], type="value", value="Canny", label="Preprocessor")
                 low_threshold = gr.Slider(label="Canny low threshold", minimum=1, maximum=255, value=100, step=1)
                 high_threshold = gr.Slider(label="Canny high threshold", minimum=1, maximum=255, value=200, step=1)
                 image_resolution = gr.Slider(label="Image Resolution", minimum=256, maximum=768, value=512, step=64)
