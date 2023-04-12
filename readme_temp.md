@@ -43,3 +43,15 @@ To install:
     conda activate control-v11
 
 ## ControlNet Depth 1.1
+
+Control Stable Diffusion with Depth Maps.
+
+Model file: control_v11p_sd15_depth.pth
+
+Config file: control_v11p_sd15_depth.yaml
+
+Training data: Midas depth (resolution 256/384/512) + Leres Depth (resolution 256/384/512) + Zoe Depth (resolution 256/384/512). Multiple depth map generator at multiple resolution as data augmentation.
+
+Acceptable Preprocessors: Depth_Midas, Depth_Leres, Depth_Zoe. This model is highly robust and can work on real depth map from rendering engines.
+
+    python gradio_depth.py
