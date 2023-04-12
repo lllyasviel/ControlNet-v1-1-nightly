@@ -27,14 +27,13 @@ preprocessor = ContentShuffleDetector()
 
 def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, ddim_steps, strength, scale, seed, eta):
     with torch.no_grad():
-        random.seed(seed)
-
         input_image = HWC3(input_image)
         detected_map = input_image.copy()
         img = resize_image(input_image, image_resolution)
         H, W, C = img.shape
 
         if det == "Shuffle":
+            random.seed(seed)
             detected_map = preprocessor(detected_map, w=W, h=H, f=256)
         else:
             detected_map = img.copy()
