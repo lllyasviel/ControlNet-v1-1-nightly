@@ -1,4 +1,4 @@
-# AnnotatorV3
+# AnnotatorV3 - we are finalizing the files!
 
 **Please keep this repo confidential before the release of ControlNet 1.1!**
 
@@ -118,6 +118,7 @@ This may also result in several interesting applications.
 
 ![p](github_misc/12.png)
 
+**Update: the training for this annotator failed to converge. We are investigating what happens.**
 
 # Color Reshuffle
 
@@ -126,3 +127,5 @@ Randomly shuffle the color of each pixel but preserve the image structure.
 Useful in training re-coloring ControlNets.
 
 ![p](github_misc/14.png)
+
+**Update: the training for this annotator failed to converge. We are investigating what happens.**
