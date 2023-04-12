@@ -29,11 +29,11 @@ ddim_sampler = DDIMSampler(model)
 def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, guess_mode, strength, scale, seed, eta, is_safe):
     global preprocessor
 
-    if det[:-5] == 'SoftEdge_HED':
+    if 'HED' in det:
         if not isinstance(preprocessor, HEDdetector):
             preprocessor = HEDdetector()
 
-    if det[:-5] == 'SoftEdge_PIDI':
+    if 'PIDI' in det:
         if not isinstance(preprocessor, PidiNetDetector):
             preprocessor = PidiNetDetector()
 
@@ -43,7 +43,7 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_res
         if det == 'None':
             detected_map = input_image.copy()
         else:
-            detected_map = preprocessor(resize_image(input_image, detect_resolution), safe=det[-4:] == 'safe')
+            detected_map = preprocessor(resize_image(input_image, detect_resolution), safe='safe' in det)
             detected_map = HWC3(detected_map)
 
         img = resize_image(input_image, image_resolution)
