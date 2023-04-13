@@ -205,3 +205,38 @@ Non-cherry-picked batch test with random seed 12345 (COCO protocol, "house"):
 
 ![img](github_docs/imgs/seg_2.png)
 
+## ControlNet 1.1 Openpose
+
+Control Stable Diffusion with Openpose.
+
+Model file: control_v11p_sd15_openpose.pth
+
+Config file: control_v11p_sd15_openpose.yaml
+
+The model is trained and can accept the following combinations:
+
+* Openpose body
+* Openpose hand
+* Openpose face
+* Openpose body + Openpose hand
+* Openpose body + Openpose face
+* Openpose hand + Openpose face
+* Openpose body + Openpose hand + Openpose face
+
+However, providing all those combinations is too complicated. We recommend to provide the users with only two choices:
+
+* "Openpose" = Openpose body
+* "Openpose Full" = Openpose body + Openpose hand + Openpose face
+
+You can try with the demo:
+
+    python gradio_openpose.py
+
+Non-cherry-picked batch test with random seed 12345 ("man in suit"):
+
+![img](github_docs/imgs/openpose_1.png)
+
+Non-cherry-picked batch test with random seed 12345 (multiple people in the wild, "handsome boys in the party"):
+
+![img](github_docs/imgs/openpose_2.png)
+
