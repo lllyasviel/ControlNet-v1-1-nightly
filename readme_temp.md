@@ -240,3 +240,27 @@ Non-cherry-picked batch test with random seed 12345 (multiple people in the wild
 
 ![img](github_docs/imgs/openpose_2.png)
 
+## ControlNet 1.1 Lineart
+
+Control Stable Diffusion with Linearts.
+
+Model file: control_v11p_sd15_lineart.pth
+
+Config file: control_v11p_sd15_lineart.yaml
+
+This model is trained on awacke1/Image-to-Line-Drawings. The preprocessor can generate detailed or coarse linearts from images (Lineart and Lineart_Coarse). The model is trained with sufficient data augmentation and can receive manually drawn linearts.
+
+    python gradio_lineart.py
+
+Non-cherry-picked batch test with random seed 12345 (detailed lineart extractor, "bag"):
+
+![img](github_docs/imgs/lineart_1.png)
+
+Non-cherry-picked batch test with random seed 12345 (coarse lineart extractor, "Michael Jackson's concert"):
+
+![img](github_docs/imgs/lineart_2.png)
+
+Non-cherry-picked batch test with random seed 12345 (use manually drawn linearts, "wolf"):
+
+![img](github_docs/imgs/lineart_3.png)
+
