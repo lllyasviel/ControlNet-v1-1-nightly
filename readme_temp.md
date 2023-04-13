@@ -312,7 +312,7 @@ Demo:
 
     python gradio_shuffle.py
 
-The model is trained to reorganize images. We use a random flow to shuffle the image and control Stable Diffusion to recompose the image.
+The model is trained to reorganize images. [We use a random flow to shuffle the image and control Stable Diffusion to recompose the image.](github_docs/annotator.md#content-reshuffle)
 
 Non-cherry-picked batch test with random seed 12345 ("hong kong"):
 
