@@ -56,6 +56,6 @@ Acceptable Preprocessors: Depth_Midas, Depth_Leres, Depth_Zoe. This model is hig
 
     python gradio_depth.py
 
-Non-cherry picked batch with random seed 12345:
+Non-cherry-picked test with random seed 12345:
 
 
