@@ -150,3 +150,34 @@ Non-cherry-picked batch test with random seed 12345 ("man in library"):
 Non-cherry-picked batch test with random seed 12345 (interactive, "the beautiful landscape"):
 
 ![img](github_docs/imgs/scribble_2.png)
+
+## ControlNet 1.1 Soft Edge
+
+Control Stable Diffusion with Soft Edges.
+
+Model file: control_v11p_sd15_softedge.pth
+
+Config file: control_v11p_sd15_softedge.yaml
+
+Training data: SoftEdge_PIDI, SoftEdge_PIDI_safe, SoftEdge_HED, SoftEdge_HED_safe.
+
+Acceptable Preprocessors: SoftEdge_PIDI, SoftEdge_PIDI_safe, SoftEdge_HED, SoftEdge_HED_safe.
+
+This model is significantly improved compared to previous model. All users should update as soon as possible.
+
+New in ControlNet 1.1: now we added a new type of soft edge called "SoftEdge_safe". This is motivated by the fact that HED or PIDI tends to hide a corrupted greyscale version of the original image inside the soft estimation, and such hidden patterns can distract ControlNet, leading to bad results. The solution is to use a pre-processing to quantize the edge maps into several levels so that the hidden patterns can be completely removed. The implementation is [in the 78-th line of annotator/util.py](https://github.com/lllyasviel/AnnotatorV3/blob/4c9560ebe7679daac53a0599a11b9b7cd984ac55/annotator/util.py#L78).
+
+The perforamce can be roughly noted as:
+
+Robustness: SoftEdge_PIDI_safe > SoftEdge_HED_safe >> SoftEdge_PIDI > SoftEdge_HED
+
+Maximum result quality: SoftEdge_HED > SoftEdge_PIDI > SoftEdge_HED_safe > SoftEdge_PIDI_safe
+
+Considering the trade-off, we recommend to use SoftEdge_PIDI by default. In most cases it works very well.
+
+    python gradio_softedge.py
+
+Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
+
+![img](github_docs/imgs/softedge_1.png)
+
