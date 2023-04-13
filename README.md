@@ -412,9 +412,9 @@ More and more people begin to think about different methods to diffuse at tiles 
 
 The problem is that, in Stable Diffusion, your prompts will always influent each tile.
 
-For example, if your prompts are "a beautiful girl" and you split an image into 4×4=16 blocks and diffusion in each block, then you are will get 16 "beautiful girls" rather than "a beautiful girl". This is a well-known problem.
+For example, if your prompts are "a beautiful girl" and you split an image into 4×4=16 blocks and do diffusion in each block, then you are will get 16 "beautiful girls" rather than "a beautiful girl". This is a well-known problem.
 
-Right now people's solution is to use some meaningless prompts like "clear, clear, super clear" to diffuse blocks. But you can expect that the results will be bad if the demonising strength is high. And because the prompts are bad, the contents are pretty random.
+Right now people's solution is to use some meaningless prompts like "clear, clear, super clear" to diffuse blocks. But you can expect that the results will be bad if the denonising strength is high. And because the prompts are bad, the contents are pretty random.
 
 ControlNet Tile is a model to solve this problem. For a given tile, it recognizes what is inside the tile and increase the influence of that recognized semantics, and it also decreases the influence of global prompts if contents do not match.
 
