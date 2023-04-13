@@ -410,7 +410,7 @@ Demo:
 
 More and more people begin to think about different methods to diffuse at tiles so that images can be very big (at 4k or 8k). 
 
-The problem is that, in Stable Diffusion, your prompts will always influence each tile.
+The problem is that, in Stable Diffusion, your prompts will always influent each tile.
 
 For example, if your prompts are "a beautiful girl" and you split an image into 4×4=16 blocks and diffusion in each block, then you are will get 16 "beautiful girls" rather than "a beautiful girl". This is a well-known problem.
 
