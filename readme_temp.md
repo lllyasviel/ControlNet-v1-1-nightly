@@ -264,3 +264,38 @@ Non-cherry-picked batch test with random seed 12345 (use manually drawn linearts
 
 ![img](github_docs/imgs/lineart_3.png)
 
+
+## ControlNet 1.1 Lineart Anime
+
+Control Stable Diffusion with Anime Linearts.
+
+Model file: control_v11p_sd15s2_lineart_anime.pth
+
+Config file: control_v11p_sd15s2_lineart_anime.yaml
+
+Training data and implementation details: (description removed).
+
+This model can take real anime line drawings or extracted line drawings as inputs.
+
+Some important notice:
+
+1. You need a file "anything-v3-full.safetensors" to run the demo. We will not provide the file. Please find that file on the Internet on your own.
+2. This model is trained with 3x token length and clip skip 2.
+3. This is a long prompt model. Unless you use LoRAs, results are better with long prompts.
+
+Demo:
+
+    python gradio_lineart_anime.py
+
+
+Non-cherry-picked batch test with random seed 12345 ("1girl, in classroom, skirt, uniform, red hair, bag, green eyes"):
+
+![img](github_docs/imgs/anime_3.png)
+
+Non-cherry-picked batch test with random seed 12345 ("1girl, saber, at night, sword, green eyes, golden hair, stocking"):
+
+![img](github_docs/imgs/anime_4.png)
+
+Non-cherry-picked batch test with random seed 12345 ("1girl, Castle, silver hair, dress, Gemstone, cinematic lighting, mechanical hand, 4k, 8k, extremely detailed, Gothic, green eye"):
+
+![img](github_docs/imgs/anime_6.png)
