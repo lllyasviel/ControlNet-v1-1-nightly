@@ -35,7 +35,7 @@ ControlNet 1.1 include 14 models (11 production-ready models, 2 experimental mod
     control_v11e_sd15_ip2p
     control_v11u_sd15_tile
 
-You can download all those models from our [HuggingFace Model Page](https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main). All these models should be put in the folder "models".
+You can download all those models from our [Hugging Face Model Page](https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main). All these models should be put in the folder "models".
 
 You need to download Stable Diffusion 1.5 model ["v1-5-pruned.ckpt"](https://huggingface.co/runwayml/stable-diffusion-v1-5/tree/main) and put it in the folder "models".
 
