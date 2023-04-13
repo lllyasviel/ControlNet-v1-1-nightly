@@ -318,7 +318,7 @@ Non-cherry-picked batch test with random seed 12345 ("hong kong"):
 
 ![img](github_docs/imgs/shuffle_1.png)
 
-In the results, the left-top one is the "shuffled" image. All others are outputs.
+In the 6 images on the right, the left-top one is the "shuffled" image. All others are outputs.
 
 In fact, since the ControlNet is trained to recompose images, we do not even need to shuffle the input - sometimes we can just use the original image as input.
 
