@@ -265,7 +265,7 @@ Non-cherry-picked batch test with random seed 12345 (use manually drawn linearts
 ![img](github_docs/imgs/lineart_3.png)
 
 
-## ControlNet 1.1 Lineart Anime
+## ControlNet 1.1 Anime Lineart
 
 Control Stable Diffusion with Anime Linearts.
 
