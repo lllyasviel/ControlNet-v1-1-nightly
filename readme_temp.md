@@ -308,6 +308,10 @@ Model file: control_v11e_sd15_shuffle.pth
 
 Config file: control_v11e_sd15_shuffle.yaml
 
+Demo:
+
+    python gradio_shuffle.py
+
 The model is trained to reorganize images. We use a random flow to shuffle the image and control Stable Diffusion to recompose the image.
 
 Non-cherry-picked batch test with random seed 12345 ("hong kong"):
