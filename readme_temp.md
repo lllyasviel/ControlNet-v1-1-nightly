@@ -42,7 +42,7 @@ To install:
     conda env create -f environment.yaml
     conda activate control-v11
 
-## ControlNet Depth 1.1
+## ControlNet 1.1 Depth
 
 Control Stable Diffusion with Depth Maps.
 
@@ -57,5 +57,9 @@ Acceptable Preprocessors: Depth_Midas, Depth_Leres, Depth_Zoe. This model is hig
     python gradio_depth.py
 
 Non-cherry-picked batch test with random seed 12345:
+
+"a handsome man"
+
+![img](github_docs/imgs/depth_1.png)
 
 
