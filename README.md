@@ -370,7 +370,7 @@ Non-cherry-picked batch test with random seed 12345 ("make it winter"):
 
 ![img](github_docs/imgs/ip2p_2.png)
 
-We mark this model as "experimental" because it sometimes need cherry-picking. For example, here is non-cherry-picked batch test with random seed 12345 ("make he iron man"):
+We mark this model as "experimental" because it sometimes needs cherry-picking. For example, here is non-cherry-picked batch test with random seed 12345 ("make he iron man"):
 
 ![img](github_docs/imgs/ip2p_3.png)
 
