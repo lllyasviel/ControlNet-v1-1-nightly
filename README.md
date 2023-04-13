@@ -8,6 +8,10 @@ We promise that we will not change the neural network architecture before Contro
 
 ControlNet 1.1 includes all previous models with improved robustness and result quality. Several new models are added.
 
+Note that we are still working on [updating this to A1111](https://github.com/Mikubill/sd-webui-controlnet/issues/736). We do not recommend to directly copy the models to the webui plugin before all updates are finished.
+
+This repo will be merged to [ControlNet](https://github.com/lllyasviel/ControlNet) after we make sure that everything is OK.
+
 # Model Specification
 
 Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rules (SCNNRs) to name all models. We hope that this naming rule can improve the user experience.
