@@ -55,3 +55,7 @@ Training data: Midas depth (resolution 256/384/512) + Leres Depth (resolution 25
 Acceptable Preprocessors: Depth_Midas, Depth_Leres, Depth_Zoe. This model is highly robust and can work on real depth map from rendering engines.
 
     python gradio_depth.py
+
+Non-cherry picked batch with random seed 12345:
+
+
