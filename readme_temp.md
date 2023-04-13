@@ -181,3 +181,27 @@ Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
 ![img](github_docs/imgs/softedge_1.png)
 
+## ControlNet 1.1 Segmentation
+
+Control Stable Diffusion with Semantic Segmentation.
+
+Model file: control_v11p_sd15_seg.pth
+
+Config file: control_v11p_sd15_seg.yaml
+
+Training data: COCO + ADE20K.
+
+Acceptable Preprocessors: Seg_OFADE20K (Oneformer ADE20K), Seg_OFCOCO (Oneformer COCO), Seg_UFADE20K (Uniformer ADE20K), or manually created masks.
+
+Now the model can receive both type of ADE20K or COCO annotations. We find that recognizing the segmentation protocol is trivial for the ControlNet encoder and training the model of multiple segmentation protocols lead to better performance.
+
+    python gradio_seg.py
+
+Non-cherry-picked batch test with random seed 12345 (ADE20k protocol, "house"):
+
+![img](github_docs/imgs/seg_1.png)
+
+Non-cherry-picked batch test with random seed 12345 (COCO protocol, "house"):
+
+![img](github_docs/imgs/seg_2.png)
+
