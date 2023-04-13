@@ -103,3 +103,23 @@ We fixed several problems in previous training datasets. The model is resumed fr
 Non-cherry-picked batch test with random seed 12345 ("dog in a room"):
 
 ![img](github_docs/imgs/canny_1.png)
+
+## ControlNet 1.1 MLSD
+
+Control Stable Diffusion with M-LSD straight lines.
+
+Model file: control_v11p_sd15_mlsd.pth
+
+Config file: control_v11p_sd15_mlsd.yaml
+
+Training data: M-LSD Lines.
+
+Acceptable Preprocessors: MLSD.
+
+We fixed several problems in previous training datasets. The model is resumed from ControlNet 1.0 and trained with 200 GPU hours of A100 80G.
+
+    python gradio_mlsd.py
+
+Non-cherry-picked batch test with random seed 12345 ("room"):
+
+![img](github_docs/imgs/mlsd_1.png)
