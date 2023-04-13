@@ -80,6 +80,10 @@ Non-cherry-picked batch test with random seed 12345 ("a man made of flowers"):
 
 ![img](github_docs/imgs/normal_1.png)
 
+Non-cherry-picked batch test with random seed 12345 ("room"):
+
+![img](github_docs/imgs/normal_2.png)
+
 ## ControlNet 1.1 Canny
 
 Control Stable Diffusion with Canny Maps.
