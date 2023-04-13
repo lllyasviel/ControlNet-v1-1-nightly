@@ -299,3 +299,37 @@ Non-cherry-picked batch test with random seed 12345 ("1girl, saber, at night, sw
 Non-cherry-picked batch test with random seed 12345 ("1girl, Castle, silver hair, dress, Gemstone, cinematic lighting, mechanical hand, 4k, 8k, extremely detailed, Gothic, green eye"):
 
 ![img](github_docs/imgs/anime_6.png)
+
+## ControlNet 1.1 Shuffle
+
+Control Stable Diffusion with Content Shuffle.
+
+Model file: control_v11e_sd15_shuffle.pth
+
+Config file: control_v11e_sd15_shuffle.yaml
+
+The model is trained to reorganize images. We use a random flow to shuffle the image and control Stable Diffusion to recompose the image.
+
+Non-cherry-picked batch test with random seed 12345 ("hong kong"):
+
+![img](github_docs/imgs/shuffle_1.png)
+
+In the results, the left-top one is the "shuffled" image. All others are outputs.
+
+In fact, since the ControlNet is trained to recompose images, we do not even need to shuffle the input - sometimes we can just use the original image as input.
+
+In this way, this ControlNet can be guided by prompts or other ControlNets to change the image style.
+
+Note that this method has nothing to do with CLIP vision or some other models. 
+
+This is a pure ControlNet.
+
+Non-cherry-picked batch test with random seed 12345 ("iron man"):
+
+![img](github_docs/imgs/shuffle_2.png)
+
+Non-cherry-picked batch test with random seed 12345 ("spider man"):
+
+![img](github_docs/imgs/shuffle_3.png)
+
+Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the SD Unet and ControlNet Encoder. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
