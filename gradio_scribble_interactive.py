@@ -64,7 +64,7 @@ def process(input_image, prompt, a_prompt, n_prompt, num_samples, image_resoluti
         x_samples = (einops.rearrange(x_samples, 'b c h w -> b h w c') * 127.5 + 127.5).cpu().numpy().clip(0, 255).astype(np.uint8)
 
         results = [x_samples[i] for i in range(num_samples)]
-    return [255 - detected_map] + results
+    return [detected_map] + results
 
 
 def create_canvas(w, h):
@@ -81,7 +81,7 @@ with block:
             canvas_height = gr.Slider(label="Canvas Height", minimum=256, maximum=1024, value=512, step=1)
             create_button = gr.Button(label="Start", value='Open drawing canvas!')
             input_image = gr.Image(source='upload', type='numpy', tool='sketch')
-            gr.Markdown(value='Do not forget to change your brush width to make it thinner. (Gradio do not allow developers to set brush width so you need to do it manually.) '
+            gr.Markdown(value='Do not forget to change your brush width to make it thinner. '
                               'Just click on the small pencil icon in the upper right corner of the above block.')
             create_button.click(fn=create_canvas, inputs=[canvas_width, canvas_height], outputs=[input_image])
             prompt = gr.Textbox(label="Prompt")

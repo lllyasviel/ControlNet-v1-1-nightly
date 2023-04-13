@@ -123,3 +123,30 @@ We fixed several problems in previous training datasets. The model is resumed fr
 Non-cherry-picked batch test with random seed 12345 ("room"):
 
 ![img](github_docs/imgs/mlsd_1.png)
+
+## ControlNet 1.1 Scribble
+
+Control Stable Diffusion with Scribbles.
+
+Model file: control_v11p_sd15_scribble.pth
+
+Config file: control_v11p_sd15_scribble.yaml
+
+Training data: Synthesized scribbles.
+
+Acceptable Preprocessors: Synthesized scribbles (Scribble_HED, Scribble_PIDI, etc.) or hand-drawn scribbles.
+
+We fixed several problems in previous training datasets. The model is resumed from ControlNet 1.0 and trained with 200 GPU hours of A100 80G.
+
+    # To test synthesized scribbles
+    python gradio_scribble.py
+    # To test hand-drawn scribbles in an interactive demo
+    python gradio_interactive.py
+
+Non-cherry-picked batch test with random seed 12345 ("man in library"):
+
+![img](github_docs/imgs/scribble_1.png)
+
+Non-cherry-picked batch test with random seed 12345 (interactive, "the beautiful landscape"):
+
+![img](github_docs/imgs/scribble_2.png)
