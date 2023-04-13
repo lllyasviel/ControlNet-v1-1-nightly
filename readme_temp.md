@@ -369,3 +369,25 @@ Non-cherry-picked batch test with random seed 12345 ("make it winter"):
 We mark this model as "experimental" because it sometimes need cherry-picking. For example, here is non-cherry-picked batch test with random seed 12345 ("make he iron man"):
 
 ![img](github_docs/imgs/ip2p_3.png)
+
+
+## ControlNet 1.1 Inpaint
+
+Control Stable Diffusion with Inpaint.
+
+Model file: control_v11p_sd15_inpaint.pth
+
+Config file: control_v11p_sd15_inpaint.yaml
+
+Demo:
+
+    python gradio_inpaint.py
+
+Some notices:
+
+1. This inpainting ControlNet is trained with 50\% random masks and 50\% random optical flow occlusion masks. This means the model can not only support the inpainting application but also work on video optical flow warping. Perhaps we will provide some example in the future (depending on our workloads).
+2. This gradio demo does not include post-processing. Ideally, you need to post-process the latent image in each diffusion iteration and post-process the image after vae decoding, so that the unmasked area keeps unchanged. However, this is complicated to implement and perhaps a better idea is to make it in a1111. In this gradio example, the outputs are just the original outputs from diffusion, and the unmasked area in your image may change because of the vae or diffusion process.
+
+Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
+
+![img](github_docs/imgs/inpaint_1.png)
