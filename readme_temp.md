@@ -337,3 +337,35 @@ Non-cherry-picked batch test with random seed 12345 ("spider man"):
 ![img](github_docs/imgs/shuffle_3.png)
 
 Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the SD Unet and ControlNet Encoder. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
+
+## ControlNet 1.1 Instruct Pix2Pix
+
+Control Stable Diffusion with Instruct Pix2Pix.
+
+Model file: control_v11e_sd15_ip2p.pth
+
+Config file: control_v11e_sd15_ip2p.yaml
+
+Demo:
+
+    python gradio_ip2p.py
+
+This is a controlnet trained on the [Instruct Pix2Pix dataset](https://github.com/timothybrooks/instruct-pix2pix).
+
+Different from official Instruct Pix2Pix, this model is trained with 50\% instruction prompts and 50\% description prompts. For example, "a cute boy" is a description prompt, while "make the boy cute" is a instruction prompt.
+
+Because this is a ControlNet, you do not need to trouble with original IP2P's double cfg tuning. And, this model can be applied to any base model.
+
+Also, it seems that instructions like "make it into X" works better than "make Y into X".
+
+Non-cherry-picked batch test with random seed 12345 ("make it on fire"):
+
+![img](github_docs/imgs/ip2p_1.png)
+
+Non-cherry-picked batch test with random seed 12345 ("make it winter"):
+
+![img](github_docs/imgs/ip2p_2.png)
+
+We mark this model as "experimental" because it sometimes need cherry-picking. For example, here is non-cherry-picked batch test with random seed 12345 ("make he iron man"):
+
+![img](github_docs/imgs/ip2p_3.png)
