@@ -300,7 +300,7 @@ Non-cherry-picked batch test with random seed 12345 ("1girl, saber, at night, sw
 
 ![img](github_docs/imgs/anime_4.png)
 
-Non-cherry-picked batch test with random seed 12345 ("1girl, Castle, silver hair, dress, Gemstone, cinematic lighting, mechanical hand, 4k, 8k, extremely detailed, Gothic, green eye"):
+Non-cherry-picked batch test with random seed 12345 (extracted line drawing, "1girl, Castle, silver hair, dress, Gemstone, cinematic lighting, mechanical hand, 4k, 8k, extremely detailed, Gothic, green eye"):
 
 ![img](github_docs/imgs/anime_6.png)
 
