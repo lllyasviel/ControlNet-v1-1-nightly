@@ -56,9 +56,7 @@ Acceptable Preprocessors: Depth_Midas, Depth_Leres, Depth_Zoe. This model is hig
 
     python gradio_depth.py
 
-Non-cherry-picked batch test with random seed 12345:
-
-"a handsome man"
+Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
 ![img](github_docs/imgs/depth_1.png)
 
@@ -78,8 +76,26 @@ Note that this method is much more reasonable than the normal-from-midas method 
 
     python gradio_normalbae.py
 
-Non-cherry-picked batch test with random seed 12345:
-
-"a man made of flowers"
+Non-cherry-picked batch test with random seed 12345 ("a man made of flowers"):
 
 ![img](github_docs/imgs/normal_1.png)
+
+## ControlNet 1.1 Canny
+
+Control Stable Diffusion with Canny Maps.
+
+Model file: control_v11p_sd15_canny.pth
+
+Config file: control_v11p_sd15_canny.yaml
+
+Training data: Canny with random thresholds.
+
+Acceptable Preprocessors: Canny.
+
+We fixed several problems in previous training datasets. The model is resumed from ControlNet 1.0 and trained with 200 GPU hours of A100 80G.
+
+    python gradio_canny.py
+
+Non-cherry-picked batch test with random seed 12345 ("dog in a room"):
+
+![img](github_docs/imgs/canny_1.png)
