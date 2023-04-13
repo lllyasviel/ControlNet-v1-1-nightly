@@ -62,4 +62,24 @@ Non-cherry-picked batch test with random seed 12345:
 
 ![img](github_docs/imgs/depth_1.png)
 
+## ControlNet 1.1 Normal
 
+Control Stable Diffusion with Normal Maps.
+
+Model file: control_v11p_sd15_normalbae.pth
+
+Config file: control_v11p_sd15_normalbae.yaml
+
+Training data: [Bae's](https://github.com/baegwangbin/surface_normal_uncertainty) normalmap estimation method.
+
+Acceptable Preprocessors: Normal BAE. This model can accept normal maps from rendering engines as long as the normal map follows [ScanNet's](http://www.scan-net.org/) protocol. That is to say, the color of your normal map should look like [the second column of this image](https://raw.githubusercontent.com/baegwangbin/surface_normal_uncertainty/main/figs/readme_scannet.png).
+
+Note that this method is much more reasonable than the normal-from-midas method in ControlNet 1.1. The previous method will be abandoned.
+
+    python gradio_normalbae.py
+
+Non-cherry-picked batch test with random seed 12345:
+
+"a man made of flowers"
+
+![img](github_docs/imgs/normal_1.png)
