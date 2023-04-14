@@ -286,6 +286,7 @@ Some important notice:
 1. You need a file "anything-v3-full.safetensors" to run the demo. We will not provide the file. Please find that file on the Internet on your own.
 2. This model is trained with 3x token length and clip skip 2.
 3. This is a long prompt model. Unless you use LoRAs, results are better with long prompts.
+4. This model does not support Guess Mode.
 
 Demo:
 
