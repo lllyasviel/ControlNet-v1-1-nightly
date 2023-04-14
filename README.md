@@ -12,6 +12,8 @@ Note that we are still working on [updating this to A1111](https://github.com/Mi
 
 This repo will be merged to [ControlNet](https://github.com/lllyasviel/ControlNet) after we make sure that everything is OK.
 
+**Note that we are actively editing this page now. The information in this page will be more detailed and finalized when ControlNet 1.1 is ready.**
+
 # Model Specification
 
 Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rules (SCNNRs) to name all models. We hope that this naming rule can improve the user experience.
