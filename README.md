@@ -24,7 +24,7 @@ ControlNet 1.1 include 14 models (11 production-ready models, 2 experimental mod
 
     control_v11p_sd15_canny
     control_v11p_sd15_mlsd
-    control_v11p_sd15_depth
+    control_v11f1p_sd15_depth
     control_v11p_sd15_normalbae
     control_v11p_sd15_seg
     control_v11p_sd15_inpaint
@@ -52,9 +52,9 @@ To install:
 
 Control Stable Diffusion with Depth Maps.
 
-Model file: control_v11p_sd15_depth.pth
+Model file: control_v11f1p_sd15_depth.pth
 
-Config file: control_v11p_sd15_depth.yaml
+Config file: control_v11f1p_sd15_depth.yaml
 
 Training data: Midas depth (resolution 256/384/512) + Leres Depth (resolution 256/384/512) + Zoe Depth (resolution 256/384/512). Multiple depth map generator at multiple resolution as data augmentation.
 
