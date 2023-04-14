@@ -68,7 +68,7 @@ Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
 **Update**
 
-2023/04/14: 72 hours ago we uploaded a wrong model "control_v11p_sd15_depth" by mistake. That model is an intermedia checkpoint during the training. That model is not converged and may cause distortion in results. We uploaded the correct depth model as "control_v11f1p_sd15_depth". The "f1" means bug fix 1. The incorrect model is removed. Sorry for the inconvenience.
+2023/04/14: 72 hours ago we uploaded a wrong model "control_v11p_sd15_depth" by mistake. That model is an intermediate checkpoint during the training. That model is not converged and may cause distortion in results. We uploaded the correct depth model as "control_v11f1p_sd15_depth". The "f1" means bug fix 1. The incorrect model is removed. Sorry for the inconvenience.
 
 ## ControlNet 1.1 Normal
 
