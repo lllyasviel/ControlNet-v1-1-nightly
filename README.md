@@ -158,7 +158,7 @@ Non-cherry-picked batch test with random seed 12345 ("room"):
 
 1. The training dataset of previous cnet 1.0 has several problems including (1) a small group of greyscale human images are duplicated thousands of times (!!), causing the previous model somewhat likely to generate grayscale human images; (2) some images has low quality, very blurry, or significant JPEG artifacts; (3) a small group of images has wrong paired prompts caused by a mistake in our data processing scripts. The new model fixed all problems of the training dataset and should be more reasonable in many cases.
 2. We enlarged the training dataset by adding 300K more images by using MLSD to find images with more than 16 straight lines in it.
-3. Continued training with 200 GPU hours of A100 80G.
+3. Resumed from MLSD 1.0 with continued training with 200 GPU hours of A100 80G.
 
 ## ControlNet 1.1 Scribble
 
