@@ -402,7 +402,7 @@ Non-cherry-picked batch test with random seed 12345 ("spider man"):
 
 Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the ControlNet Encoder outputs and SD Unet layers. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
 
-# EXTREMELY IMPORTANT
+### EXTREMELY IMPORTANT
 
 Note that this ControlNet Shuffle will be the **one and only one** image stylization method that we will maintain the robustness in a long term support. 
 
