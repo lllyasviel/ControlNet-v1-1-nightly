@@ -223,6 +223,10 @@ Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
 ![img](github_docs/imgs/softedge_1.png)
 
+**Improvements in Soft Edge 1.1:**
+
+TODO
+
 ## ControlNet 1.1 Segmentation
 
 Control Stable Diffusion with Semantic Segmentation.
@@ -246,6 +250,10 @@ Non-cherry-picked batch test with random seed 12345 (ADE20k protocol, "house"):
 Non-cherry-picked batch test with random seed 12345 (COCO protocol, "house"):
 
 ![img](github_docs/imgs/seg_2.png)
+
+**Improvements in Segmentation 1.1:**
+
+TODO
 
 ## ControlNet 1.1 Openpose
 
@@ -281,6 +289,10 @@ Non-cherry-picked batch test with random seed 12345 ("man in suit"):
 Non-cherry-picked batch test with random seed 12345 (multiple people in the wild, "handsome boys in the party"):
 
 ![img](github_docs/imgs/openpose_2.png)
+
+**Improvements in Openpose 1.1:**
+
+TODO
 
 ## ControlNet 1.1 Lineart
 
