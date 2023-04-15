@@ -33,7 +33,7 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_res
         H, W, C = img.shape
 
         if det == "Shuffle":
-            random.seed(seed)
+            np.random.seed(seed)
             detected_map = preprocessor(detected_map, w=W, h=H, f=256)
         else:
             detected_map = img.copy()
