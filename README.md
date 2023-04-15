@@ -48,6 +48,8 @@ To install:
     conda env create -f environment.yaml
     conda activate control-v11
 
+Note that if you use 8GB GPU, you need to set "save_memory = True" in "config.py".
+
 ## ControlNet 1.1 Depth
 
 Control Stable Diffusion with Depth Maps.
