@@ -398,7 +398,7 @@ Non-cherry-picked batch test with random seed 12345 ("spider man"):
 
 ![img](github_docs/imgs/shuffle_3.png)
 
-***Important If You Implement Your Own Inference:**
+**Important If You Implement Your Own Inference:**
 
 Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the ControlNet Encoder outputs and SD Unet layers. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
 
