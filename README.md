@@ -408,11 +408,11 @@ Note that this ControlNet Shuffle will be the **one and only one** image styliza
 
 I am going to repeat these 3 times because these are very important (stop asking me what do I think of XXX other methods):
 
-**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVE UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
 
-**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVE UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
 
-**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVE UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
 
 The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
 
