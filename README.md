@@ -102,6 +102,12 @@ Non-cherry-picked batch test with random seed 12345 ("room"):
 
 ![img](github_docs/imgs/normal_2.png)
 
+**Improvements in Normal 1.1:**
+
+1. The normal-from-midas method in Normal 1.0 is neither reasonable nor physically correct. That method does not work very well in many images. The normal 1.0 model cannot interpret real normal maps created by rendering engines.
+2. This Normal 1.1 is much more reasonable because the preprocessor is trained to estimate normal maps with a relatively correct protocol (NYU-V2's visualization method). This means the Normal 1.1 can interpret real normal maps from rendering engines as long as the colors are correct (blue is front, red is left, green is top).
+3. In our test, this model is robust and can achieve similar performance to the depth model. In previous CNET 1.0, the Normal 1.0 is not very frequently used. But this Normal 2.0 is much improved and has potential to be used much more frequently.
+
 ## ControlNet 1.1 Canny
 
 Control Stable Diffusion with Canny Maps.
