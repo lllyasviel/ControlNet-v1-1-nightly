@@ -412,6 +412,12 @@ Note that this ControlNet Shuffle will be the **one and only one** image styliza
 
 **All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
 
+The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
+
+The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
+
+The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
+
 ## ControlNet 1.1 Instruct Pix2Pix
 
 Control Stable Diffusion with Instruct Pix2Pix.
