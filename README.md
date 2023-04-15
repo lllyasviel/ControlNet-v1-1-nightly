@@ -297,7 +297,9 @@ Non-cherry-picked batch test with random seed 12345 (multiple people in the wild
 
 **Improvements in Openpose 1.1:**
 
-TODO
+1. The improvement of this model is mainly based on our improved implementation of OpenPose. We carefully reviewed the difference between the pytorch OpenPose and CMU's c++ openpose. Now the processor should be more accurate, especially for hands. The improvement of processor leads to the improvement of Openpose 1.1.
+2. More inputs are supported (hand and face).
+3. The training dataset of previous cnet 1.0 has several problems including (1) a small group of greyscale human images are duplicated thousands of times (!!), causing the previous model somewhat likely to generate grayscale human images; (2) some images has low quality, very blurry, or significant JPEG artifacts; (3) a small group of images has wrong paired prompts caused by a mistake in our data processing scripts. The new model fixed all problems of the training dataset and should be more reasonable in many cases.
 
 ## ControlNet 1.1 Lineart
 
