@@ -70,6 +70,14 @@ Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
 2023/04/14: 72 hours ago we uploaded a wrong model "control_v11p_sd15_depth" by mistake. That model is an intermediate checkpoint during the training. That model is not converged and may cause distortion in results. We uploaded the correct depth model as "control_v11f1p_sd15_depth". The "f1" means bug fix 1. The incorrect model is removed. Sorry for the inconvenience.
 
+**Improvements in Depth 1.1:**
+
+1. The training dataset of previous cnet 1.0 has several problems including (1) a small group of greyscale human images are duplicated thousands of times (!!), causing the previous model somewhat likely to generate grayscale human images; (2) some images has low quality, very blurry, or significant JPEG artifacts; (3) a small group of images has wrong paired prompts caused by a mistake in our data processing scripts. The new model fixed all problems of the training dataset and should be more reasonable in many cases.
+2. The new depth model is a relative unbiased model. It is not trained with some specific type of depth by some specific depth estimation method. It is not over-fitted to one preprocessor. This means this model will work better with different depth estimation, different preprocessor resolutions, or even with real depth created by 3D engines.
+3. Some reasonable data augmentations are applied to training, like random left-right flipping.
+4. The model is resumed from depth 1.0, and it should work well in all cases where depth 1.0 works well. If not, please open an issue with image, and we will take a look at your case. Depth 1.1 works well in many failure cases of depth 1.0.
+5. If you use Midas depth (the "depth" in webui plugin) with 384 preprocessor resolution, the difference between depth 1.0 and 1.1 should be minimal. However, if you try other preprocessor resolutions or other preprocessors (like leres and zoe), the depth 1.1 is expected to be a bit better than 1.0.
+
 ## ControlNet 1.1 Normal
 
 Control Stable Diffusion with Normal Maps.
