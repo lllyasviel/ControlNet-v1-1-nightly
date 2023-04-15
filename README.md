@@ -406,11 +406,11 @@ Note that this ControlNet requires to add a global average pooling " x = torch.m
 
 Note that this ControlNet Shuffle will be the **one and only one** image stylization method that we will maintain the robustness in a long term support. 
 
-**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injection. It is impossible to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
 
-**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injection. It is impossible to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
 
-**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injection. It is impossible to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
 
 ## ControlNet 1.1 Instruct Pix2Pix
 
