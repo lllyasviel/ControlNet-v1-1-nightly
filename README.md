@@ -257,7 +257,7 @@ Non-cherry-picked batch test with random seed 12345 (COCO protocol, "house"):
 
 **Improvements in Segmentation 1.1:**
 
-TODO
+1. COCO protocol is supported. The previous Segmentation 1.0 supports about 150 colors, but Segmentation 1.1 supports another 182 colors from coco.
 
 ## ControlNet 1.1 Openpose
 
