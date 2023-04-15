@@ -120,13 +120,19 @@ Training data: Canny with random thresholds.
 
 Acceptable Preprocessors: Canny.
 
-We fixed several problems in previous training datasets. The model is resumed from ControlNet 1.0 and trained with 200 GPU hours of A100 80G.
+We fixed several problems in previous training datasets.
 
     python gradio_canny.py
 
 Non-cherry-picked batch test with random seed 12345 ("dog in a room"):
 
 ![img](github_docs/imgs/canny_1.png)
+
+**Improvements in Canny 1.1:**
+
+1. The training dataset of previous cnet 1.0 has several problems including (1) a small group of greyscale human images are duplicated thousands of times (!!), causing the previous model somewhat likely to generate grayscale human images; (2) some images has low quality, very blurry, or significant JPEG artifacts; (3) a small group of images has wrong paired prompts caused by a mistake in our data processing scripts. The new model fixed all problems of the training dataset and should be more reasonable in many cases.
+2. Because the Canny model is one of the most important (perhaps the most frequently used) ControlNet, we used a fund to train it on a machine with 8 Nvidia A100 80G with batchsize 8×32=256 for 3 days, spending 72×30=2160 USD (8 A100 with 30 USD/hour). The model is resumed from Canny 1.0.
+3. Although it is difficult to evaluate a ControlNet, we find Canny 1.1 is a bit more robust and a bit higher visual quality than Canny 1.0. 
 
 ## ControlNet 1.1 MLSD
 
