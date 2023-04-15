@@ -408,11 +408,11 @@ Note that this ControlNet Shuffle will be the **ONE AND ONLY ONE** image styliza
 
 I am going to repeat these 3 times because these are very important (stop asking me what do I think of XXX other methods):
 
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
 
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
 
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
 
 The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
 
