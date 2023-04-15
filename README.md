@@ -404,7 +404,7 @@ Note that this ControlNet requires to add a global average pooling " x = torch.m
 
 ### EXTREMELY IMPORTANT
 
-Note that this ControlNet Shuffle will be the **one and only one** image stylization method that we will maintain the robustness in a long term support. 
+Note that this ControlNet Shuffle will be the **ONE AND ONLY ONE** image stylization method that we will maintain the robustness in a long term support. 
 
 I am going to repeat these 3 times because these are very important (stop asking me what do I think of XXX other methods):
 
