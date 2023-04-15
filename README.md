@@ -402,6 +402,16 @@ Non-cherry-picked batch test with random seed 12345 ("spider man"):
 
 Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the ControlNet Encoder outputs and SD Unet layers. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
 
+**Extremely Important:**
+
+Note that this ControlNet Shuffle will be the **one and only one** image stylization method that we will maintain the robustness in a long term support. 
+
+**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injection. It is impossible to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+
+**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injection. It is impossible to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+
+**All other CLIP image encoder, Unclip, image tokenization, or image-based prompts are essentially and fundamental limited. All those methods do not work well with user prompts or additional/multiple U-Net injection. It is impossible to make those methods work well. We have give up those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255).**
+
 ## ControlNet 1.1 Instruct Pix2Pix
 
 Control Stable Diffusion with Instruct Pix2Pix.
