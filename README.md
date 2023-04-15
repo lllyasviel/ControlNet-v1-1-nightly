@@ -191,6 +191,7 @@ Non-cherry-picked batch test with random seed 12345 (interactive, "the beautiful
 
 1. The training dataset of previous cnet 1.0 has several problems including (1) a small group of greyscale human images are duplicated thousands of times (!!), causing the previous model somewhat likely to generate grayscale human images; (2) some images has low quality, very blurry, or significant JPEG artifacts; (3) a small group of images has wrong paired prompts caused by a mistake in our data processing scripts. The new model fixed all problems of the training dataset and should be more reasonable in many cases.
 2. We find out that users sometimes like to draw very thick scribbles. Because of that, we used more aggressive random morphological transforms to synthesize scribbles. This model should work well even when the scribbles are relatively thick (the maximum width of training data is 24-pixel-width scribble in a 512 canvas, but it seems to work well even for a bit wider scribbles; the minimum width is 1 pixel).
+3. Resumed from Scribble 1.0, continued with 200 GPU hours of A100 80G.
 
 ## ControlNet 1.1 Soft Edge
 
