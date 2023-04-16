@@ -14,7 +14,7 @@ This repo will be merged to [ControlNet](https://github.com/lllyasviel/ControlNe
 
 **Note that we are actively editing this page now. The information in this page will be more detailed and finalized when ControlNet 1.1 is ready.**
 
-# The Beta Test for A1111 IS Started
+# The Beta Test for A1111 Is Started
 
 The A1111 plugin is: https://github.com/Mikubill/sd-webui-controlnet
 
