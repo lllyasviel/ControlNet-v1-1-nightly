@@ -8,11 +8,19 @@ We promise that we will not change the neural network architecture before Contro
 
 ControlNet 1.1 includes all previous models with improved robustness and result quality. Several new models are added.
 
-Note that we are still working on [updating this to A1111](https://github.com/Mikubill/sd-webui-controlnet/issues/736). We do not recommend to directly copy the models to the webui plugin before all updates are finished.
+Note that we are still working on [updating this to A1111](https://github.com/Mikubill/sd-webui-controlnet/issues/736). 
 
 This repo will be merged to [ControlNet](https://github.com/lllyasviel/ControlNet) after we make sure that everything is OK.
 
 **Note that we are actively editing this page now. The information in this page will be more detailed and finalized when ControlNet 1.1 is ready.**
+
+# The Beta Test for A1111 IS Started
+
+The A1111 plugin is: https://github.com/Mikubill/sd-webui-controlnet
+
+The discussion and bug report is: https://github.com/Mikubill/sd-webui-controlnet/issues/736
+
+Note that the inpaint and tile models are not supported yet.
 
 # Model Specification
 
