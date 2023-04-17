@@ -20,8 +20,6 @@ The A1111 plugin is: https://github.com/Mikubill/sd-webui-controlnet
 
 The discussion and bug report is: https://github.com/Mikubill/sd-webui-controlnet/issues/736
 
-Note that the inpaint and tile models are not supported yet.
-
 # Model Specification
 
 Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rules (SCNNRs) to name all models. We hope that this naming rule can improve the user experience.
