@@ -198,6 +198,19 @@ def color_shuffler(img, res):
     return [result]
 
 
+model_colorization = None
+
+
+def colorization(img, res, br, co):
+    img = resize_image(HWC3(img), res)
+    global model_colorization
+    if model_colorization is None:
+        from annotator.colorization import ColorizerDetector
+        model_colorization = ColorizerDetector()
+    result = model_colorization(img, br, co)
+    return [result]
+
+
 block = gr.Blocks().queue()
 with block:
     with gr.Row():
@@ -371,6 +384,19 @@ with block:
         with gr.Column():
             gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
     run_button.click(fn=color_shuffler, inputs=[input_image, resolution], outputs=[gallery])
+
+    with gr.Row():
+        gr.Markdown("## Colorization")
+    with gr.Row():
+        with gr.Column():
+            input_image = gr.Image(source='upload', type="numpy")
+            brightness = gr.Slider(label="brightness", minimum=-100, maximum=100, value=0, step=5)
+            contrast = gr.Slider(label="contrast", minimum=-100, maximum=100, value=0, step=5)
+            resolution = gr.Slider(label="resolution", minimum=512, maximum=2048, value=512, step=64)
+            run_button = gr.Button(label="Run")
+        with gr.Column():
+            gallery = gr.Gallery(label="Generated images", show_label=False).style(height="auto")
+    run_button.click(fn=colorization, inputs=[input_image, resolution, brightness, contrast], outputs=[gallery])
 
 
 block.launch(server_name='0.0.0.0')

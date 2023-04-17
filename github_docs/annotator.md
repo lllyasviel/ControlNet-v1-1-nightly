@@ -93,3 +93,9 @@ Use a simple random flow to reshuffle the content of an image. This can be used 
 This method was first proposed in [Two-stage Sketch Colorization](https://www.cse.cuhk.edu.hk/~ttwong/papers/colorize/colorize.html) to guide the style of image-to-image translation.
 
 ![p](annotator_imgs/12.png)
+
+# Colorization
+
+Colorization Anotator converts any photo to grayscale
+
+![p](annotator_imgs/13.jpg)
