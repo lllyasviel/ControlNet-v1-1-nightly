@@ -26,7 +26,7 @@ Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rul
 
 ![img](github_docs/imgs/spec.png)
 
-ControlNet 1.1 include 14 models (11 production-ready models, 2 experimental models, and 1 unfinished model):
+ControlNet 1.1 include 15 models (11 production-ready models, 2 experimental models, and 2 unfinished model):
 
     control_v11p_sd15_canny
     control_v11p_sd15_mlsd
@@ -42,6 +42,7 @@ ControlNet 1.1 include 14 models (11 production-ready models, 2 experimental mod
     control_v11e_sd15_shuffle
     control_v11e_sd15_ip2p
     control_v11u_sd15_tile
+    control_v11u_sd21_colorization
 
 You can download all those models from our [HuggingFace Model Page](https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main). All these models should be put in the folder "models".
 
@@ -515,6 +516,35 @@ You can see that the prompt is "a handsome man" but the model does not paint "a 
 In this way, ControlNet is able to change the behavior of any Stable Diffusion model to perform diffusion in tiles. 
 
 Note that this is an unfinished model, and we are still looking at better ways to train/use such idea. Right now the model is trained on 200k images with 4k resolution.
+
+## ControlNet 1.1 Colorization (Unfinished)
+
+Control Stable Diffusion with Colorization.
+
+Model file: [control_v11u_sd21_colorization.ckpt](https://huggingface.co/neurallove/controlnet-sd21-colorization/resolve/main/control_v11u_sd21_colorization.ckpt)
+
+Config file: control_v11u_sd21_colorization.yaml
+
+Demo:
+
+    python gradio_colorization.py
+
+This model takes a black and white photo and colorizes it. The anatator turns the incoming image into black and white (in case color or sepia has been loaded).
+
+The model was trained on different LR's on the manually collected b&w-colorful image pares dataset. At the moment, the main problems of the model are adding colored spots to a homogeneous surface and coloring an object in a color that it cannot actually be. These problems rarely occur, so the main method of repair is to regenerate the picture but with a different seed. 
+
+The "Prompt" field can be left blank, but the variety of the palette can be increased by describing the objects in the photo. To do this, the prompt can either be written by yourself, or you can use [BLIP](https://huggingface.co/Salesforce/blip-image-captioning-base). It is important that the prompt does not contain phrases like "black and white". So it is better to fix it yourself by adding "and color photo" to the beginning.
+
+For example ("a color photo of a rock formation in the ocean"):
+
+![img](github_docs/imgs/colorization.jpg)
+
+Some notices:
+
+1. You need a file [v2-1_512-ema-pruned.ckpt](https://huggingface.co/stabilityai/stable-diffusion-2-1-base/resolve/main/v2-1_512-ema-pruned.ckpt) to run the demo. Please download and put it in the **./models** folder.
+2. The result of model generation is usually a color image of very low quality. This is not a problem, because as preprocessing, you can transfer the UV channels from the result to the original and obtain a highly detailed image. In file **gradio_colorization.py** this is implemented in function **restore_color**.
+3. In the Prompt, you can change the phrase "*a color photo of*" to "*a summer photo of*", "*a winter photo of*" or others and get images with different color palettes.
+4. This model does not work well with Guess Mode on.
 
 # Annotate Your Own Data
 
