@@ -39,13 +39,13 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, detect_re
             preprocessor = ColorizerDetector()
 
     with torch.no_grad():
-        img = HWC3(input_image)
-        H, W, C = img.shape
+        input_image = HWC3(input_image)
+        H_orig, W_orig, _ = input_image.shape
 
         if det == 'None':
-            detected_map = img.copy()
+            detected_map = input_image.copy()
         else:
-            detected_map = preprocessor(resize_image(img, detect_resolution), brightness, contrast)
+            detected_map = preprocessor(resize_image(input_image, detect_resolution), brightness, contrast)
             detected_map = HWC3(detected_map)
 
         control = torch.from_numpy(detected_map.copy()).float().cuda() / 255.0
@@ -61,6 +61,7 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, detect_re
 
         cond = {"c_concat": [control], "c_crossattn": [model.get_learned_conditioning([prompt + ', ' + a_prompt] * num_samples)]}
         un_cond = {"c_concat": None if guess_mode else [control], "c_crossattn": [model.get_learned_conditioning([n_prompt] * num_samples)]}
+        H, W, _ = detected_map.shape
         shape = (4, H // 8, W // 8)
 
         if config.save_memory:
@@ -82,8 +83,8 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, detect_re
 
         results = []
         for i in range(num_samples):
-            color_img = cv2.resize(x_samples[i], (W, H))
-            results.append(restore_color(img, color_img))
+            color_img = cv2.resize(x_samples[i], (W_orig, H_orig))
+            results.append(restore_color(input_image, color_img))
     return [detected_map] + results
 
 
