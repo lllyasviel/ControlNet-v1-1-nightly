@@ -1,3 +1,6 @@
+# Pidinet
+# https://github.com/hellozhuo/pidinet
+
 import os
 import torch
 import numpy as np
