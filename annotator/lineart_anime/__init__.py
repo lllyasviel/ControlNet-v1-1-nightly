@@ -1,3 +1,6 @@
+# Anime2sketch
+# https://github.com/Mukosame/Anime2Sketch
+
 import numpy as np
 import torch
 import torch.nn as nn
