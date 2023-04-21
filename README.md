@@ -410,23 +410,7 @@ Non-cherry-picked batch test with random seed 12345 ("spider man"):
 
 Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the ControlNet Encoder outputs and SD Unet layers. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
 
-### EXTREMELY IMPORTANT
-
-Note that this ControlNet Shuffle will be the **ONE AND ONLY ONE** image stylization method that we will maintain for the robustness in a long term support. 
-
-I am going to repeat these 3 times because these are very important (stop asking me what do I think of XXX other methods):
-
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
-
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
-
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
-
-The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
-
-The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
-
-The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
+Note that this ControlNet Shuffle will be the **ONE AND ONLY ONE** image stylization method that we will maintain for the robustness in a long term support. We have tested other CLIP image encoder, Unclip, image tokenization, and image-based prompts but it seems that those methods do not work very well with user prompts or additional/multiple U-Net injections. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and some other related issues.
 
 ## ControlNet 1.1 Instruct Pix2Pix
 
