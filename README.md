@@ -14,7 +14,19 @@ This repo will be merged to [ControlNet](https://github.com/lllyasviel/ControlNe
 
 **Note that we are actively editing this page now. The information in this page will be more detailed and finalized when ControlNet 1.1 is ready.**
 
-# The Beta Test for A1111 Is Started
+# This Project is NOT an A1111 extension
+
+Please do not copy the URL of this project into your A1111.
+
+If you want to use ControlNet 1.1 in A1111, you only need to install https://github.com/Mikubill/sd-webui-controlnet
+
+If you want to use ControlNet 1.1 in A1111, you only need to follow the instructions in https://github.com/Mikubill/sd-webui-controlnet
+
+This project is for research use and academic experiments. This project does not have any relationship to A1111.
+
+Again, do NOT install ControlNet-v1-1-nightly into your A1111.
+
+# The Beta Test for A1111 Is Started. How to use ControlNet 1.1 in A1111?
 
 The A1111 plugin is: https://github.com/Mikubill/sd-webui-controlnet
 
