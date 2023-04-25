@@ -38,7 +38,7 @@ Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rul
 
 ![img](github_docs/imgs/spec.png)
 
-ControlNet 1.1 include 14 models (11 production-ready models, 2 experimental models, and 1 unfinished model):
+ControlNet 1.1 include 14 models (11 production-ready models and 3 experimental models):
 
     control_v11p_sd15_canny
     control_v11p_sd15_mlsd
@@ -53,7 +53,7 @@ ControlNet 1.1 include 14 models (11 production-ready models, 2 experimental mod
     control_v11p_sd15_softedge
     control_v11e_sd15_shuffle
     control_v11e_sd15_ip2p
-    control_v11u_sd15_tile
+    control_v11f1e_sd15_tile
 
 You can download all those models from our [HuggingFace Model Page](https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main). All these models should be put in the folder "models".
 
@@ -478,17 +478,50 @@ Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
 ![img](github_docs/imgs/inpaint_1.png)
 
-## ControlNet 1.1 Tile (Unfinished)
+## ControlNet 1.1 Tile
+
+Update 2023 April 25: The previously unfinished tile model is finished now. The new name is "control_v11f1e_sd15_tile". The "f1e" means 1st bug fix ("f1"), experimental ("e").  The previous "control_v11u_sd15_tile" is removed. Please update if your model name is "v11u".
 
 Control Stable Diffusion with Tiles.
 
-Model file: control_v11u_sd15_tile.pth
+Model file: control_v11f1e_sd15_tile.pth
 
-Config file: control_v11u_sd15_tile.yaml
+Config file: control_v11f1e_sd15_tile.yaml
 
 Demo:
 
     python gradio_tile.py
+
+The model can be used in many ways. Overall, the model has two behaviors:
+
+* Ignore the details in an image and generate new details.
+* Ignore global prompts if local tile semantics and prompts mismatch, and guide diffusion with local context.
+
+Because the model can generate new details and ignore existing image details, we can use this model to remove bad details and add refined details. For example, remove blurring caused by image resizing.
+
+Below is an example of 8x super resolution. This is a 64x64 dog image.
+
+![p](test_imgs/dog64.png)
+
+Non-cherry-picked batch test with random seed 12345 ("dog on grassland"):
+
+![img](github_docs/imgs/tile_new_1.png)
+
+Note that this model is NOT a super resolution model. It IGNOREs the details in an image and generate new details. This means you can use it to fix bad details in an image.
+
+For example, below is a dog image corrupted by Real-ESRGAN. This is a typical example that sometimes super resolution methds fail to upscale images when source context is too small.
+
+![p](test_imgs/dog_bad_sr.png)
+
+Non-cherry-picked batch test with random seed 12345 ("dog on grassland"):
+
+![img](github_docs/imgs/tile_new_2.png)
+
+If your image already have good details, you can still use this model to replace image details. Note that Stable Diffusion's I2I can achieve similar effects but this model make it much easier for you to maintain the overall structure and only change details even with denoising strength 1.0 .
+
+Non-cherry-picked batch test with random seed 12345 ("Silver Armor"):
+
+![img](github_docs/imgs/tile_new_3.png)
 
 More and more people begin to think about different methods to diffuse at tiles so that images can be very big (at 4k or 8k). 
 
@@ -498,19 +531,15 @@ For example, if your prompts are "a beautiful girl" and you split an image into 
 
 Right now people's solution is to use some meaningless prompts like "clear, clear, super clear" to diffuse blocks. But you can expect that the results will be bad if the denonising strength is high. And because the prompts are bad, the contents are pretty random.
 
-ControlNet Tile is a model to solve this problem. For a given tile, it recognizes what is inside the tile and increase the influence of that recognized semantics, and it also decreases the influence of global prompts if contents do not match.
+ControlNet Tile can solve this problem. For a given tile, it recognizes what is inside the tile and increase the influence of that recognized semantics, and it also decreases the influence of global prompts if contents do not match.
 
 Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
-![img](github_docs/imgs/tile_1.png)
-
-![img](github_docs/imgs/tile_2.png)
+![img](github_docs/imgs/tile_new_4.png)
 
 You can see that the prompt is "a handsome man" but the model does not paint "a handsome man" on that tree leaves or the hand areas. Instead, it recognizes the tree leaves and hands and paint accordingly.
 
 In this way, ControlNet is able to change the behavior of any Stable Diffusion model to perform diffusion in tiles. 
-
-Note that this is an unfinished model, and we are still looking at better ways to train/use such idea. Right now the model is trained on 200k images with 4k resolution.
 
 # Annotate Your Own Data
 
