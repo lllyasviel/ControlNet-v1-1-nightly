@@ -507,7 +507,7 @@ Non-cherry-picked batch test with random seed 12345 ("dog on grassland"):
 
 ![img](github_docs/imgs/tile_new_1.png)
 
-Note that this model is NOT a super resolution model. It IGNOREs the details in an image and generate new details. This means you can use it to fix bad details in an image.
+Note that this model is not a super resolution model. It ignores the details in an image and generate new details. This means you can use it to fix bad details in an image.
 
 For example, below is a dog image corrupted by Real-ESRGAN. This is a typical example that sometimes super resolution methds fail to upscale images when source context is too small.
 
