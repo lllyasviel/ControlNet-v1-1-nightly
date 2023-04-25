@@ -537,7 +537,7 @@ Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
 ![img](github_docs/imgs/tile_new_4.png)
 
-You can see that the prompt is "a handsome man" but the model does not paint "a handsome man" on that tree leaves or the hand areas. Instead, it recognizes the tree leaves and hands and paint accordingly.
+You can see that the prompt is "a handsome man" but the model does not paint "a handsome man" on that tree leaves. Instead, it recognizes the tree leaves paint accordingly.
 
 In this way, ControlNet is able to change the behavior of any Stable Diffusion model to perform diffusion in tiles. 
 
