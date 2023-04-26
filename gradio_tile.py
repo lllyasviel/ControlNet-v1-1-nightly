@@ -14,7 +14,7 @@ from cldm.model import create_model, load_state_dict
 from cldm.ddim_hacked import DDIMSampler
 
 
-model_name = 'control_v11u_sd15_tile'
+model_name = 'control_v11f1e_sd15_tile'
 model = create_model(f'./models/{model_name}.yaml').cpu()
 model.load_state_dict(load_state_dict('./models/v1-5-pruned.ckpt', location='cuda'), strict=False)
 model.load_state_dict(load_state_dict(f'./models/{model_name}.pth', location='cuda'), strict=False)
@@ -26,18 +26,13 @@ def process(input_image, prompt, a_prompt, n_prompt, num_samples, image_resoluti
     global preprocessor
 
     with torch.no_grad():
-        if min(input_image.shape[0], input_image.shape[1]) < 64:
-            print('Input tile is smaller than 64*64. Terminated.')
-            return []
-
         input_image = HWC3(input_image)
+        detected_map = input_image.copy()
 
         img = resize_image(input_image, image_resolution)
         H, W, C = img.shape
 
-        detected_map = cv2.resize(input_image, (W // 8, H // 8), interpolation=cv2.INTER_AREA)  # using 64 * 64 images
-        for _ in range(3):
-            detected_map = cv2.pyrUp(detected_map)
+        detected_map = cv2.resize(detected_map, (W, H), interpolation=cv2.INTER_LINEAR)
 
         control = torch.from_numpy(detected_map.copy()).float().cuda() / 255.0
         control = torch.stack([control for _ in range(num_samples)], dim=0)
@@ -90,15 +85,13 @@ with block:
     with gr.Row():
         with gr.Column():
             input_image = gr.Image(source='upload', type="numpy")
-            gr.Markdown("1. Upload image and write prompt.")
-            gr.Markdown("2. Click the pencil icon on the top-right corner of your uploaded image to select tile.")
             prompt = gr.Textbox(label="Prompt")
             run_button = gr.Button(label="Run")
             num_samples = gr.Slider(label="Images", minimum=1, maximum=12, value=1, step=1)
             seed = gr.Slider(label="Seed", minimum=-1, maximum=2147483647, step=1, value=12345)
             det = gr.Radio(choices=["None"], type="value", value="None", label="Preprocessor")
+            denoise_strength = gr.Slider(label="Denoising Strength", minimum=0.1, maximum=1.0, value=1.0, step=0.01)
             with gr.Accordion("Advanced options", open=False):
-                denoise_strength = gr.Slider(label="Denoising Strength", minimum=0.1, maximum=1.0, value=1.0, step=0.01)
                 image_resolution = gr.Slider(label="Image Resolution", minimum=256, maximum=2048, value=512, step=64)
                 strength = gr.Slider(label="Control Strength", minimum=0.0, maximum=2.0, value=1.0, step=0.01)
                 guess_mode = gr.Checkbox(label='Guess Mode', value=False)

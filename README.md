@@ -14,7 +14,19 @@ This repo will be merged to [ControlNet](https://github.com/lllyasviel/ControlNe
 
 **Note that we are actively editing this page now. The information in this page will be more detailed and finalized when ControlNet 1.1 is ready.**
 
-# The Beta Test for A1111 Is Started
+# This Project is NOT an A1111 extension
+
+Please do not copy the URL of this project into your A1111.
+
+If you want to use ControlNet 1.1 in A1111, you only need to install https://github.com/Mikubill/sd-webui-controlnet
+
+If you want to use ControlNet 1.1 in A1111, you only need to follow the instructions in https://github.com/Mikubill/sd-webui-controlnet
+
+This project is for research use and academic experiments. This project does not have any relationship to A1111.
+
+Again, do NOT install ControlNet-v1-1-nightly into your A1111.
+
+# The Beta Test for A1111 Is Started. How to use ControlNet 1.1 in A1111?
 
 The A1111 plugin is: https://github.com/Mikubill/sd-webui-controlnet
 
@@ -26,7 +38,7 @@ Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rul
 
 ![img](github_docs/imgs/spec.png)
 
-ControlNet 1.1 include 15 models (11 production-ready models, 2 experimental models, and 2 unfinished model):
+ControlNet 1.1 include 14 models (11 production-ready models and 3 experimental models, and 1 unfinished model):
 
     control_v11p_sd15_canny
     control_v11p_sd15_mlsd
@@ -41,7 +53,7 @@ ControlNet 1.1 include 15 models (11 production-ready models, 2 experimental mod
     control_v11p_sd15_softedge
     control_v11e_sd15_shuffle
     control_v11e_sd15_ip2p
-    control_v11u_sd15_tile
+    control_v11f1e_sd15_tile
     control_v11u_sd21_colorization
 
 You can download all those models from our [HuggingFace Model Page](https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main). All these models should be put in the folder "models".
@@ -411,23 +423,7 @@ Non-cherry-picked batch test with random seed 12345 ("spider man"):
 
 Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the ControlNet Encoder outputs and SD Unet layers. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
 
-### EXTREMELY IMPORTANT
-
-Note that this ControlNet Shuffle will be the **ONE AND ONLY ONE** image stylization method that we will maintain for the robustness in a long term support. 
-
-I am going to repeat these 3 times because these are very important (stop asking me what do I think of XXX other methods):
-
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
-
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
-
-**All other CLIP image encoder, Unclip, image tokenization, and image-based prompts are essentially and fundamentally limited. All those methods do NOT (!!!) work well with user prompts or additional/multiple U-Net injections. It is IMPOSSIBLE to make those methods work well. We have GIVEN UP those methods. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and much more.**
-
-The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
-
-The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
-
-The ControlNet Shuffle is the one and only one method that has potential to work very well with all other ControlNets and user prompts.
+Note that this ControlNet Shuffle will be the one and only one image stylization method that we will maintain for the robustness in a long term support. We have tested other CLIP image encoder, Unclip, image tokenization, and image-based prompts but it seems that those methods do not work very well with user prompts or additional/multiple U-Net injections. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and some other related issues.
 
 ## ControlNet 1.1 Instruct Pix2Pix
 
@@ -483,17 +479,50 @@ Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
 ![img](github_docs/imgs/inpaint_1.png)
 
-## ControlNet 1.1 Tile (Unfinished)
+## ControlNet 1.1 Tile
+
+Update 2023 April 25: The previously unfinished tile model is finished now. The new name is "control_v11f1e_sd15_tile". The "f1e" means 1st bug fix ("f1"), experimental ("e").  The previous "control_v11u_sd15_tile" is removed. Please update if your model name is "v11u".
 
 Control Stable Diffusion with Tiles.
 
-Model file: control_v11u_sd15_tile.pth
+Model file: control_v11f1e_sd15_tile.pth
 
-Config file: control_v11u_sd15_tile.yaml
+Config file: control_v11f1e_sd15_tile.yaml
 
 Demo:
 
     python gradio_tile.py
+
+The model can be used in many ways. Overall, the model has two behaviors:
+
+* Ignore the details in an image and generate new details.
+* Ignore global prompts if local tile semantics and prompts mismatch, and guide diffusion with local context.
+
+Because the model can generate new details and ignore existing image details, we can use this model to remove bad details and add refined details. For example, remove blurring caused by image resizing.
+
+Below is an example of 8x super resolution. This is a 64x64 dog image.
+
+![p](test_imgs/dog64.png)
+
+Non-cherry-picked batch test with random seed 12345 ("dog on grassland"):
+
+![img](github_docs/imgs/tile_new_1.png)
+
+Note that this model is not a super resolution model. It ignores the details in an image and generate new details. This means you can use it to fix bad details in an image.
+
+For example, below is a dog image corrupted by Real-ESRGAN. This is a typical example that sometimes super resolution methds fail to upscale images when source context is too small.
+
+![p](test_imgs/dog_bad_sr.png)
+
+Non-cherry-picked batch test with random seed 12345 ("dog on grassland"):
+
+![img](github_docs/imgs/tile_new_2.png)
+
+If your image already have good details, you can still use this model to replace image details. Note that Stable Diffusion's I2I can achieve similar effects but this model make it much easier for you to maintain the overall structure and only change details even with denoising strength 1.0 .
+
+Non-cherry-picked batch test with random seed 12345 ("Silver Armor"):
+
+![img](github_docs/imgs/tile_new_3.png)
 
 More and more people begin to think about different methods to diffuse at tiles so that images can be very big (at 4k or 8k). 
 
@@ -503,15 +532,13 @@ For example, if your prompts are "a beautiful girl" and you split an image into 
 
 Right now people's solution is to use some meaningless prompts like "clear, clear, super clear" to diffuse blocks. But you can expect that the results will be bad if the denonising strength is high. And because the prompts are bad, the contents are pretty random.
 
-ControlNet Tile is a model to solve this problem. For a given tile, it recognizes what is inside the tile and increase the influence of that recognized semantics, and it also decreases the influence of global prompts if contents do not match.
+ControlNet Tile can solve this problem. For a given tile, it recognizes what is inside the tile and increase the influence of that recognized semantics, and it also decreases the influence of global prompts if contents do not match.
 
 Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
-![img](github_docs/imgs/tile_1.png)
+![img](github_docs/imgs/tile_new_4.png)
 
-![img](github_docs/imgs/tile_2.png)
-
-You can see that the prompt is "a handsome man" but the model does not paint "a handsome man" on that tree leaves or the hand areas. Instead, it recognizes the tree leaves and hands and paint accordingly.
+You can see that the prompt is "a handsome man" but the model does not paint "a handsome man" on that tree leaves. Instead, it recognizes the tree leaves paint accordingly.
 
 In this way, ControlNet is able to change the behavior of any Stable Diffusion model to perform diffusion in tiles. 
 

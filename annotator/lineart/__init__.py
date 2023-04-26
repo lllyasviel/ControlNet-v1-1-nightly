@@ -1,3 +1,6 @@
+# From https://github.com/carolineec/informative-drawings
+# MIT License
+
 import os
 import cv2
 import torch

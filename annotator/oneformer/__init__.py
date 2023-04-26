@@ -1,3 +1,5 @@
+# https://github.com/SHI-Labs/OneFormer
+
 import os
 from annotator.util import annotator_ckpts_path
 from .api import make_detectron2_model, semantic_run

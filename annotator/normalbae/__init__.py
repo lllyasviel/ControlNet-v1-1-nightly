@@ -1,3 +1,6 @@
+# Estimating and Exploiting the Aleatoric Uncertainty in Surface Normal Estimation
+# https://github.com/baegwangbin/surface_normal_uncertainty
+
 import os
 import types
 import torch
