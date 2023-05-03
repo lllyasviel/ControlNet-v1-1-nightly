@@ -22,9 +22,7 @@ If you want to use ControlNet 1.1 in A1111, you only need to install https://git
 
 If you want to use ControlNet 1.1 in A1111, you only need to follow the instructions in https://github.com/Mikubill/sd-webui-controlnet
 
-This project is for research use and academic experiments. This project does not have any relationship to A1111.
-
-Again, do NOT install ControlNet-v1-1-nightly into your A1111.
+This project is for research use and academic experiments. Again, do NOT install ControlNet-v1-1-nightly into your A1111.
 
 # How to use ControlNet 1.1 in A1111?
 
