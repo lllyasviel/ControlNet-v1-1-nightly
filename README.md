@@ -32,6 +32,8 @@ The A1111 plugin is: https://github.com/Mikubill/sd-webui-controlnet
 
 The discussion and bug report is: https://github.com/Mikubill/sd-webui-controlnet/issues/736
 
+**For researchers who are not familiar with A1111:** The A1111 plugin supports arbitrary combination of arbitrary number of ControlNets, arbitrary community models, arbitrary LoRAs, and arbitrary sampling methods! We should definitely try it!
+
 # Model Specification
 
 Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rules (SCNNRs) to name all models. We hope that this naming rule can improve the user experience.
