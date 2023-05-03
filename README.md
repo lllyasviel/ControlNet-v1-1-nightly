@@ -26,7 +26,9 @@ This project is for research use and academic experiments. This project does not
 
 Again, do NOT install ControlNet-v1-1-nightly into your A1111.
 
-# The Beta Test for A1111 Is Started. How to use ControlNet 1.1 in A1111?
+# How to use ControlNet 1.1 in A1111?
+
+The Beta Test for A1111 Is Started. 
 
 The A1111 plugin is: https://github.com/Mikubill/sd-webui-controlnet
 
