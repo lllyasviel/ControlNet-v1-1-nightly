@@ -112,7 +112,7 @@ Training data: [Bae's](https://github.com/baegwangbin/surface_normal_uncertainty
 
 Acceptable Preprocessors: Normal BAE. This model can accept normal maps from rendering engines as long as the normal map follows [ScanNet's](http://www.scan-net.org/) protocol. That is to say, the color of your normal map should look like [the second column of this image](https://raw.githubusercontent.com/baegwangbin/surface_normal_uncertainty/main/figs/readme_scannet.png).
 
-Note that this method is much more reasonable than the normal-from-midas method in ControlNet 1.1. The previous method will be abandoned.
+Note that this method is much more reasonable than the normal-from-midas method in ControlNet 1.0. The previous method will be abandoned.
 
     python gradio_normalbae.py
 
