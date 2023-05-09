@@ -34,6 +34,10 @@ The discussion and bug report is: https://github.com/Mikubill/sd-webui-controlne
 
 **For researchers who are not familiar with A1111:** The A1111 plugin supports arbitrary combination of arbitrary number of ControlNets, arbitrary community models, arbitrary LoRAs, and arbitrary sampling methods! We should definitely try it!
 
+Note that our official support for “Multi-ControlNet” is A1111-only. Please use [Automatic1111 with ControlNet](https://github.com/Mikubill/sd-webui-controlnet) if you want to use multiple ControlNets at the same time.
+
+Note that ControlNet project perfectly supports combining multiple ControlNets, and all production-ready ControlNets are extensively tested with multiple ControlNets combined.
+
 # Model Specification
 
 Starting from ControlNet 1.1, we begin to use the Standard ControlNet Naming Rules (SCNNRs) to name all models. We hope that this naming rule can improve the user experience.
@@ -477,6 +481,8 @@ Some notices:
 2. This gradio demo does not include post-processing. Ideally, you need to post-process the latent image in each diffusion iteration and post-process the image after vae decoding, so that the unmasked area keeps unchanged. However, this is complicated to implement and perhaps a better idea is to make it in a1111. In this gradio example, the outputs are just the original outputs from diffusion, and the unmasked area in your image may change because of the vae or diffusion process.
 
 Update 2023/May/03: ControlNet's inpaint without changing unmasked areas is [implemented in a1111](https://github.com/Mikubill/sd-webui-controlnet/discussions/1143). It supports arbitrary base models/LoRAa, and can work together with arbitrary number of other ControlNets.
+
+**Note that our official support for [“inpaint without changing unmasked area”](https://github.com/Mikubill/sd-webui-controlnet/discussions/1143) is A1111-only. All other implementations, including this repo and diffusers, do not have this feature. Please use [Automatic1111 with ControlNet](https://github.com/Mikubill/sd-webui-controlnet/discussions/1143) if you want to inpaint an image without changing unmasked areas.**
 
 Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
