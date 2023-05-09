@@ -34,9 +34,7 @@ The discussion and bug report is: https://github.com/Mikubill/sd-webui-controlne
 
 **For researchers who are not familiar with A1111:** The A1111 plugin supports arbitrary combination of arbitrary number of ControlNets, arbitrary community models, arbitrary LoRAs, and arbitrary sampling methods! We should definitely try it!
 
-Note that our official support for “Multi-ControlNet” is A1111-only. Please use [Automatic1111 with ControlNet](https://github.com/Mikubill/sd-webui-controlnet) if you want to use multiple ControlNets at the same time.
-
-Note that ControlNet project perfectly supports combining multiple ControlNets, and all production-ready ControlNets are extensively tested with multiple ControlNets combined.
+Note that our official support for “Multi-ControlNet” is A1111-only. Please use [Automatic1111 with ControlNet](https://github.com/Mikubill/sd-webui-controlnet) if you want to use multiple ControlNets at the same time. The ControlNet project perfectly supports combining multiple ControlNets, and all production-ready ControlNets are extensively tested with multiple ControlNets combined.
 
 # Model Specification
 
