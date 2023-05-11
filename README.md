@@ -28,6 +28,8 @@ The Beta Test for A1111 Is Started.
 
 The A1111 plugin is: https://github.com/Mikubill/sd-webui-controlnet
 
+Note that if you use A1111, you only need to follow the instructions in the above link. (You can ignore all installation steps in this page if you use A1111.)
+
 **For researchers who are not familiar with A1111:** The A1111 plugin supports arbitrary combination of arbitrary number of ControlNets, arbitrary community models, arbitrary LoRAs, and arbitrary sampling methods! We should definitely try it!
 
 Note that our official support for “Multi-ControlNet” is A1111-only. Please use [Automatic1111 with ControlNet](https://github.com/Mikubill/sd-webui-controlnet) if you want to use multiple ControlNets at the same time. The ControlNet project perfectly supports combining multiple ControlNets, and all production-ready ControlNets are extensively tested with multiple ControlNets combined.
