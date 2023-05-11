@@ -79,7 +79,7 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         samples, intermediates = ddim_sampler.sample(ddim_steps, num_samples,
                                                      shape, cond, verbose=False, eta=eta,
                                                      unconditional_guidance_scale=scale,
-                                                     unconditional_conditioning=un_cond, x0=x0, mask=mask)
+                                                     unconditional_conditioning=un_cond, x0=x0, mask=1 - mask)
 
         if config.save_memory:
             model.low_vram_shift(is_diffusing=False)

@@ -153,7 +153,7 @@ class DDIMSampler(object):
 
             if mask is not None:
                 assert x0 is not None
-                img_orig = self.model.q_sample(x0, ts)  # TODO: deterministic forward pass?
+                img_orig = self.model.q_sample(x0, ts)
                 img = img_orig * mask + (1. - mask) * img
 
             if ucg_schedule is not None:
