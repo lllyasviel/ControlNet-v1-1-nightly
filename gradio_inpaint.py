@@ -27,7 +27,7 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         input_image = HWC3(input_image_and_mask['image'])
         input_mask = input_image_and_mask['mask']
 
-        img_raw = resize_image(input_image, image_resolution)
+        img_raw = resize_image(input_image, image_resolution).astype(np.float32)
         H, W, C = img_raw.shape
 
         mask_pixel = cv2.resize(input_mask[:, :, 0], (W, H), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255.0
@@ -35,7 +35,7 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
 
         mask_latent = cv2.resize(mask_pixel, (W // 8, H // 8), interpolation=cv2.INTER_AREA)
 
-        detected_map = img_raw.copy().astype(np.float32)
+        detected_map = img_raw.copy()
         detected_map[mask_pixel > 0.5] = - 255.0
 
         control = torch.from_numpy(detected_map.copy()).float().cuda() / 255.0
@@ -50,8 +50,8 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         x0 = torch.stack([x0 for _ in range(num_samples)], dim=0)
         x0 = einops.rearrange(x0, 'b h w c -> b c h w').clone()
 
-        mask_pixel = mask_pixel[None, :, :, None]
-        img_pixel = img_raw.astype(np.float32)[None]
+        mask_pixel_batched = mask_pixel[None, :, :, None]
+        img_pixel_batched = img_raw.copy()[None]
 
         if seed == -1:
             seed = random.randint(0, 65535)
@@ -86,7 +86,7 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
 
         x_samples = model.decode_first_stage(samples)
         x_samples = (einops.rearrange(x_samples, 'b c h w -> b h w c') * 127.5 + 127.5).cpu().numpy().astype(np.float32)
-        x_samples = x_samples * mask_pixel + img_pixel * (1.0 - mask_pixel)
+        x_samples = x_samples * mask_pixel_batched + img_pixel_batched * (1.0 - mask_pixel_batched)
 
         results = [x_samples[i].clip(0, 255).astype(np.uint8) for i in range(num_samples)]
     return [detected_map.clip(0, 255).astype(np.uint8)] + results
