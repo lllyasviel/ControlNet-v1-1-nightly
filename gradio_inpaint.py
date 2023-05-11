@@ -22,21 +22,36 @@ model = model.cuda()
 ddim_sampler = DDIMSampler(model)
 
 
-def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image_resolution, ddim_steps, guess_mode, strength, scale, seed, eta):
+def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image_resolution, ddim_steps, guess_mode, strength, scale, seed, eta, mask_blur):
     with torch.no_grad():
         input_image = HWC3(input_image_and_mask['image'])
         input_mask = input_image_and_mask['mask']
 
         img = resize_image(input_image, image_resolution)
+        img_pixel = img.astype(np.float32)
         H, W, C = img.shape
 
-        detected_mask = cv2.resize(input_mask[:, :, 0], (W, H), interpolation=cv2.INTER_LINEAR)
+        mask_pixel = cv2.resize(input_mask[:, :, 0], (W, H), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255.0
+        mask_pixel = cv2.GaussianBlur(mask_pixel, (0, 0), mask_blur)
+        mask_latent = cv2.resize(mask_pixel, (W // 8, H // 8), interpolation=cv2.INTER_AREA)
+
         detected_map = img.astype(np.float32).copy()
-        detected_map[detected_mask > 127] = -255.0  # use -1 as inpaint value
+        detected_map[mask_pixel > 0.5] = -255.0
 
         control = torch.from_numpy(detected_map.copy()).float().cuda() / 255.0
         control = torch.stack([control for _ in range(num_samples)], dim=0)
         control = einops.rearrange(control, 'b h w c -> b c h w').clone()
+
+        mask = torch.from_numpy(mask_latent.copy()).float().cuda()
+        mask = torch.stack([mask for _ in range(num_samples)], dim=0)
+        mask = einops.rearrange(mask, 'b h w -> b 1 h w').clone()
+
+        img = torch.from_numpy(img.copy()).float().cuda() / 127.0 - 1.0
+        img = torch.stack([img for _ in range(num_samples)], dim=0)
+        img = einops.rearrange(img, 'b h w c -> b c h w').clone()
+
+        mask_pixel = mask_pixel[None, :, :, None]
+        img_pixel = img_pixel[None]
 
         if seed == -1:
             seed = random.randint(0, 65535)
@@ -50,6 +65,12 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         shape = (4, H // 8, W // 8)
 
         if config.save_memory:
+            model.low_vram_shift(is_diffusing=False)
+
+        ddim_sampler.make_schedule(ddim_steps, ddim_eta=eta, verbose=True)
+        x0 = model.get_first_stage_encoding(model.encode_first_stage(img))
+
+        if config.save_memory:
             model.low_vram_shift(is_diffusing=True)
 
         model.control_scales = [strength * (0.825 ** float(12 - i)) for i in range(13)] if guess_mode else ([strength] * 13)
@@ -58,15 +79,16 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         samples, intermediates = ddim_sampler.sample(ddim_steps, num_samples,
                                                      shape, cond, verbose=False, eta=eta,
                                                      unconditional_guidance_scale=scale,
-                                                     unconditional_conditioning=un_cond)
+                                                     unconditional_conditioning=un_cond, x0=x0, mask=mask)
 
         if config.save_memory:
             model.low_vram_shift(is_diffusing=False)
 
         x_samples = model.decode_first_stage(samples)
-        x_samples = (einops.rearrange(x_samples, 'b c h w -> b h w c') * 127.5 + 127.5).cpu().numpy().clip(0, 255).astype(np.uint8)
+        x_samples = (einops.rearrange(x_samples, 'b c h w -> b h w c') * 127.5 + 127.5).cpu().numpy().astype(np.float32)
+        x_samples = x_samples * mask_pixel + img_pixel * (1.0 - mask_pixel)
 
-        results = [x_samples[i] for i in range(num_samples)]
+        results = [x_samples[i].clip(0, 255).astype(np.uint8) for i in range(num_samples)]
     return [detected_map.clip(0, 255).astype(np.uint8)] + results
 
 
@@ -81,7 +103,7 @@ with block:
             run_button = gr.Button(label="Run")
             num_samples = gr.Slider(label="Images", minimum=1, maximum=12, value=1, step=1)
             seed = gr.Slider(label="Seed", minimum=-1, maximum=2147483647, step=1, value=12345)
-            det = gr.Radio(choices=["None"], type="value", value="None", label="Preprocessor")
+            mask_blur = gr.Slider(label="Mask Blur", minimum=0.1, maximum=7.0, value=5.0, step=0.01)
             with gr.Accordion("Advanced options", open=False):
                 image_resolution = gr.Slider(label="Image Resolution", minimum=256, maximum=768, value=512, step=64)
                 strength = gr.Slider(label="Control Strength", minimum=0.0, maximum=2.0, value=1.0, step=0.01)
@@ -93,7 +115,7 @@ with block:
                 n_prompt = gr.Textbox(label="Negative Prompt", value='lowres, bad anatomy, bad hands, cropped, worst quality')
         with gr.Column():
             result_gallery = gr.Gallery(label='Output', show_label=False, elem_id="gallery").style(grid=2, height='auto')
-    ips = [input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, ddim_steps, guess_mode, strength, scale, seed, eta]
+    ips = [input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, ddim_steps, guess_mode, strength, scale, seed, eta, mask_blur]
     run_button.click(fn=process, inputs=ips, outputs=[result_gallery])
 
 
