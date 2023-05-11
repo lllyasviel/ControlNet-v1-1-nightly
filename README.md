@@ -480,7 +480,7 @@ Some notices:
 
 Non-cherry-picked batch test with random seed 12345 ("a handsome man"):
 
-![img](github_docs/imgs/inpaint_1.png)
+![img](github_docs/imgs/inpaint_after_fix.png)
 
 See also the Guidelines for [Using ControlNet Inpaint in Automatic 1111](https://github.com/Mikubill/sd-webui-controlnet/discussions/1143).
 
