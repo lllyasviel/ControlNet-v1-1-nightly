@@ -27,31 +27,31 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         input_image = HWC3(input_image_and_mask['image'])
         input_mask = input_image_and_mask['mask']
 
-        img = resize_image(input_image, image_resolution)
-        img_pixel = img.astype(np.float32)
-        H, W, C = img.shape
+        img_raw = resize_image(input_image, image_resolution)
+        H, W, C = img_raw.shape
 
         mask_pixel = cv2.resize(input_mask[:, :, 0], (W, H), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255.0
         mask_pixel = cv2.GaussianBlur(mask_pixel, (0, 0), mask_blur)
+
         mask_latent = cv2.resize(mask_pixel, (W // 8, H // 8), interpolation=cv2.INTER_AREA)
 
-        detected_map = img.astype(np.float32).copy()
-        detected_map[mask_pixel > 0.5] = -255.0
+        detected_map = img_raw.copy().astype(np.float32)
+        detected_map[mask_pixel > 0.5] = - 255.0
 
         control = torch.from_numpy(detected_map.copy()).float().cuda() / 255.0
         control = torch.stack([control for _ in range(num_samples)], dim=0)
         control = einops.rearrange(control, 'b h w c -> b c h w').clone()
 
-        mask = torch.from_numpy(mask_latent.copy()).float().cuda()
+        mask = 1.0 - torch.from_numpy(mask_latent.copy()).float().cuda()
         mask = torch.stack([mask for _ in range(num_samples)], dim=0)
         mask = einops.rearrange(mask, 'b h w -> b 1 h w').clone()
 
-        img = torch.from_numpy(img.copy()).float().cuda() / 127.0 - 1.0
-        img = torch.stack([img for _ in range(num_samples)], dim=0)
-        img = einops.rearrange(img, 'b h w c -> b c h w').clone()
+        x0 = torch.from_numpy(img_raw.copy()).float().cuda() / 127.0 - 1.0
+        x0 = torch.stack([x0 for _ in range(num_samples)], dim=0)
+        x0 = einops.rearrange(x0, 'b h w c -> b c h w').clone()
 
         mask_pixel = mask_pixel[None, :, :, None]
-        img_pixel = img_pixel[None]
+        img_pixel = img_raw.astype(np.float32)[None]
 
         if seed == -1:
             seed = random.randint(0, 65535)
@@ -68,7 +68,7 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
             model.low_vram_shift(is_diffusing=False)
 
         ddim_sampler.make_schedule(ddim_steps, ddim_eta=eta, verbose=True)
-        x0 = model.get_first_stage_encoding(model.encode_first_stage(img))
+        x0 = model.get_first_stage_encoding(model.encode_first_stage(x0))
 
         if config.save_memory:
             model.low_vram_shift(is_diffusing=True)
@@ -79,7 +79,7 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         samples, intermediates = ddim_sampler.sample(ddim_steps, num_samples,
                                                      shape, cond, verbose=False, eta=eta,
                                                      unconditional_guidance_scale=scale,
-                                                     unconditional_conditioning=un_cond, x0=x0, mask=1 - mask)
+                                                     unconditional_conditioning=un_cond, x0=x0, mask=mask)
 
         if config.save_memory:
             model.low_vram_shift(is_diffusing=False)
