@@ -565,7 +565,7 @@ You can see that the prompt is "a handsome man" but the model does not paint "a 
 
 In this way, ControlNet is able to change the behavior of any Stable Diffusion model to perform diffusion in tiles. 
 
-**Galerry of ControlNet Tile**
+**Gallery of ControlNet Tile**
 
 From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5788601
 
@@ -594,6 +594,8 @@ From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussion
 
 (after)
 ![2600914554720735184649534855329348215514636383-1549088886](https://user-images.githubusercontent.com/31148570/236037509-ce24c816-f50f-4fe0-8c19-423bf30dad26.png)
+
+**Comparison to Midjourney V5/V5.1 coming soon.**
 
 # Annotate Your Own Data
 
