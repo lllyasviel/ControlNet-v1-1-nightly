@@ -420,6 +420,22 @@ Non-cherry-picked batch test with random seed 12345 ("spider man"):
 
 ![img](github_docs/imgs/shuffle_3.png)
 
+**Multi-ControlNets** (A1111-only)
+
+Canny Image (Input):
+
+<img src="https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/5dcb3d28-b845-4752-948d-6357224ca2ef" width="200">
+
+Shuffle Image (Input):
+
+<img src="https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/c0d98c17-d79b-49d8-96af-89b87c532820" width="200">
+
+Outputs:
+
+![image](https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/a4b30709-8393-43d1-9da2-5c6c5ea70e9c)
+
+(From: https://github.com/Mikubill/sd-webui-controlnet/issues/736#issuecomment-1509986321)
+
 **Important If You Implement Your Own Inference:**
 
 Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the ControlNet Encoder outputs and SD Unet layers. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
