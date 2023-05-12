@@ -596,7 +596,7 @@ From: https://github.com/lllyasviel/ControlNet-v1-1-nightly/issues/50#issuecomme
 
 ![image](https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/9132700e-b2f9-4a33-a589-611ba234d325)
 
-(Output, **Click image to see full resolution**)
+(Output, **Click image to see full resolution**, note that this example is extremely challenging)
 
 ![image](https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/609acf87-1e51-4c03-85dc-37e486566158)
 
