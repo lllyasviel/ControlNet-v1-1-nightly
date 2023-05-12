@@ -569,7 +569,11 @@ In this way, ControlNet is able to change the behavior of any Stable Diffusion m
 
 From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5788601
 
+(Output)
+
 ![grannie-comp](https://user-images.githubusercontent.com/54312595/235352555-846982dc-eba2-4e6a-8dfa-076a5e9ee4fd.jpg)
+
+(Zooming-in of outputs)
 
 ![grannie-Comp_face](https://user-images.githubusercontent.com/54312595/235352557-8f90e59d-8d03-4909-b805-8643940973d0.jpg)
 
