@@ -565,6 +565,36 @@ You can see that the prompt is "a handsome man" but the model does not paint "a 
 
 In this way, ControlNet is able to change the behavior of any Stable Diffusion model to perform diffusion in tiles. 
 
+**Galerry of ControlNet Tile**
+
+From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5788601
+
+![grannie-comp](https://user-images.githubusercontent.com/54312595/235352555-846982dc-eba2-4e6a-8dfa-076a5e9ee4fd.jpg)
+
+![grannie-Comp_face](https://user-images.githubusercontent.com/54312595/235352557-8f90e59d-8d03-4909-b805-8643940973d0.jpg)
+
+![grannie-Comp_torso](https://user-images.githubusercontent.com/54312595/235352562-ad0a5618-a1dd-40d0-9bfe-65e9786b496f.jpg)
+
+![grannie-Comp_torso2](https://user-images.githubusercontent.com/54312595/235352567-4e9a887f-142f-4f65-8084-d4c7f602985b.jpg)
+
+From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5788617
+
+(Input)
+
+![image](https://user-images.githubusercontent.com/34932866/235639514-31df5838-e251-4a17-b6ad-a678cdb8a58d.png)
+
+(Output)
+![image](https://user-images.githubusercontent.com/34932866/235639422-1f95d228-f902-4d94-b57b-e67460a719ef.png)
+
+From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5796326:
+
+(before)
+
+![2600914554720735184649534855329348215514636378-166329422](https://user-images.githubusercontent.com/31148570/236037445-f91a060b-698a-4cae-bf18-93796351da66.png)
+
+(after)
+![2600914554720735184649534855329348215514636383-1549088886](https://user-images.githubusercontent.com/31148570/236037509-ce24c816-f50f-4fe0-8c19-423bf30dad26.png)
+
 # Annotate Your Own Data
 
 We provide simple python scripts to process images.
