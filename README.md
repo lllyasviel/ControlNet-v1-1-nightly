@@ -422,6 +422,10 @@ Non-cherry-picked batch test with random seed 12345 ("spider man"):
 
 **Multi-ControlNets** (A1111-only)
 
+Source Image (not used):
+
+<img src="https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/56050654-6a82-495c-8bdc-d63847053e54" width="200">
+
 Canny Image (Input):
 
 <img src="https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/5dcb3d28-b845-4752-948d-6357224ca2ef" width="200">
