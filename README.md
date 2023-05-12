@@ -569,7 +569,7 @@ In this way, ControlNet is able to change the behavior of any Stable Diffusion m
 
 From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5788601
 
-(Output)
+(Output, **Click image to see full resolution**)
 
 ![grannie-comp](https://user-images.githubusercontent.com/54312595/235352555-846982dc-eba2-4e6a-8dfa-076a5e9ee4fd.jpg)
 
@@ -587,7 +587,7 @@ From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussion
 
 ![image](https://user-images.githubusercontent.com/34932866/235639514-31df5838-e251-4a17-b6ad-a678cdb8a58d.png)
 
-(Output)
+(Output, **Click image to see full resolution**)
 ![image](https://user-images.githubusercontent.com/34932866/235639422-1f95d228-f902-4d94-b57b-e67460a719ef.png)
 
 From: https://github.com/lllyasviel/ControlNet-v1-1-nightly/issues/50#issuecomment-1541914890
@@ -596,7 +596,7 @@ From: https://github.com/lllyasviel/ControlNet-v1-1-nightly/issues/50#issuecomme
 
 ![image](https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/9132700e-b2f9-4a33-a589-611ba234d325)
 
-(Output)
+(Output, **Click image to see full resolution**)
 
 ![image](https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/609acf87-1e51-4c03-85dc-37e486566158)
 
@@ -606,7 +606,7 @@ From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussion
 
 ![2600914554720735184649534855329348215514636378-166329422](https://user-images.githubusercontent.com/31148570/236037445-f91a060b-698a-4cae-bf18-93796351da66.png)
 
-(after)
+(after, **Click image to see full resolution**)
 ![2600914554720735184649534855329348215514636383-1549088886](https://user-images.githubusercontent.com/31148570/236037509-ce24c816-f50f-4fe0-8c19-423bf30dad26.png)
 
 **Comparison to Midjourney V5/V5.1 coming soon.**
