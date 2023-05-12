@@ -590,6 +590,16 @@ From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussion
 (Output)
 ![image](https://user-images.githubusercontent.com/34932866/235639422-1f95d228-f902-4d94-b57b-e67460a719ef.png)
 
+From: https://github.com/lllyasviel/ControlNet-v1-1-nightly/issues/50#issuecomment-1541914890
+
+(Input)
+
+![image](https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/9132700e-b2f9-4a33-a589-611ba234d325)
+
+(Output)
+
+![image](https://github.com/lllyasviel/ControlNet-v1-1-nightly/assets/19834515/609acf87-1e51-4c03-85dc-37e486566158)
+
 From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5796326:
 
 (before)
