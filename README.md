@@ -567,6 +567,8 @@ In this way, ControlNet is able to change the behavior of any Stable Diffusion m
 
 **Gallery of ControlNet Tile**
 
+*Note:* Our official support for tiled image upscaling is A1111-only. The gradio example in this repo does not include tiled upscaling scripts. Please use the A1111 extension to perform tiled upscaling (with other tiling scripts like Ultimate SD Upscale or Tiled Diffusion/VAE).
+
 From https://github.com/Mikubill/sd-webui-controlnet/discussions/1142#discussioncomment-5788601
 
 (Output, **Click image to see full resolution**)
