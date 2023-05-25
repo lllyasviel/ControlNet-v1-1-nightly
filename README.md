@@ -444,7 +444,7 @@ Outputs:
 
 Note that this ControlNet requires to add a global average pooling " x = torch.mean(x, dim=(2, 3), keepdim=True) " between the ControlNet Encoder outputs and SD Unet layers. And the ControlNet must be put only on the conditional side of cfg scale. We recommend to use the "global_average_pooling" item in the yaml file to control such behaviors.
 
-Note that this ControlNet Shuffle will be the one and only one image stylization method that we will maintain for the robustness in a long term support. We have tested other CLIP image encoder, Unclip, image tokenization, and image-based prompts but it seems that those methods do not work very well with user prompts or additional/multiple U-Net injections. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and some other related issues.
+~Note that this ControlNet Shuffle will be the one and only one image stylization method that we will maintain for the robustness in a long term support. We have tested other CLIP image encoder, Unclip, image tokenization, and image-based prompts but it seems that those methods do not work very well with user prompts or additional/multiple U-Net injections. See also the evidence [here](https://github.com/lllyasviel/ControlNet/issues/255), [here](https://github.com/Mikubill/sd-webui-controlnet/issues/547), and some other related issues.~ After some more recent researches/experiments, we plan to support more types of stylization methods in the future. 
 
 ## ControlNet 1.1 Instruct Pix2Pix
 
