@@ -86,6 +86,6 @@ async def get_result(job_id: str, image_id: int):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8889)
+    uvicorn.run(app, host="0.0.0.0", port=8889, ssl_keyfile="./key.pem", ssl_certfile="./cert.pem")
 
 
