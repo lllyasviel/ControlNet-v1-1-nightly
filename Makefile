@@ -6,4 +6,4 @@ server:
 	python server.py
 
 test:
-	python client.py img.png mask.png --prompt "a red drawer"
+	python client.py img.png mask.png --prompt "a boatsteg made of glass overlooking a large lake" --seed 1 --num_images 1 --resolution 512

@@ -40,7 +40,9 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         img_raw = resize_image(input_image, image_resolution).astype(np.float32)
         H, W, C = img_raw.shape
 
-        mask_pixel = cv2.resize(input_mask[:, :, 0], (W, H), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255.0
+        if (len(input_mask.shape) >= 3):
+            input_mask = input_mask[:, :, 0]
+        mask_pixel = cv2.resize(input_mask, (W, H), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255.0
         mask_pixel = cv2.GaussianBlur(mask_pixel, (0, 0), mask_blur)
 
         mask_latent = cv2.resize(mask_pixel, (W // 8, H // 8), interpolation=cv2.INTER_AREA)
@@ -88,11 +90,11 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         # Magic number. IDK why. Perhaps because 0.825**12<0.01 but 0.826**12>0.01
 
         def update_status_dict(i):
-            update_state_fn({"step": i, "num_steps": ddim_steps})
+            update_state_fn({"step": i, "num_steps": ddim_steps + 1})
     
         samples, intermediates = ddim_sampler.sample(
             ddim_steps, num_samples,
-            shape, cond, verbose=False, eta=eta,
+            shape, cond, verbose=True, eta=eta,
             unconditional_guidance_scale=scale,
             unconditional_conditioning=un_cond, x0=x0, mask=mask,
             callback = update_status_dict
