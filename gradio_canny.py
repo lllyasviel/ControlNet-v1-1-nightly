@@ -28,11 +28,13 @@ ddim_sampler = DDIMSampler(model)
 def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_resolution, detect_resolution, ddim_steps, guess_mode, strength, scale, seed, eta, low_threshold, high_threshold):
     global preprocessor
 
+    print("Process")
     if det == 'Canny':
         if not isinstance(preprocessor, CannyDetector):
             preprocessor = CannyDetector()
 
     with torch.no_grad():
+        print("image conversion")
         input_image = HWC3(input_image)
 
         if det == 'None':
@@ -40,12 +42,12 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_res
         else:
             detected_map = preprocessor(resize_image(input_image, detect_resolution), low_threshold, high_threshold)
             detected_map = HWC3(detected_map)
-
+        print("resize")
         img = resize_image(input_image, image_resolution)
         H, W, C = img.shape
 
         detected_map = cv2.resize(detected_map, (W, H), interpolation=cv2.INTER_LINEAR)
-
+        print("to torch")
         control = torch.from_numpy(detected_map.copy()).float().cuda() / 255.0
         control = torch.stack([control for _ in range(num_samples)], dim=0)
         control = einops.rearrange(control, 'b h w c -> b c h w').clone()
@@ -66,7 +68,7 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_res
 
         model.control_scales = [strength * (0.825 ** float(12 - i)) for i in range(13)] if guess_mode else ([strength] * 13)
         # Magic number. IDK why. Perhaps because 0.825**12<0.01 but 0.826**12>0.01
-
+        print("sampling")
         samples, intermediates = ddim_sampler.sample(ddim_steps, num_samples,
                                                      shape, cond, verbose=False, eta=eta,
                                                      unconditional_guidance_scale=scale,
@@ -74,10 +76,10 @@ def process(det, input_image, prompt, a_prompt, n_prompt, num_samples, image_res
 
         if config.save_memory:
             model.low_vram_shift(is_diffusing=False)
-
+        print("decoding")
         x_samples = model.decode_first_stage(samples)
         x_samples = (einops.rearrange(x_samples, 'b c h w -> b h w c') * 127.5 + 127.5).cpu().numpy().clip(0, 255).astype(np.uint8)
-
+        print("returning samples")
         results = [x_samples[i] for i in range(num_samples)]
     return [detected_map] + results
 
@@ -112,4 +114,4 @@ with block:
     run_button.click(fn=process, inputs=ips, outputs=[result_gallery])
 
 
-block.launch(server_name='0.0.0.0')
+block.launch(server_name='0.0.0.0', share=False)

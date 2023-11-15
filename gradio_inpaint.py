@@ -33,6 +33,8 @@ def process(input_image_and_mask, prompt, a_prompt, n_prompt, num_samples, image
         mask_pixel = cv2.resize(input_mask[:, :, 0], (W, H), interpolation=cv2.INTER_LINEAR).astype(np.float32) / 255.0
         mask_pixel = cv2.GaussianBlur(mask_pixel, (0, 0), mask_blur)
 
+        with open("test.txt", "w") as w:
+            print(mask_pixel, file=w)
         mask_latent = cv2.resize(mask_pixel, (W // 8, H // 8), interpolation=cv2.INTER_AREA)
 
         detected_map = img_raw.copy()
