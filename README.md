@@ -31,19 +31,19 @@ ControlNet은 간단한 스케치를 이미지로 변환하는 강력한 모델�
 
 1. 이 저장소를 클론합니다:
 
-    ```bash
-    git clone https://github.com/HectorSin/ControlNet.git
-    cd ControlNet
-    ```
+   ```bash
+   git clone https://github.com/HectorSin/ControlNet.git
+   cd ControlNet
+   ```
 
 2. Conda 가상환경을 설정하고 필요한 패키지를 설치합니다:
 
-    ```bash
-    conda env create -f environment.yaml
-    conda activate control-v11
-    sudo apt-get update
-    sudo apt-get install libsm6 libxext6 libxrender-dev
-    ```
+   ```bash
+   conda env create -f environment.yaml
+   conda activate control-v11
+   sudo apt-get update
+   sudo apt-get install libsm6 libxext6 libxrender-dev
+   ```
 
 3. 필요한 모델 파일을 다운로드하여 `models/` 디렉토리에 저장합니다:
 
@@ -68,6 +68,7 @@ curl -LO https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5
 ```
 
 베이스 도커 이미지
+
 ```
 nvidia/cuda:11.1.1-devel-ubuntu20.04
 ```
@@ -79,25 +80,28 @@ ControlNet 모델을 실행하여 이미지를 생성하고, 성능을 평가하
 1. `test_imgs` 디렉토리에 입력 이미지를 추가합니다.
 2. ControlNet 모델을 실행하여 이미지를 생성합니다:
 
-    ```bash
-    python gradio_app.py  # Gradio 인터페이스를 통해 사용 가능
-    ```
+   ```bash
+   python gradio_app.py  # Gradio 인터페이스를 통해 사용 가능
+   ```
 
 3. 생성된 이미지의 성능을 평가하고 시각화하기 위해 다음 명령을 실행합니다:
 
-    ```bash
-    python visualize.py  # 성능 지표를 시각화하여 결과물로 저장
-    ```
+   ```bash
+   python visualize.py  # 성능 지표를 시각화하여 결과물로 저장
+   ```
 
 ## 성능지표
 
 ### FID (Frechet Inception Distance)
+
 FID는 생성된 이미지와 실제 이미지의 통계적 유사성을 측정하는 지표입니다. 낮을수록 품질이 높습니다.
 
 ### PSNR (Peak Signal-to-Noise Ratio)
+
 PSNR은 두 이미지 간의 최대 신호 대 잡음 비율을 평가합니다. 값이 클수록 두 이미지가 유사함을 나타냅니다.
 
 ### SSIM (Structural Similarity Index)
+
 SSIM은 두 이미지 간의 구조적 유사성을 평가합니다. 값이 1에 가까울수록 유사성이 높습니다.
 
 ## 테스트 환경 및 성능 평가
@@ -110,12 +114,12 @@ SSIM은 두 이미지 간의 구조적 유사성을 평가합니다. 값이 1에
 
 이 프로젝트에서는 ControlNet 모델의 다양한 버전과 양자화 여부에 따라 성능을 비교하였습니다.
 
-| 모델 | 버전 | 양자화 | id |
-| --- | --- | --- | --- |
-| canny | 1.0 | x | a |
-| canny | 1.0 | o | b |
-| canny | 1.1 | o | c |
-| canny | 1.1 | x | d |
+| 모델  | 버전 | 양자화 | id  |
+| ----- | ---- | ------ | --- |
+| canny | 1.0  | x      | a   |
+| canny | 1.0  | o      | b   |
+| canny | 1.1  | o      | c   |
+| canny | 1.1  | x      | d   |
 
 각 모델의 ID를 통해 실험 데이터를 구분할 수 있습니다.
 
@@ -123,12 +127,12 @@ SSIM은 두 이미지 간의 구조적 유사성을 평가합니다. 값이 1에
 
 양자화 및 프루닝을 통해 모델 가중치 크기를 최적화하였습니다. 각 모델의 가중치 크기는 다음과 같습니다:
 
-| id | weight size (MB) |
-| --- | --- |
-| a | 5446.203125 |
-| b | 1365.8515625 |
-| c | 8725.21875 |
-| d | 1365.87890625 |
+| id  | weight size (MB) |
+| --- | ---------------- |
+| a   | 5446.203125      |
+| b   | 1365.8515625     |
+| c   | 8725.21875       |
+| d   | 1365.87890625    |
 
 양자화를 통해 모델 크기가 크게 줄어들었음을 확인할 수 있습니다.
 
@@ -139,30 +143,31 @@ SSIM은 두 이미지 간의 구조적 유사성을 평가합니다. 값이 1에
 GPU: 1x V100 (16GB)
 테스트 코드: 아래의 테스트용 코드와 양자화 모델 전용 테스트 코드를 사용하였으며, 각 샘플에서 측정된 값의 총합을 사용하였습니다.
 
-| id | model loading (s) | inference (s) | max vram (MB) |
-| --- | --- | --- | --- |
-| a | 5.862994432449341 | 0.3019897937774658 | 15404 |
-| b | 3.2166452407836914 | 0.28455471992492676 | 14038 |
-| c | 3.8730764389038086 | 0.31455421447753906 | 14038 |
-| d | 9.291844606399536 | 0.3257734775543213 | 11238 |
+| id  | model loading (s)  | inference (s)       | max vram (MB) |
+| --- | ------------------ | ------------------- | ------------- |
+| a   | 5.862994432449341  | 0.3019897937774658  | 15404         |
+| b   | 3.2166452407836914 | 0.28455471992492676 | 14038         |
+| c   | 3.8730764389038086 | 0.31455421447753906 | 14038         |
+| d   | 9.291844606399536  | 0.3257734775543213  | 11238         |
 
-* 양자화된 모델을 사용하는 과정에서 모델의 로드 및 추론 시 시간이 크게 개선되지 않았으며, 이는 연산에서 사용되는 precision이 양자화 이전과 동일하기 때문입니다.
+- 양자화된 모델을 사용하는 과정에서 모델의 로드 및 추론 시 시간이 크게 개선되지 않았으며, 이는 연산에서 사용되는 precision이 양자화 이전과 동일하기 때문입니다.
 
 ```
 for key in state_dict.keys():
     if "weight" in key or "bias" in key:
         state_dict[key] = state_dict[key].dequantize()
 ```
+
 ### 성능 지표
 
 모델의 품질을 평가하기 위해 FID, PSNR, SSIM을 사용했습니다.
 
-| id | fid | Average PSNR | Average SSIM |
-| --- | --- | --- | --- |
-| a | 1099.709082229354 | 6.659616943402007 | 0.15312470843542905 |
-| b | 1637.612544460094 | 5.297666086037641 | 0.03359545908319394 |
-| c | 1431.6549796952213 | 6.412770991006596 | 0.12356166210005037 |
-| d | 1086.6900126662883 | 6.721158450455801 | 0.16993654150823315 |
+| id  | fid                | Average PSNR      | Average SSIM        |
+| --- | ------------------ | ----------------- | ------------------- |
+| a   | 1099.709082229354  | 6.659616943402007 | 0.15312470843542905 |
+| b   | 1637.612544460094  | 5.297666086037641 | 0.03359545908319394 |
+| c   | 1431.6549796952213 | 6.412770991006596 | 0.12356166210005037 |
+| d   | 1086.6900126662883 | 6.721158450455801 | 0.16993654150823315 |
 
 ## 실험 결과
 
@@ -186,6 +191,42 @@ for key in state_dict.keys():
 - **프로젝트 구현 및 테스트**: 현동철
 - **모델 양자화 및 경량화 작업**: 최호재
 - **문헌 조사 및 발표 자료 준비**: 팀원 전체
+
+## frontend & backend 실행
+
+backend 실행
+
+**실행전 backend 경로 밑의 .env_sample파일을 참고하여 필요한것을 설정해두어야 합니다.**
+
+```sh
+conda install fastapi pydantic-settings aiohttp
+python fastapi_main.py
+
+```
+
+![swagger ui](img/fastapi_swagger.png)
+
+frontend 실행
+
+```sh
+# node 18 버전 설치
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+apt-get install nodejs
+# yarn 설치
+npm install -g yarn
+# 필요 패키지 설치
+apt-get install -y libgl1-mesa-glx
+
+cd frontend/control_net
+yarn install
+yarn start
+```
+
+![front main page](img/frontend_main.png)
+![front model test page](img/frontend_model_test1.png)
+![front model test page](img/frontend_model_test2.png)
+![front model test page](img/frontend_game1.png)
+![front model test page](img/frontend_game2.png)
 
 ## 연락처
 
