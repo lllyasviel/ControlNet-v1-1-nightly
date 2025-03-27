@@ -15,7 +15,7 @@ from utils import accuracy, AverageMeter
 
 has_native_amp = False
 try:
-    if getattr(torch.cuda.amp, 'autocast') is not None:
+    if getattr(torch.amp, 'autocast') is not None:
         has_native_amp = True
 except AttributeError:
     pass
@@ -74,7 +74,7 @@ def main():
         if not has_native_amp:
             print("Native Torch AMP is not available (requires torch >= 1.6), using FP32.")
         else:
-            amp_autocast = torch.cuda.amp.autocast
+            amp_autocast = torch.amp.autocast
 
     # create model
     model = geffnet.create_model(

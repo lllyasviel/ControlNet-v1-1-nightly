@@ -23,7 +23,7 @@
 # File author: Shariq Farooq Bhat
 
 import torch
-import torch.cuda.amp as amp
+import torch.amp as amp
 import torch.nn as nn
 
 from zoedepth.trainers.loss import GradL1Loss, SILogLoss

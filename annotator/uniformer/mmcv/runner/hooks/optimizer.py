@@ -13,7 +13,12 @@ from .hook import HOOKS, Hook
 try:
     # If PyTorch version >= 1.6.0, torch.cuda.amp.GradScaler would be imported
     # and used; otherwise, auto fp16 will adopt mmcv's implementation.
-    from torch.cuda.amp import GradScaler
+    if torch.cuda.is_available():
+        from torch.cuda.amp import GradScaler  # Use CUDA's AMP if available
+    elif torch.backends.mps.is_available():
+        from torch.amp import GradScaler  # Use MPS-compatible AMP
+    else:
+        from torch.amp import GradScaler  # Use CPU AMP
 except ImportError:
     pass
 
